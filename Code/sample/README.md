@@ -1,7 +1,7 @@
 # Maven Help:
 https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
 
-# JavaFX with Mavan:
+# JavaFX with Maven:
 https://openjfx.io/openjfx-docs/maven
 
 ## Run
