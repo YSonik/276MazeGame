@@ -1,0 +1,59 @@
+public class Tile
+{
+    private final int tileHeight = 30;
+    private final int tileWidth = 30;
+    private boolean isEntrance;
+    private boolean isExit;
+    private boolean isBarrier;
+    private boolean isReward;
+    private boolean isCharacter;
+    private boolean isEmpty;
+
+    Tile(boolean hasBarrier, boolean hasReward, boolean isEntrance, boolean isExit, boolean isCharacter, boolean isEmpty)
+    {
+        this.isBarrier = hasBarrier;
+        this.isReward = hasReward;
+        this.isEntrance = isEntrance;
+        this.isExit = isExit;
+        this.isCharacter = isCharacter;
+        this.isEmpty = isEmpty;
+    }
+
+    public boolean getisBarrier()
+    {
+        return this.isBarrier;
+    }
+
+    public boolean getisReward()
+    {
+        return this.isReward;
+    }
+
+    public boolean getIsCharacter()
+    {
+        return this.isCharacter;
+    }
+    public boolean getisEmpty()
+    {
+        return this.isEmpty;
+    }
+
+    public void setBarrier(boolean value)
+    {
+        this.isBarrier = value;
+    }
+
+    public void setReward(boolean value)
+    {
+        this.isReward = value;
+    }
+
+    public void setCharacter(boolean value)
+    {
+        this.isCharacter = value;
+    }
+
+    public void setEmpty(boolean empty) {
+        isEmpty = empty;
+    }
+}
