@@ -5,36 +5,100 @@ import java.awt.event.KeyListener;
 
 public class Game extends JFrame implements KeyListener {
 
-    public Tile[][] levelMap;
+    private Tile[][] levelMap;//Game Template
+    private JLabel[][] gameMap;//Mapping of levelMap to JFrame
     Mouse myMouse;
     JLabel mouseLabel;
-    ImageIcon mouseIcon;
 
 
-    Game()
+    JLabel catLabel1;
+    JLabel catLabel2;
+
+
+    public void createMouse()
     {
-        //Create the window
+        mouseLabel = new JLabel();
+        mouseLabel.setBounds(100,200,100,100);
+        mouseLabel.setBackground(Color.blue);
+        mouseLabel.setOpaque(true);
+        this.add(mouseLabel);
+        this.validate();
+    }
+
+    private void createGameMap()
+    {
+        //Set up frame and add mouse label
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1000,1000);
+        this.setSize(1000,1200);//extra 100 pixels at the top for displaying statistic
         this.setLayout(null);
         this.addKeyListener(this);
-        //Display the label
-        mouseLabel = new JLabel();
-        mouseLabel.setBounds(0,0,100,100);
-        mouseLabel.setBackground(Color.red);
-        mouseLabel.setOpaque(true);
-        this.getContentPane().setBackground(Color.BLUE);
-        this.add(mouseLabel);
+        this.setResizable(false);
+        this.getContentPane().setBackground(Color.WHITE);
+
+
+
+        //Read the LevelMap Array and create the initial render of the game on the Frame
+
+        int x = 0;
+        int y = 100;
+        JLabel tempLabel = new JLabel();
+
+        for(int i = 0; i< 10; i++)
+        {
+            for(int j = 0; j <10; j++)
+            {
+                if(levelMap[i][j].getisBarrier() == true ) {
+                    tempLabel = new JLabel();
+                    tempLabel.setBounds(x,y,100,100);
+                    tempLabel.setBackground(Color.red);
+                    tempLabel.setOpaque(true);
+                }
+                else if(levelMap[i][j].getisReward() == true)
+                {
+                    tempLabel = new JLabel();
+                    tempLabel.setBounds(x,y,100,100);
+                    tempLabel.setBackground(Color.yellow);
+                    tempLabel.setOpaque(true);
+
+                }
+                else if(levelMap[i][j].getisEmpty() == true)
+                {
+                    tempLabel = new JLabel();
+                    tempLabel.setBounds(x,y,100,100);
+                    tempLabel.setBackground(Color.white);
+                    tempLabel.setOpaque(true);
+                }
+                else if(levelMap[i][j].getisEntrance() == true)
+                {
+                    tempLabel = new JLabel("Entrance");
+                    tempLabel.setBounds(x,y,100,100);
+                    tempLabel.setBackground(Color.white);
+                    tempLabel.setOpaque(true);
+                }
+                else if (levelMap[i][j].getisExit() == true)
+                {
+                    tempLabel = new JLabel("Exit");
+                    tempLabel.setBounds(x,y,100,100);
+                    tempLabel.setBackground(Color.white);
+                    tempLabel.setOpaque(true);
+                }
+                this.add(tempLabel);
+                x += 100;
+            }
+            y+= 100;
+            x= 0;
+
+        }
+
+
+
+
         this.setVisible(true);
 
+    }
 
-
-
-
-        //Create a Mouse
-        myMouse = new Mouse();
-
-
+    private void createTileMap()
+    {
         //Set the outer boundaries of tile map:
         levelMap = new Tile[10][10];
         for(int i = 0; i < 10; i++)
@@ -76,7 +140,21 @@ public class Game extends JFrame implements KeyListener {
         levelMap[9][8] = new Tile(false,false,true,false,false,false);
 
         // Place Mouse at Entrance
-        levelMap[8][8] = new Tile(false,false,false,false,true,false);
+        //levelMap[8][8] = new Tile(false,false,false,false,true,false);
+    }
+
+
+    Game()
+    {
+        //Create a Mouse
+        myMouse = new Mouse();
+        createTileMap();
+        createMouse();
+        createGameMap();
+
+
+
+
 
 
     }

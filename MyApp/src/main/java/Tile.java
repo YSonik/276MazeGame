@@ -1,7 +1,7 @@
 public class Tile
 {
-    private final int tileHeight = 30;
-    private final int tileWidth = 30;
+    private final int tileHeight = 100;
+    private final int tileWidth = 100;
     private boolean isEntrance;
     private boolean isExit;
     private boolean isBarrier;
@@ -40,6 +40,14 @@ public class Tile
         return this.isEmpty;
     }
 
+    public boolean getisEntrance() {
+        return this.isEntrance;
+    }
+
+    public boolean getisExit() {
+        return this.isExit;
+    }
+
     public void setBarrier(boolean value)
     {
         this.isBarrier = value;
@@ -58,4 +66,13 @@ public class Tile
     public void setEmpty(boolean empty) {
         isEmpty = empty;
     }
+
+    public void setEntrance(boolean value)
+    {
+        this.isEntrance = value;
+    }
+    public void setExit(boolean exit) {
+        isExit = exit;
+    }
+
 }
