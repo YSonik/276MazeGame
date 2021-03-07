@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -6,14 +7,29 @@ public class Game extends JFrame implements KeyListener {
 
     public Tile[][] levelMap;
     Mouse myMouse;
+    JLabel mouseLabel;
+    ImageIcon mouseIcon;
+
 
     Game()
     {
+        //Create the window
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000,1000);
         this.setLayout(null);
         this.addKeyListener(this);
+        //Display the label
+        mouseLabel = new JLabel();
+        mouseLabel.setBounds(0,0,100,100);
+        mouseLabel.setBackground(Color.red);
+        mouseLabel.setOpaque(true);
+        this.getContentPane().setBackground(Color.BLUE);
+        this.add(mouseLabel);
         this.setVisible(true);
+
+
+
+
 
         //Create a Mouse
         myMouse = new Mouse();
@@ -61,6 +77,8 @@ public class Game extends JFrame implements KeyListener {
 
         // Place Mouse at Entrance
         levelMap[8][8] = new Tile(false,false,false,false,true,false);
+
+
     }
 
     public void moveMouse(String direction)
@@ -72,7 +90,6 @@ public class Game extends JFrame implements KeyListener {
             //if valid update the tile map
             levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,false,true);
             myMouse.setCurrentX( myMouse.getCurrentX() -1);
-            //if valid update the tile map
             levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,true,false);
         }
         else if(direction == "right")
@@ -80,7 +97,6 @@ public class Game extends JFrame implements KeyListener {
             //if valid update the tile map
             levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,false,true);
             myMouse.setCurrentX( myMouse.getCurrentX() +1);
-            //if valid update the tile map
             levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,true,false);
         }
         else if(direction == "up")
@@ -95,7 +111,7 @@ public class Game extends JFrame implements KeyListener {
             //if valid update the tile map
             levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,false,true);
             myMouse.setCurrentY( myMouse.getCurrentY() +1);
-            //if valid update the tile map
+
             levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,true,false);
         }
 
@@ -131,7 +147,9 @@ public class Game extends JFrame implements KeyListener {
 
 
     public static void main(String[] args) {
+        //initial static View
         Game myGame = new Game();
+
         for(int i = 0; i< 10; i++)
         {
             for(int j = 0; j <10; j++)
@@ -179,7 +197,25 @@ public class Game extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        switch(e.getKeyCode())
+        {
+            case 37: mouseLabel.setLocation(mouseLabel.getX()-100, mouseLabel.getY());
+                break;
+            case 39: mouseLabel.setLocation(mouseLabel.getX()+100, mouseLabel.getY());
+                break;
+            case 40: mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY()+100);
+                break;
+            case 38 : mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY()-100);
+                break;
+//            case 37: moveMouse("left");
+//                break;
+//            case 39: moveMouse("right");
+//                break;
+//            case 40: moveMouse("down");
+//                break;
+//            case 38 : moveMouse("up");
+//                break;
+        }
     }
 
     @Override

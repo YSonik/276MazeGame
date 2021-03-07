@@ -8,6 +8,8 @@ public class Tile
     private boolean isReward;
     private boolean isCharacter;
     private boolean isEmpty;
+    //private boolean isCat;
+    //private boolean isMouseTrap;
 
     Tile(boolean hasBarrier, boolean hasReward, boolean isEntrance, boolean isExit, boolean isCharacter, boolean isEmpty)
     {
