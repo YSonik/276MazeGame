@@ -8,11 +8,26 @@ public class Game extends JFrame implements KeyListener {
     private Tile[][] levelMap;//Game Template
     private JLabel[][] gameMap;//Mapping of levelMap to JFrame
     private Mouse myMouse;
+    private Cat[] cats;
     private JLabel mouseLabel;
-
 
     JLabel catLabel1;
     JLabel catLabel2;
+    JLabel catLabel3;
+
+    Game()
+    {
+        //Create a Mouse
+        myMouse = new Mouse();//coords set to 8,8
+        createMouseLabel();
+        // Create multiple cats
+        cats = new Cat[3];
+        createCatLabel();
+
+        createTileMap();
+        createFrame();
+        createGameMap();
+    }
 
     public void createMouseLabel()
     {
@@ -20,10 +35,35 @@ public class Game extends JFrame implements KeyListener {
         mouseLabel.setBounds(800,900,100,100);
         mouseLabel.setBackground(Color.blue);
         mouseLabel.setOpaque(true);
+        ImageIcon icon = new ImageIcon(myMouse.getMouseImage());
+        mouseLabel.setIcon(icon);
         this.add(mouseLabel);
         this.validate();
     }
 
+    public void createCatLabel()
+    {
+        catLabel1 = new JLabel();
+        catLabel1.setBounds(800,900,100,100);
+        catLabel1.setBackground(Color.yellow);
+        catLabel1.setOpaque(true);
+        this.add(catLabel1);
+        this.validate();
+
+        catLabel2 = new JLabel();
+        catLabel2.setBounds(800,900,100,100);
+        catLabel2.setBackground(Color.yellow);
+        catLabel2.setOpaque(true);
+        this.add(catLabel2);
+        this.validate();
+
+        catLabel3 = new JLabel();
+        catLabel3.setBounds(800,900,100,100);
+        catLabel3.setBackground(Color.yellow);
+        catLabel3.setOpaque(true);
+        this.add(catLabel3);
+        this.validate();
+    }
 
     public void createFrame()
     {
@@ -169,24 +209,6 @@ public class Game extends JFrame implements KeyListener {
         levelMap[2][6] = new Tile(true,false,false,false,false,false);
         levelMap[2][7] = new Tile(true,false,false,false,false,false);
         levelMap[3][7] = new Tile(true,false,false,false,false,false);
-
-
-
-    }
-
-
-    Game()
-    {
-        //Create a Mouse
-        myMouse = new Mouse();//coords set to 8,8
-
-        createTileMap();
-        createMouseLabel();
-        createFrame();
-        createGameMap();
-
-
-
     }
 
     public void moveMouse(String direction)
@@ -279,8 +301,6 @@ public class Game extends JFrame implements KeyListener {
             }
             System.out.print("\n");
         }
-
-
     }
 
 
