@@ -1,16 +1,10 @@
-import java.io.File;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 public class Rewards {
     private int xCoord;
     private int yCoord;
     private int value;
     private final int chHeight = 25;
     private final int chWidth = 25;
+
 
     Rewards(int x, int y, int z)
     {
