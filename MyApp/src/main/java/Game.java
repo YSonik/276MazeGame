@@ -140,6 +140,38 @@ public class Game extends JFrame implements KeyListener {
         //Set Entrance Tile
         levelMap[8][9] = new Tile(false,false,true,false,false,false);
 
+        //Create the internal maze layout
+        //Structure1:
+        for(int i = 2; i <5;i++ )
+        {
+            levelMap[2][i].setEmpty(false);
+            levelMap[2][i].setBarrier(true);
+        }
+        levelMap[3][2] = new Tile(true,false,false,false,false,false);
+
+        //Structure2
+        levelMap[5][2] = new Tile(true,false,false,false,false,false);
+        levelMap[6][2] = new Tile(true,false,false,false,false,false);
+        levelMap[6][3] = new Tile(true,false,false,false,false,false);
+        levelMap[7][3] = new Tile(true,false,false,false,false,false);
+        levelMap[7][4] = new Tile(true,false,false,false,false,false);
+        levelMap[5][4] = new Tile(true,false,false,false,false,false);
+
+        //Structure3
+        levelMap[5][8] = new Tile(true,false,false,false,false,false);
+        levelMap[5][7] = new Tile(true,false,false,false,false,false);
+        levelMap[5][6] = new Tile(true,false,false,false,false,false);
+        levelMap[6][6] = new Tile(true,false,false,false,false,false);
+        levelMap[7][6] = new Tile(true,false,false,false,false,false);
+        levelMap[7][7] = new Tile(true,false,false,false,false,false);
+
+        //Structure4
+        levelMap[2][6] = new Tile(true,false,false,false,false,false);
+        levelMap[2][7] = new Tile(true,false,false,false,false,false);
+        levelMap[3][7] = new Tile(true,false,false,false,false,false);
+
+
+
     }
 
 
@@ -173,9 +205,6 @@ public class Game extends JFrame implements KeyListener {
         else if(direction == "right")
         {
             if(levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()+1].getisBarrier() == false) {
-
-
-
                 levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true);
                 myMouse.setCurrentX(myMouse.getCurrentX() + 1);
                 levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false);
