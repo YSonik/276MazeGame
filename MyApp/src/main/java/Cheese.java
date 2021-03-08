@@ -10,11 +10,9 @@ public class Cheese extends Rewards{
 
     private BufferedImage cheeseImg;
     Cheese(int x, int y, int value){
-        super(x, y, value);
-    }
 
-    public void drawCheese()
-    {
+        super(x, y, value);
+       // drawCheese();
         try {
             Path cheesePath = Paths.get("Images/cheese.png").toRealPath();;
             this.cheeseImg = ImageIO.read(new File(cheesePath.toString()));
@@ -22,4 +20,18 @@ public class Cheese extends Rewards{
             e.printStackTrace();
         }
     }
+
+    public BufferedImage getCheeseImg()
+    {
+        return this.cheeseImg;
+    }
+    /*public void drawCheese()
+    {
+        try {
+            Path cheesePath = Paths.get("Images/cheese.png").toRealPath();;
+            this.cheeseImg = ImageIO.read(new File(cheesePath.toString()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
 }

@@ -8,25 +8,99 @@ public class Game extends JFrame implements KeyListener {
     private Tile[][] levelMap;//Game Template
     private JLabel[][] gameMap;//Mapping of levelMap to JFrame
     private Mouse myMouse;
+    private Cheese cheese1, cheese2, cheese3;
+    private OrganicCheese orgCheese1, orgCheese2, orgCheese3;
+    private OrganicCheese orgCheese;
     private Cat[] cats;
     private JLabel mouseLabel;
 
     JLabel catLabel1;
     JLabel catLabel2;
     JLabel catLabel3;
+    JLabel cheeseLabel1;
+    JLabel cheeseLabel2;
+    JLabel cheeseLabel3;
+    JLabel organicCheeseLabel1;
+    JLabel organicCheeseLabel2;
+    JLabel organicCheeseLabel3;
 
     Game()
     {
         //Create a Mouse
         myMouse = new Mouse();//coords set to 8,8
+        //Create cheese
+        cheese1 = new Cheese(8,1, 10);
+        cheese2 = new Cheese(3,3,10);
+        cheese3 = new Cheese(7,6,10);
         createMouseLabel();
         // Create multiple cats
+
         cats = new Cat[3];
         createCatLabel();
-
         createTileMap();
         createFrame();
         createGameMap();
+        createCheeseLabel();
+    }
+
+    public void createOrganicCheese()
+    {
+
+        organicCheeseLabel1 = new JLabel();
+        organicCheeseLabel1.setBounds(800,200,100,100);
+        organicCheeseLabel1.setBackground(Color.pink);
+        organicCheeseLabel1.setOpaque(true);
+        ImageIcon orgCheeseIcon1 = new ImageIcon(orgCheese1.orgCheeseImg());
+        organicCheeseLabel1.setIcon(orgCheeseIcon1);
+        this.add(organicCheeseLabel1);
+        this.validate();
+
+        organicCheeseLabel2 = new JLabel();
+        organicCheeseLabel2.setBounds(300,400,100,100);
+        organicCheeseLabel2.setBackground(Color.pink);
+        organicCheeseLabel2.setOpaque(true);
+        ImageIcon orgCheeseIcon2 = new ImageIcon(orgCheese2.orgCheeseImg());
+        organicCheeseLabel2.setIcon(orgCheeseIcon2);
+        this.add(organicCheeseLabel2);
+        this.validate();
+
+        organicCheeseLabel3 = new JLabel();
+        organicCheeseLabel3.setBounds(700,700,100,100);
+        organicCheeseLabel3.setBackground(Color.pink);
+        organicCheeseLabel3.setOpaque(true);
+        ImageIcon orgCheeseIcon3 = new ImageIcon(orgCheese3.orgCheeseImg());
+        organicCheeseLabel3.setIcon(orgCheeseIcon3);
+        this.add(organicCheeseLabel3);
+        this.validate();
+    }
+    public void createCheeseLabel()
+    {
+        cheeseLabel1 = new JLabel();
+        cheeseLabel1.setBounds(800,200,100,100);
+        cheeseLabel1.setBackground(Color.orange);
+        cheeseLabel1.setOpaque(true);
+        ImageIcon cheeseicon1 = new ImageIcon(cheese1.getCheeseImg());
+        cheeseLabel1.setIcon(cheeseicon1);
+        this.add(cheeseLabel1);
+        this.validate();
+
+        cheeseLabel2 = new JLabel();
+        cheeseLabel2.setBounds(300,400,100,100);
+        cheeseLabel2.setBackground(Color.orange);
+        cheeseLabel2.setOpaque(true);
+        ImageIcon cheeseicon2 = new ImageIcon(cheese2.getCheeseImg());
+        cheeseLabel2.setIcon(cheeseicon2);
+        this.add(cheeseLabel2);
+        this.validate();
+
+        cheeseLabel3 = new JLabel();
+        cheeseLabel3.setBounds(700,700,100,100);
+        cheeseLabel3.setBackground(Color.orange);
+        cheeseLabel3.setOpaque(true);
+        ImageIcon cheeseicon3 = new ImageIcon(cheese3.getCheeseImg());
+        cheeseLabel3.setIcon(cheeseicon3);
+        this.add(cheeseLabel3);
+        this.validate();
     }
 
     public void createMouseLabel()

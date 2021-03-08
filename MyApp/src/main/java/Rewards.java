@@ -2,8 +2,8 @@ public class Rewards {
     private int xCoord;
     private int yCoord;
     private int value;
-    private final int chHeight = 25;
-    private final int chWidth = 25;
+    private final int chHeight = 100;
+    private final int chWidth = 100;
 
 
     Rewards(int x, int y, int z)

@@ -12,19 +12,7 @@ public class OrganicCheese extends Rewards {
     {
         super(x,y,value);
         this.isInvisible = invisibility;
-    }
-
-    public void setInvisibility(boolean invisibility)
-    {
-        this.isInvisible = invisibility;
-    }
-
-    public boolean getInvisibilityg(){
-        return this.isInvisible;
-    }
-
-    public void drawOrgCheese()
-    {
+        //drawOrgCheese();
         try {
             Path orgCheesePath = Paths.get("Images/stack_of_cheese.png").toRealPath();;
             this.orgCheese = ImageIO.read(new File(orgCheesePath.toString()));
@@ -32,5 +20,29 @@ public class OrganicCheese extends Rewards {
             e.printStackTrace();
         }
     }
+
+    public BufferedImage orgCheeseImg()
+    {
+        return this.orgCheese;
+    }
+
+    public void setInvisibility(boolean invisibility)
+    {
+        this.isInvisible = invisibility;
+    }
+
+    public boolean getInvisibility(){
+        return this.isInvisible;
+    }
+
+    /*public void drawOrgCheese()
+    {
+        try {
+            Path orgCheesePath = Paths.get("Images/stack_of_cheese.png").toRealPath();;
+            this.orgCheese = ImageIO.read(new File(orgCheesePath.toString()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
 
 }
