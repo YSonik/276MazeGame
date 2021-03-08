@@ -64,7 +64,7 @@ public class Tile
     }
 
     public void setEmpty(boolean empty) {
-        isEmpty = empty;
+        this.isEmpty = empty;
     }
 
     public void setEntrance(boolean value)
@@ -72,7 +72,7 @@ public class Tile
         this.isEntrance = value;
     }
     public void setExit(boolean exit) {
-        isExit = exit;
+        this.isExit = exit;
     }
 
 }

@@ -7,25 +7,25 @@ public class Game extends JFrame implements KeyListener {
 
     private Tile[][] levelMap;//Game Template
     private JLabel[][] gameMap;//Mapping of levelMap to JFrame
-    Mouse myMouse;
-    JLabel mouseLabel;
+    private Mouse myMouse;
+    private JLabel mouseLabel;
 
 
     JLabel catLabel1;
     JLabel catLabel2;
 
-
-    public void createMouse()
+    public void createMouseLabel()
     {
         mouseLabel = new JLabel();
-        mouseLabel.setBounds(100,200,100,100);
+        mouseLabel.setBounds(800,900,100,100);
         mouseLabel.setBackground(Color.blue);
         mouseLabel.setOpaque(true);
         this.add(mouseLabel);
         this.validate();
     }
 
-    private void createGameMap()
+
+    public void createFrame()
     {
         //Set up frame and add mouse label
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,9 +34,10 @@ public class Game extends JFrame implements KeyListener {
         this.addKeyListener(this);
         this.setResizable(false);
         this.getContentPane().setBackground(Color.WHITE);
+    }
 
-
-
+    private void createGameMap()
+    {
         //Read the LevelMap Array and create the initial render of the game on the Frame
 
         int x = 0;
@@ -89,71 +90,68 @@ public class Game extends JFrame implements KeyListener {
             x= 0;
 
         }
-
-
-
-
         this.setVisible(true);
 
     }
 
     private void createTileMap()
     {
-        //Set the outer boundaries of tile map:
+        //fill map with empty tiles:
         levelMap = new Tile[10][10];
         for(int i = 0; i < 10; i++)
         {
             for(int j = 0; j< 10; j++)
             {
-                levelMap[i][j] = new Tile(false,true,false,false,false, false);
+                levelMap[i][j] = new Tile(false,false,false,false,false, true);
             }
         }
+
         //Left column
         for(int i = 0; i< 10; i++)
         {
+            levelMap[i][0].setEmpty(false);
             levelMap[i][0].setBarrier(true);
-            levelMap[i][0].setReward(false);
 
+        }
+
+        //Top Row
+        for(int i = 0; i < 10; i++)
+        {
+            levelMap[0][i].setEmpty(false);
+            levelMap[0][i].setBarrier(true);
+        }
+
+        //Bottom Row
+        for(int i = 0; i<10;i++)
+        {
+            levelMap[9][i].setEmpty(false);
+            levelMap[9][i].setBarrier(true);
         }
 
         //Right Column
-        for(int i = 0; i < 10; i++)
-        {
-            levelMap[i][9].setBarrier(true);
-            levelMap[i][9].setReward(false);
-        }
-
-        //Top row-leaving opening for exit
-        for(int i = 0; i<10;i++)
-        {
-            levelMap[0][i].setBarrier(true);
-            levelMap[0][i].setReward(false);
-        }
-        levelMap[0][1] = new Tile(false,false,false,true,false,false);
-
-        //Bottom row-leaving opening for entrance
         for(int i = 0; i < 10;i++)
         {
-            levelMap[9][i].setBarrier(true);
-            levelMap[9][i].setReward(false);
+            levelMap[i][9].setEmpty(false);
+            levelMap[i][9].setBarrier(true);
         }
-        levelMap[9][8] = new Tile(false,false,true,false,false,false);
 
-        // Place Mouse at Entrance
-        //levelMap[8][8] = new Tile(false,false,false,false,true,false);
+        //Set Exit Tile
+        levelMap[1][0]  = new Tile(false,false,false,true,false,false);
+        //Set Entrance Tile
+        levelMap[8][9] = new Tile(false,false,true,false,false,false);
+
     }
 
 
     Game()
     {
         //Create a Mouse
-        myMouse = new Mouse();
+        myMouse = new Mouse();//coords set to 8,8
+
         createTileMap();
-        createMouse();
+        createMouseLabel();
+        createFrame();
         createGameMap();
-
-
-
 
 
 
@@ -165,34 +163,44 @@ public class Game extends JFrame implements KeyListener {
         //Perform checks in each case to see whether the new spot is a valid movement(no barriers)
         if(direction == "left")
         {
-            //if valid update the tile map
-            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,false,true);
-            myMouse.setCurrentX( myMouse.getCurrentX() -1);
-            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,true,false);
+            if(levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()-1].getisBarrier() == false) {
+                levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true);
+                myMouse.setCurrentX(myMouse.getCurrentX() - 1);
+                levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false);
+                mouseLabel.setLocation(mouseLabel.getX()-100, mouseLabel.getY());
+            }
         }
         else if(direction == "right")
         {
-            //if valid update the tile map
-            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,false,true);
-            myMouse.setCurrentX( myMouse.getCurrentX() +1);
-            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,true,false);
+            if(levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()+1].getisBarrier() == false) {
+
+
+
+                levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true);
+                myMouse.setCurrentX(myMouse.getCurrentX() + 1);
+                levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false);
+                mouseLabel.setLocation(mouseLabel.getX()+100, mouseLabel.getY());
+            }
         }
         else if(direction == "up")
         {
-            //if valid update the tile map
-            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,false,true);
-            myMouse.setCurrentY( myMouse.getCurrentY() -1);
-            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,true,false);
+            if(levelMap[myMouse.getCurrentY()-1][myMouse.getCurrentX()].getisBarrier() == false) {
+                levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true);
+                myMouse.setCurrentY(myMouse.getCurrentY() - 1);
+                levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false);
+                mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY()-100);
+            }
         }
         else if(direction == "down")
         {
-            //if valid update the tile map
-            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,false,true);
-            myMouse.setCurrentY( myMouse.getCurrentY() +1);
-
-            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false,false,false,false,true,false);
+            if(levelMap[myMouse.getCurrentY()+1][myMouse.getCurrentX()].getisBarrier() == false) {
+                levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true);
+                myMouse.setCurrentY(myMouse.getCurrentY() + 1);
+                levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false);
+                mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY()+100);
+            }
         }
-
+        //Redraw Labels
         for(int i = 0; i< 10; i++)
         {
             for(int j = 0; j <10; j++)
@@ -208,19 +216,12 @@ public class Game extends JFrame implements KeyListener {
                 {
                     System.out.print(" M ");
                 }
-                else if(levelMap[i][j].getisEmpty() == true)
-                {
-                    System.out.print("   ");
-                }
                 else{
                     System.out.print("   ");
                 }
             }
             System.out.print("\n");
         }
-        System.out.print("\n");
-
-
     }
 
 
@@ -260,39 +261,35 @@ public class Game extends JFrame implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        switch(e.getKeyChar())
-        {
-            case 'a': moveMouse("left");
-                break;
-            case 'd': moveMouse("right");
-                break;
-            case 's': moveMouse("down");
-                break;
-            case 'w': moveMouse("up");
-                break;
-        }
+//        switch(e.getKeyChar())
+//        {
+//            case 'a': moveMouse("left");
+//                break;
+//            case 'd': moveMouse("right");
+//                break;
+//            case 's': moveMouse("down");
+//                break;
+//            case 'w': moveMouse("up");
+//                break;
+//        }
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode())
         {
-            case 37: mouseLabel.setLocation(mouseLabel.getX()-100, mouseLabel.getY());
-                break;
-            case 39: mouseLabel.setLocation(mouseLabel.getX()+100, mouseLabel.getY());
-                break;
-            case 40: mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY()+100);
-                break;
-            case 38 : mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY()-100);
-                break;
-//            case 37: moveMouse("left");
-//                break;
-//            case 39: moveMouse("right");
-//                break;
-//            case 40: moveMouse("down");
-//                break;
-//            case 38 : moveMouse("up");
-//                break;
+            case 37: moveMouse("left");
+
+                                break;
+            case 39: moveMouse("right");
+
+                                break;
+            case 40: moveMouse("down");
+
+                                break;
+            case 38 : moveMouse("up");
+
+                                break;
         }
     }
 
