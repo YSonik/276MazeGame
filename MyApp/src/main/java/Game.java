@@ -506,6 +506,7 @@ public class Game extends JFrame implements KeyListener {
                 }
             }
             System.out.print("\n");
+            System.out.println(score);
         }
 
     }
