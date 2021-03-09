@@ -1,36 +1,34 @@
 public class Rewards {
-    private int xCoord;
-    private int yCoord;
-    private int value;
-    private final int chHeight = 100;
-    private final int chWidth = 100;
+    protected int x;
+    protected int y;
+    protected int value;
 
 
-    Rewards(int x, int y, int z)
+    Rewards(int x, int y, int value)
     {
-        this.xCoord = x;
-        this.yCoord = y;
-        this.value = z;
+        this.x = x;
+        this.y = y;
+        this.value = value;
     }
 
-    public void setXCoord (int x)
+    public void setX (int x)
     {
-        this.xCoord = x;
+        this.x = x;
     }
 
-    public void setYCoord(int y)
+    public void setY(int y)
     {
-        this.yCoord = y;
+        this.y = y;
     }
 
-    public int getXCoord()
+    public int getX()
     {
-        return this.xCoord;
+        return this.x;
     }
 
-    public int getYCoord()
+    public int getY()
     {
-        return this.yCoord;
+        return this.y;
     }
 
     public void setValue(int value)
@@ -42,9 +40,6 @@ public class Rewards {
     {
         return this.value;
     }
-
-
-
 
 
 }

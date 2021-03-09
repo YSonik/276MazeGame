@@ -9,8 +9,8 @@ public class Mouse {
     private int currentX;
     private int currentY;
     private int cheeseEaten;
-    private final int mouseHeight = 25;
-    private final int mouseWidth = 25;
+    private final int mouseHeight = 100;
+    private final int mouseWidth = 100;
     private BufferedImage mouseImage;
 
     Mouse()
