@@ -49,22 +49,35 @@ public class Game extends JFrame implements KeyListener {
     {
         Cheese1 = new JLabel("Cheese1");
         Cheese1.setBounds(cheese1.y*100,(cheese1.x+1)*100,100,100);
-        Cheese1.setBackground(Color.green);
+        Cheese1.setBackground(Color.white);
         Cheese1.setOpaque(true);
+        Image cheeseImg = cheese1.getCheeseImg().getScaledInstance(Cheese1.getWidth(), Cheese1.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(cheeseImg);
+        Cheese1.setIcon(icon);
         this.add(Cheese1);
         this.validate();
 
         Cheese2 = new JLabel("Cheese2");
         Cheese2.setBounds(cheese2.y*100,(cheese2.x+1)*100,100,100);
-        Cheese2.setBackground(Color.green);
+        Cheese2.setBackground(Color.white);
         Cheese2.setOpaque(true);
+        Image cheeseImg2 = cheese2.getCheeseImg().getScaledInstance(Cheese2.getWidth(), Cheese2.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon2 = new ImageIcon(cheeseImg2);
+        Cheese2.setIcon(icon2);
         this.add(Cheese2);
         this.validate();
 
         Cheese3 = new JLabel("Cheese3");
         Cheese3.setBounds(cheese3.y*100,(cheese3.x+1)*100,100,100);
-        Cheese3.setBackground(Color.green);
+        Cheese3.setBackground(Color.white);
         Cheese3.setOpaque(true);
+        Image cheeseImg3 = cheese3.getCheeseImg().getScaledInstance(Cheese3.getWidth(), Cheese3.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon3 = new ImageIcon(cheeseImg3);
+        Cheese3.setIcon(icon3);
+
         this.add(Cheese3);
         this.validate();
     }
@@ -75,7 +88,9 @@ public class Game extends JFrame implements KeyListener {
         mouseLabel.setBounds(800,900,100,100);
         mouseLabel.setBackground(Color.blue);
         mouseLabel.setOpaque(true);
-        ImageIcon icon = new ImageIcon(myMouse.getMouseImage());
+        Image mouseImg = myMouse.getMouseImage().getScaledInstance(mouseLabel.getWidth(), mouseLabel.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(mouseImg);
         mouseLabel.setIcon(icon);
         this.add(mouseLabel);
         this.validate();
