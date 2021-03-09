@@ -33,10 +33,16 @@ public class Game extends JFrame implements KeyListener {
         cheese2 = new Cheese(3,3,10);
         cheese3 = new Cheese(7,6,10);
         createMouseLabel();
+        
         // Create multiple cats
         cat1 = new Cat();
+        cat1.setCurrentX(4);
+        cat1.setCurrentY(2);
         cat2 = new Cat();
+        cat1.setCurrentX(8);
+        cat1.setCurrentY(5);
         createCatLabel();
+
         createTileMap();
         createFrame();
         createGameMap();
@@ -284,165 +290,52 @@ public class Game extends JFrame implements KeyListener {
                 if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisBarrier() == false) {
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true);
                     myMouse.setCurrentX(myMouse.getCurrentX() - 1);
-                    int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false);
                     mouseLabel.setLocation(mouseLabel.getX() - 100, mouseLabel.getY());
-                    switch (direction1) {
-                        case 1:
-                            catLabel1.setLocation(catLabel1.getX() + 100, catLabel1.getY());
-                            break;
-                        case 2:
-                            catLabel1.setLocation(catLabel1.getX() - 100, catLabel1.getY());
-                            break;
-                        case 3:
-                            catLabel1.setLocation(catLabel1.getX(), catLabel1.getY() + 100);
-                            break;
-                        case 4:
-                            catLabel1.setLocation(catLabel1.getX(), catLabel1.getY() - 100);
-                            break;
-                        default:
-                            break;
-                    }
-                    switch (direction2) {
-                        case 1:
-                            catLabel2.setLocation(catLabel2.getX() + 100, catLabel2.getY());
-                            break;
-                        case 2:
-                            catLabel2.setLocation(catLabel2.getX() - 100, catLabel2.getY());
-                            break;
-                        case 3:
-                            catLabel2.setLocation(catLabel2.getX(), catLabel2.getY() + 100);
-                            break;
-                        case 4:
-                            catLabel2.setLocation(catLabel2.getX(), catLabel2.getY() - 100);
-                            break;
-                        default:
-                            break;
-                    }
+
+                    cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
+                    cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
+                    catLabel1.setLocation(cat1.getCurrentX()*100, cat1.getCurrentY()*100);
+                    catLabel2.setLocation(cat2.getCurrentX()*100, cat2.getCurrentY()*100);
                 }
             } else if (direction == "right") {
                 if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getisBarrier() == false) {
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true);
                     myMouse.setCurrentX(myMouse.getCurrentX() + 1);
-                    int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false);
                     mouseLabel.setLocation(mouseLabel.getX() + 100, mouseLabel.getY());
-                    switch (direction1) {
-                        case 1:
-                            catLabel1.setLocation(catLabel1.getX() + 100, catLabel1.getY());
-                            break;
-                        case 2:
-                            catLabel1.setLocation(catLabel1.getX() - 100, catLabel1.getY());
-                            break;
-                        case 3:
-                            catLabel1.setLocation(catLabel1.getX(), catLabel1.getY() + 100);
-                            break;
-                        case 4:
-                            catLabel1.setLocation(catLabel1.getX(), catLabel1.getY() - 100);
-                            break;
-                        default:
-                            break;
-                    }
-                    switch (direction2) {
-                        case 1:
-                            catLabel2.setLocation(catLabel2.getX() + 100, catLabel2.getY());
-                            break;
-                        case 2:
-                            catLabel2.setLocation(catLabel2.getX() - 100, catLabel2.getY());
-                            break;
-                        case 3:
-                            catLabel2.setLocation(catLabel2.getX(), catLabel2.getY() + 100);
-                            break;
-                        case 4:
-                            catLabel2.setLocation(catLabel2.getX(), catLabel2.getY() - 100);
-                            break;
-                        default:
-                            break;
-                    }
+                    
+                    cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
+                    cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
+                    catLabel1.setLocation(cat1.getCurrentX()*100, cat1.getCurrentY()*100);
+                    catLabel2.setLocation(cat2.getCurrentX()*100, cat2.getCurrentY()*100);
                 }
             } else if (direction == "up") {
                 if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getisBarrier() == false) {
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true);
                     myMouse.setCurrentY(myMouse.getCurrentY() - 1);
-                    int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
+                   
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false);
                     mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() - 100);
-                    switch (direction1) {
-                        case 1:
-                            catLabel1.setLocation(catLabel1.getX() + 100, catLabel1.getY());
-                            break;
-                        case 2:
-                            catLabel1.setLocation(catLabel1.getX() - 100, catLabel1.getY());
-                            break;
-                        case 3:
-                            catLabel1.setLocation(catLabel1.getX(), catLabel1.getY() + 100);
-                            break;
-                        case 4:
-                            catLabel1.setLocation(catLabel1.getX(), catLabel1.getY() - 100);
-                            break;
-                        default:
-                            break;
-                    }
-                    switch (direction2) {
-                        case 1:
-                            catLabel2.setLocation(catLabel2.getX() + 100, catLabel2.getY());
-                            break;
-                        case 2:
-                            catLabel2.setLocation(catLabel2.getX() - 100, catLabel2.getY());
-                            break;
-                        case 3:
-                            catLabel2.setLocation(catLabel2.getX(), catLabel2.getY() + 100);
-                            break;
-                        case 4:
-                            catLabel2.setLocation(catLabel2.getX(), catLabel2.getY() - 100);
-                            break;
-                        default:
-                            break;
-                    }
+                    
+                    cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
+                    cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
+                    catLabel1.setLocation(cat1.getCurrentX()*100, cat1.getCurrentY()*100);
+                    catLabel2.setLocation(cat2.getCurrentX()*100, cat2.getCurrentY()*100);
                 }
             } else if (direction == "down") {
                 if (levelMap[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisBarrier() == false) {
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true);
                     myMouse.setCurrentY(myMouse.getCurrentY() + 1);
-                    int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
+                    
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false);
                     mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() + 100);
-                    switch (direction1) {
-                        case 1:
-                            catLabel1.setLocation(catLabel1.getX() + 100, catLabel1.getY());
-                            break;
-                        case 2:
-                            catLabel1.setLocation(catLabel1.getX() - 100, catLabel1.getY());
-                            break;
-                        case 3:
-                            catLabel1.setLocation(catLabel1.getX(), catLabel1.getY() + 100);
-                            break;
-                        case 4:
-                            catLabel1.setLocation(catLabel1.getX(), catLabel1.getY() - 100);
-                            break;
-                        default:
-                            break;
-                    }
-                    switch (direction2) {
-                        case 1:
-                            catLabel2.setLocation(catLabel2.getX() + 100, catLabel2.getY());
-                            break;
-                        case 2:
-                            catLabel2.setLocation(catLabel2.getX() - 100, catLabel2.getY());
-                            break;
-                        case 3:
-                            catLabel2.setLocation(catLabel2.getX(), catLabel2.getY() + 100);
-                            break;
-                        case 4:
-                            catLabel2.setLocation(catLabel2.getX(), catLabel2.getY() - 100);
-                            break;
-                        default:
-                            break;
-                    }
+
+                    cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
+                    cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
+                    catLabel1.setLocation(cat1.getCurrentX()*100, cat1.getCurrentY()*100);
+                    catLabel2.setLocation(cat2.getCurrentX()*100, cat2.getCurrentY()*100);
+                    
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
