@@ -14,7 +14,7 @@ public class OrganicCheese extends Rewards {
         this.isInvisible = invisibility;
         //drawOrgCheese();
         try {
-            Path orgCheesePath = Paths.get("Myapp/Images/stack_of_cheese.png").toRealPath();;
+            Path orgCheesePath = Paths.get("MyApp/Images/stack_of_cheese.png").toRealPath();;
             this.orgCheese = ImageIO.read(new File(orgCheesePath.toString()));
         } catch (IOException e) {
             e.printStackTrace();
