@@ -4,35 +4,38 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Game extends JFrame implements KeyListener {
-
+    private int score;
     private Tile[][] levelMap;//Game Template
     private JLabel[][] gameMap;//Mapping of levelMap to JFrame
     private Mouse myMouse;
     private Cat cat1;
     private Cat cat2;
-    private Cheese cheese1, cheese2, cheese3;
-    private OrganicCheese orgCheese1, orgCheese2, orgCheese3;
-    private OrganicCheese orgCheese;
+    private Cheese cheese1;
+    private Cheese cheese2;
+    private Cheese cheese3;
+    private JLabel Cheese1;
+    private JLabel Cheese2;
+    private JLabel Cheese3;
     private JLabel mouseLabel;
 
     JLabel catLabel1;
     JLabel catLabel2;
-    JLabel cheeseLabel1;
-    JLabel cheeseLabel2;
-    JLabel cheeseLabel3;
-    JLabel organicCheeseLabel1;
-    JLabel organicCheeseLabel2;
-    JLabel organicCheeseLabel3;
+
 
     Game()
     {
         //Create a Mouse
         myMouse = new Mouse();//coords set to 8,8
-        //Create cheese
-        cheese1 = new Cheese(8,1, 10);
-        cheese2 = new Cheese(3,3,10);
-        cheese3 = new Cheese(7,6,10);
+        //set score
+        int score = 0;
+        //Create Cheese
+        cheese1 = new Cheese(6,7,5);
+        cheese2 = new Cheese(4,3,5);
+        cheese3 = new Cheese(2,8,5);
+        createCheeseLabel();
+
         createMouseLabel();
+
         // Create multiple cats
         cat1 = new Cat();
         cat2 = new Cat();
@@ -40,66 +43,29 @@ public class Game extends JFrame implements KeyListener {
         createTileMap();
         createFrame();
         createGameMap();
-        createCheeseLabel();
     }
 
-    public void createOrganicCheese()
-    {
-
-        organicCheeseLabel1 = new JLabel();
-        organicCheeseLabel1.setBounds(800,200,100,100);
-        organicCheeseLabel1.setBackground(Color.pink);
-        organicCheeseLabel1.setOpaque(true);
-        ImageIcon orgCheeseIcon1 = new ImageIcon(orgCheese1.orgCheeseImg());
-        organicCheeseLabel1.setIcon(orgCheeseIcon1);
-        this.add(organicCheeseLabel1);
-        this.validate();
-
-        organicCheeseLabel2 = new JLabel();
-        organicCheeseLabel2.setBounds(300,400,100,100);
-        organicCheeseLabel2.setBackground(Color.pink);
-        organicCheeseLabel2.setOpaque(true);
-        ImageIcon orgCheeseIcon2 = new ImageIcon(orgCheese2.orgCheeseImg());
-        organicCheeseLabel2.setIcon(orgCheeseIcon2);
-        this.add(organicCheeseLabel2);
-        this.validate();
-
-        organicCheeseLabel3 = new JLabel();
-        organicCheeseLabel3.setBounds(700,700,100,100);
-        organicCheeseLabel3.setBackground(Color.pink);
-        organicCheeseLabel3.setOpaque(true);
-        ImageIcon orgCheeseIcon3 = new ImageIcon(orgCheese3.orgCheeseImg());
-        organicCheeseLabel3.setIcon(orgCheeseIcon3);
-        this.add(organicCheeseLabel3);
-        this.validate();
-    }
     public void createCheeseLabel()
     {
-        cheeseLabel1 = new JLabel();
-        cheeseLabel1.setBounds(800,200,100,100);
-        cheeseLabel1.setBackground(Color.orange);
-        cheeseLabel1.setOpaque(true);
-        ImageIcon cheeseicon1 = new ImageIcon(cheese1.getCheeseImg());
-        cheeseLabel1.setIcon(cheeseicon1);
-        this.add(cheeseLabel1);
+        Cheese1 = new JLabel("Cheese1");
+        Cheese1.setBounds(cheese1.y*100,(cheese1.x+1)*100,100,100);
+        Cheese1.setBackground(Color.green);
+        Cheese1.setOpaque(true);
+        this.add(Cheese1);
         this.validate();
 
-        cheeseLabel2 = new JLabel();
-        cheeseLabel2.setBounds(300,400,100,100);
-        cheeseLabel2.setBackground(Color.orange);
-        cheeseLabel2.setOpaque(true);
-        ImageIcon cheeseicon2 = new ImageIcon(cheese2.getCheeseImg());
-        cheeseLabel2.setIcon(cheeseicon2);
-        this.add(cheeseLabel2);
+        Cheese2 = new JLabel("Cheese2");
+        Cheese2.setBounds(cheese2.y*100,(cheese2.x+1)*100,100,100);
+        Cheese2.setBackground(Color.green);
+        Cheese2.setOpaque(true);
+        this.add(Cheese2);
         this.validate();
 
-        cheeseLabel3 = new JLabel();
-        cheeseLabel3.setBounds(700,700,100,100);
-        cheeseLabel3.setBackground(Color.orange);
-        cheeseLabel3.setOpaque(true);
-        ImageIcon cheeseicon3 = new ImageIcon(cheese3.getCheeseImg());
-        cheeseLabel3.setIcon(cheeseicon3);
-        this.add(cheeseLabel3);
+        Cheese3 = new JLabel("Cheese3");
+        Cheese3.setBounds(cheese3.y*100,(cheese3.x+1)*100,100,100);
+        Cheese3.setBackground(Color.green);
+        Cheese3.setOpaque(true);
+        this.add(Cheese3);
         this.validate();
     }
 
@@ -207,7 +173,7 @@ public class Game extends JFrame implements KeyListener {
         {
             for(int j = 0; j< 10; j++)
             {
-                levelMap[i][j] = new Tile(false,false,false,false,false, true);
+                levelMap[i][j] = new Tile(false,false,false,false,false, true,false,false,false);
             }
         }
 
@@ -241,9 +207,9 @@ public class Game extends JFrame implements KeyListener {
         }
 
         //Set Exit Tile
-        levelMap[1][0]  = new Tile(false,false,false,true,false,false);
+        levelMap[1][0]  = new Tile(false,false,false,true,false,false,false,false,false);
         //Set Entrance Tile
-        levelMap[8][9] = new Tile(false,false,true,false,false,false);
+        levelMap[8][9] = new Tile(false,false,true,false,false,false,false,false,false);
 
         //Create the internal maze layout
         //Structure1:
@@ -252,28 +218,36 @@ public class Game extends JFrame implements KeyListener {
             levelMap[2][i].setEmpty(false);
             levelMap[2][i].setBarrier(true);
         }
-        levelMap[3][2] = new Tile(true,false,false,false,false,false);
+        levelMap[3][2] = new Tile(true,false,false,false,false,false,false,false, false);
 
         //Structure2
-        levelMap[5][2] = new Tile(true,false,false,false,false,false);
-        levelMap[6][2] = new Tile(true,false,false,false,false,false);
-        levelMap[6][3] = new Tile(true,false,false,false,false,false);
-        levelMap[7][3] = new Tile(true,false,false,false,false,false);
-        levelMap[7][4] = new Tile(true,false,false,false,false,false);
-        levelMap[5][4] = new Tile(true,false,false,false,false,false);
+        levelMap[5][2] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[6][2] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[6][3] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[7][3] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[7][4] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[5][4] = new Tile(true,false,false,false,false,false,false,false,false);
 
         //Structure3
-        levelMap[5][8] = new Tile(true,false,false,false,false,false);
-        levelMap[5][7] = new Tile(true,false,false,false,false,false);
-        levelMap[5][6] = new Tile(true,false,false,false,false,false);
-        levelMap[6][6] = new Tile(true,false,false,false,false,false);
-        levelMap[7][6] = new Tile(true,false,false,false,false,false);
-        levelMap[7][7] = new Tile(true,false,false,false,false,false);
+        levelMap[5][8] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[5][7] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[5][6] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[6][6] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[7][6] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[7][7] = new Tile(true,false,false,false,false,false,false,false,false);
 
         //Structure4
-        levelMap[2][6] = new Tile(true,false,false,false,false,false);
-        levelMap[2][7] = new Tile(true,false,false,false,false,false);
-        levelMap[3][7] = new Tile(true,false,false,false,false,false);
+        levelMap[2][6] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[2][7] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[3][7] = new Tile(true,false,false,false,false,false,false,false,false);
+
+
+        //Set locations for cheese
+        levelMap[6][7] = new Tile(false,false,false,false,false,false,true, false,false);
+        levelMap[4][3] = new Tile(false,false,false,false,false,false,true, false,false);
+        levelMap[2][8] = new Tile(false,false,false,false,false,false,true, false,false);
+
+
     }
 
     public void moveMouse(String direction)
@@ -282,12 +256,33 @@ public class Game extends JFrame implements KeyListener {
             //Perform checks in each case to see whether the new spot is a valid movement(no barriers)
             if (direction == "left") {
                 if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisBarrier() == false) {
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true);
+
+                    //Mouse position update plus cheese check
+                    if( levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()-1].getisCheese() == true)
+                    {
+                        score += cheese1.value;
+                        System.out.println(score);
+                        //Remove Labels
+                        if(myMouse.getCurrentX()-1 == cheese1.getY())
+                        {
+                            Cheese1.setVisible(false);
+                            this.repaint();
+                        }
+                        else
+                        {
+                            Cheese2.setVisible(false);
+                            this.repaint();
+                        }
+
+                    }
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false);
                     myMouse.setCurrentX(myMouse.getCurrentX() - 1);
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
                     mouseLabel.setLocation(mouseLabel.getX() - 100, mouseLabel.getY());
+
+                    //Cat Position update
                     switch (direction1) {
                         case 1:
                             catLabel1.setLocation(catLabel1.getX() + 100, catLabel1.getY());
@@ -323,11 +318,22 @@ public class Game extends JFrame implements KeyListener {
                 }
             } else if (direction == "right") {
                 if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getisBarrier() == false) {
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true);
+
+                    //Mouse position update plus cheese check
+                    if( levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()+1].getisCheese() == true)
+                    {
+                        score += cheese1.value;
+                        System.out.println(score);
+                        //Remove Labels
+                        Cheese2.setVisible(false);
+                        this.repaint();
+
+                    }
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false);
                     myMouse.setCurrentX(myMouse.getCurrentX() + 1);
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
                     mouseLabel.setLocation(mouseLabel.getX() + 100, mouseLabel.getY());
                     switch (direction1) {
                         case 1:
@@ -362,14 +368,29 @@ public class Game extends JFrame implements KeyListener {
                             break;
                     }
                 }
-            } else if (direction == "up") {
+            }
+
+            else if (direction == "up") {
                 if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getisBarrier() == false) {
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true);
+                    //Mouse position update plus cheese check
+                    if( levelMap[myMouse.getCurrentY()-1][myMouse.getCurrentX()].getisCheese() == true)
+                    {
+                        score += cheese1.value;
+                        System.out.println(score);
+                        //Remove Labels
+
+                        Cheese3.setVisible(false);
+                        this.repaint();
+
+                    }
+
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false);
                     myMouse.setCurrentY(myMouse.getCurrentY() - 1);
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
                     mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() - 100);
+
                     switch (direction1) {
                         case 1:
                             catLabel1.setLocation(catLabel1.getX() + 100, catLabel1.getY());
@@ -403,13 +424,26 @@ public class Game extends JFrame implements KeyListener {
                             break;
                     }
                 }
+
             } else if (direction == "down") {
                 if (levelMap[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisBarrier() == false) {
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true);
+
+                    //Mouse position update plus cheese check
+                    if( levelMap[myMouse.getCurrentY()+1][myMouse.getCurrentX()].getisCheese() == true) {
+                        score += cheese1.value;
+                        System.out.println(score);
+                        //Remove Labels
+
+                        Cheese3.setVisible(false);
+                        this.repaint();
+
+                    }
+
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false);
                     myMouse.setCurrentY(myMouse.getCurrentY() + 1);
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
                     mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() + 100);
                     switch (direction1) {
                         case 1:
@@ -448,6 +482,33 @@ public class Game extends JFrame implements KeyListener {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not move");
         }
+        for(int i = 0; i< 10; i++)
+        {
+            for(int j = 0; j <10; j++)
+            {
+                if(levelMap[i][j].getisBarrier() == true ) {
+                    System.out.print("[ ]");
+                }
+                else if(levelMap[i][j].getisReward() == true)
+                {
+                    System.out.print(" * ");
+                }
+                else if(levelMap[i][j].getIsCharacter() == true)
+                {
+                    System.out.print(" M ");
+                }
+                else if (levelMap[i][j].getisCheese() == true)
+                {
+                    System.out.print(" * ");
+                }
+                else{
+                    System.out.print("   ");
+                }
+            }
+            System.out.print("\n");
+            System.out.println(score);
+        }
+
     }
 
     public static void main(String[] args) {
