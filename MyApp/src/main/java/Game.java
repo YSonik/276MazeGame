@@ -433,9 +433,17 @@ public class Game extends JFrame implements KeyListener {
                         score += cheese1.value;
                         System.out.println(score);
                         //Remove Labels
+                        if(myMouse.getCurrentY()+1 == cheese2.getX())
+                        {
+                            Cheese2.setVisible(false);
+                            this.repaint();
+                        }
+                        else
+                        {
+                            Cheese3.setVisible(false);
+                            this.repaint();
+                        }
 
-                        Cheese3.setVisible(false);
-                        this.repaint();
 
                     }
 
@@ -506,7 +514,7 @@ public class Game extends JFrame implements KeyListener {
                 }
             }
             System.out.print("\n");
-            System.out.println(score);
+            //System.out.println(score);
         }
 
     }
