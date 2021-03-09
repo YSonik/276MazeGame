@@ -6,40 +6,108 @@ public class Cat {
 
     Cat()
     {
-        this.currentX = 8;
-        this.currentY = 8;
+        this.currentX = currentX;
+        this.currentY = currentY;
     }
 
-    public int chase (int mouseCurrentX, int mouseCurrentY, Tile [][] map) {
+    public void chase (int mouseCurrentX, int mouseCurrentY, Tile [][] map) {
         int distanceX = mouseCurrentX - this.getCurrentX();
         int distanceY = mouseCurrentY - this.getCurrentY();
-        if (distanceX > 0) {
-            if (map[this.getCurrentY()][this.getCurrentX() + 1].getisBarrier() == false) {
-                this.setCurrentX(this.getCurrentX() + 1);
-                return 1;
-            }
-        } else if (distanceX < 0){
+
+
+        //if mouse is on the left
+        if (distanceX < 0) {
+            
             if (map[this.getCurrentY()][this.getCurrentX() - 1].getisBarrier() == false) {
                 this.setCurrentX(this.getCurrentX() - 1);
-                return 2;
             }
-        } else {
-            return 0;
-        }
-        if (distanceY > 0) {
-            if (map[this.getCurrentY() + 1][this.getCurrentX()].getisBarrier() == false) {
-                this.setCurrentY(this.getCurrentY() + 1);
-                return 3;
+
+            //left is blocked, go to bottom
+            else if(map[this.getCurrentY() + 1][this.getCurrentX()].getisBarrier() == false ){
+                            this.setCurrentY(this.getCurrentY() + 1);
+                            
             }
-        } else if (distanceY < 0){
-            if (map[this.getCurrentY() - 1][this.getCurrentX()].getisBarrier() == false) {
+            //if left and bottom are blocks, go up
+            else if (map[this.getCurrentY() - 1][this.getCurrentX()].getisBarrier() == false ){
                 this.setCurrentY(this.getCurrentY() - 1);
-                return 4;
-            }
-        } else {
-            return 0;
+                            
+            }                       
+            //otherwise go right
+            else {
+                this.setCurrentX(this.currentX + 1);
+                            
+            }            
+                     
+            
         }
-        return 0;
+        
+        
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //mouse is on the right
+        else if (distanceX > 0) {
+            
+            if (map[this.getCurrentY()][this.getCurrentX() + 1].getisBarrier() == false) {
+                this.setCurrentX(this.getCurrentX() + 1);
+              
+            }
+            //right is blocked
+            else if(map[this.getCurrentY() + 1][this.getCurrentX()].getisBarrier() == false ){
+                            this.setCurrentY(this.getCurrentY() + 1);
+                            
+            }
+            //if right and bottom are blocks, go up
+            else if (map[this.getCurrentY() - 1][this.getCurrentX()].getisBarrier() == false ){
+                            this.setCurrentY(this.getCurrentY() - 1);
+                           
+            }            
+            //otherwise go left
+            else {
+                 this.setCurrentX(this.currentX - 1);           
+                          
+            }                                   
+                    
+            
+        }
+        else if (distanceX == 0){
+            // mouse is at the bottom
+            if(distanceY > 0){
+                if (map[this.getCurrentY()+1][this.getCurrentX()].getisBarrier() == false) {
+                    this.setCurrentY(this.getCurrentY() + 1);
+                  
+                }
+                else if (map[this.getCurrentY()][this.getCurrentX()+1].getisBarrier() == false) {
+                    this.setCurrentX(this.getCurrentX() + 1);
+                  
+                }
+                else if (map[this.getCurrentY()][this.getCurrentX()-1].getisBarrier() == false) {
+                    this.setCurrentX(this.getCurrentX() - 1);
+                  
+                }
+                else {
+                    this.setCurrentY(this.getCurrentY() - 1);
+                }
+            }
+            //mouse at the top
+            else{
+                if (map[this.getCurrentY()-1][this.getCurrentX()].getisBarrier() == false) {
+                    this.setCurrentY(this.getCurrentY() - 1);
+                  
+                }
+                else if (map[this.getCurrentY()][this.getCurrentX()+1].getisBarrier() == false) {
+                    this.setCurrentX(this.getCurrentX() + 1);
+                  
+                }
+                else if (map[this.getCurrentY()][this.getCurrentX()-1].getisBarrier() == false) {
+                    this.setCurrentX(this.getCurrentX() - 1);
+                  
+                }
+                else {
+                    this.setCurrentY(this.getCurrentY() + 1);
+                }
+                
+            }
+        }
+
     }
 
     public int getCurrentX() {
