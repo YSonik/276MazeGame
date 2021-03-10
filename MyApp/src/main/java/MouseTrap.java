@@ -5,12 +5,15 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class MouseTrap extends Enemies{
+public class MouseTrap extends Enemies {
     private int penalty;
     private BufferedImage MTImage;
     
     MouseTrap(){
-        this.penalty = 5; 
+        this.penalty = 6; 
+        this.currentX = getCurrentX();
+        this.currentY = getCurrentY();
+
         try {
             Path MTPath = Paths.get("MyApp/Images/mousetrap.jpg").toRealPath();;
             this.MTImage = ImageIO.read(new File(MTPath.toString()));
@@ -26,5 +29,4 @@ public class MouseTrap extends Enemies{
     public BufferedImage getMTImage () {
         return MTImage;
     }
-    
 }
