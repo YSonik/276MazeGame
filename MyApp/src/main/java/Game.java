@@ -27,13 +27,19 @@ public class Game extends JFrame implements KeyListener {
     JLabel trapLabel1;
     JLabel trapLabel2;
 
+   
+
+    //JButton Reset;
+
+
+    
+
 
     Game()
     {
         //Create a Mouse
         myMouse = new Mouse();//coords set to 8,8
-        //set score
-        int score = 0;
+        score = 0;
         //Create Cheese
         cheese1 = new Cheese(6,7,5);
         cheese2 = new Cheese(4,3,5);
@@ -43,8 +49,8 @@ public class Game extends JFrame implements KeyListener {
         createMouseLabel();
 
         // Create multiple cats
-        cat1 = new Cat(4, 1);
-        cat2 = new Cat(8, 4);
+        cat1 = new Cat(7, 1);
+        cat2 = new Cat(7, 2);
         createCatLabel();
 
         // Create mousetraps
@@ -57,16 +63,23 @@ public class Game extends JFrame implements KeyListener {
         createTrapLabel();  
 
         scoreBelowZero();
-
+        
         createTileMap();
         createFrame();
         createGameMap();
-        inGame = true;
+
+        
+        inGame = true; 
+
     }
 
     public boolean scoreBelowZero(){
         return score < 0;
     }
+
+
+  
+    
 
     public void catMoveDraw(int direction1, int direction2) {
         //Cat Position update
@@ -167,14 +180,14 @@ public class Game extends JFrame implements KeyListener {
     public void createCatLabel()
     {
         catLabel1 = new JLabel();
-        catLabel1.setBounds(400,200,100,100);
+        catLabel1.setBounds(cat1.getCurrentY()*100,(cat1.getCurrentX()+1)*100,100,100);
         catLabel1.setBackground(Color.yellow);
         catLabel1.setOpaque(true);
         this.add(catLabel1);
         this.validate();
 
         catLabel2 = new JLabel();
-        catLabel2.setBounds(800,500,100,100);
+        catLabel2.setBounds(cat2.getCurrentY()*100,(cat2.getCurrentX()+1)*100,100,100);
         catLabel2.setBackground(Color.yellow);
         catLabel2.setOpaque(true);
         this.add(catLabel2);
@@ -190,7 +203,10 @@ public class Game extends JFrame implements KeyListener {
         this.addKeyListener(this);
         this.setResizable(false);
         this.getContentPane().setBackground(Color.WHITE);
+        
     }
+
+    
 
     private void createGameMap()
     {
@@ -244,8 +260,9 @@ public class Game extends JFrame implements KeyListener {
             x= 0;
 
         }
+        
         this.setVisible(true);
-
+ 
     }
 
     private void createTileMap()
@@ -343,6 +360,7 @@ public class Game extends JFrame implements KeyListener {
         try {
             //Perform checks in each case to see whether the new spot is a valid movement(no barriers)
             if (direction == "left") {
+                
                 if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisBarrier() == false) {
 
                     //Mouse position update plus cheese check
@@ -367,9 +385,6 @@ public class Game extends JFrame implements KeyListener {
                     if( levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()-1].getisMouseTrap() == true)
                     {
                         score -= trap1.getPenalty();
-                        if(scoreBelowZero()){
-                            System.out.println("Game Over");
-                        }
                         System.out.println(score);
                         //Remove Labels
                         trapLabel2.setVisible(false);
@@ -380,6 +395,7 @@ public class Game extends JFrame implements KeyListener {
                     levelMap[cat1.getCurrentY()][cat1.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     levelMap[cat2.getCurrentY()][cat2.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     myMouse.setCurrentX(myMouse.getCurrentX() - 1);
+                    
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     catMoveDraw(direction1, direction2);
@@ -555,6 +571,10 @@ public class Game extends JFrame implements KeyListener {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not move");
         }
+
+
+
+
         for(int i = 0; i< 10; i++)
         {
             for(int j = 0; j <10; j++)
