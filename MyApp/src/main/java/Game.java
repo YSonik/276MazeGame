@@ -27,6 +27,11 @@ public class Game extends JFrame implements KeyListener {
     JLabel trapLabel1;
     JLabel trapLabel2;
 
+    private String[] optionsMenu;
+	private static final String START_GAME = "Start Game!";
+	private static final String QUIT_GAME = "Quit game";
+	private int selected;
+
 
     Game()
     {
@@ -63,10 +68,21 @@ public class Game extends JFrame implements KeyListener {
         createTileMap();
         createFrame();
         createGameMap();
+
+        GameOver();
+
     }
 
     public boolean scoreBelowZero(){
         return score < 0;
+    }
+
+    public void GameOver(Graphics g){
+        if(scoreBelowZero()){
+            g.setColor(Color.white);
+            g.setFont(new Font("arial", Font.BOLD, 50));
+            g.drawString("Game Over", 300, 300);
+        }
     }
 
     public void createTrapLabel()
