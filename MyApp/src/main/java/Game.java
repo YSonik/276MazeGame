@@ -34,6 +34,8 @@ public class Game extends JFrame implements KeyListener {
         myMouse = new Mouse();//coords set to 8,8
         //set score
         int score = 0;
+        //check score
+        scoreBelowZero();
         //Create Cheese
         cheese1 = new Cheese(6,7,5);
         cheese2 = new Cheese(4,3,5);
@@ -63,6 +65,9 @@ public class Game extends JFrame implements KeyListener {
         createGameMap();
     }
 
+    public boolean scoreBelowZero(){
+        return score < 0;
+    }
 
     public void createTrapLabel()
     {
@@ -324,11 +329,16 @@ public class Game extends JFrame implements KeyListener {
                     if( levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()-1].getisMouseTrap() == true)
                     {
                         score -= trap1.getPenalty();
+                        if(scoreBelowZero()){
+                            System.out.println("Game Over");
+                        }
                         System.out.println(score);
                         //Remove Labels
                         trapLabel2.setVisible(false);
-                        this.repaint();
+                        this.repaint();    
                     }
+                    
+
                     
 
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false);
@@ -360,6 +370,9 @@ public class Game extends JFrame implements KeyListener {
                     if( levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()+1].getisMouseTrap() == true)
                     {
                         score -= trap1.getPenalty();
+                        if(scoreBelowZero()){
+                            System.out.println("Game Over");
+                        }
                         System.out.println(score);
                         //Remove Labels
                         if(myMouse.getCurrentX()+1 == trap1.getCurrentY())
@@ -371,7 +384,6 @@ public class Game extends JFrame implements KeyListener {
                             trapLabel2.setVisible(false);
                             this.repaint();
                         }
-
                     }
 
 
@@ -406,6 +418,9 @@ public class Game extends JFrame implements KeyListener {
                     if( levelMap[myMouse.getCurrentY()-1][myMouse.getCurrentX()].getisMouseTrap() == true)
                     {
                         score -= trap1.getPenalty();
+                        if(scoreBelowZero()){
+                            System.out.println("Game Over");
+                        }
                         System.out.println(score);
                         //Remove Labels
                         trapLabel1.setVisible(false);
@@ -449,6 +464,9 @@ public class Game extends JFrame implements KeyListener {
                     if( levelMap[myMouse.getCurrentY()+1][myMouse.getCurrentX()].getisMouseTrap() == true)
                     {
                         score -= trap2.getPenalty();
+                        if(scoreBelowZero()){
+                            System.out.println("Game Over");
+                        }
                         System.out.println(score);
                         //Remove Labels
                         trapLabel2.setVisible(false);
