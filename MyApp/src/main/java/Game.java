@@ -87,7 +87,8 @@ public class Game extends JFrame implements KeyListener {
                 catLabel1.setLocation(this.catLabel1.getX(), this.catLabel1.getY() - 100);
                 break;
             default:
-                this.inGame = false;
+                //This was causing gameover issue
+                //this.inGame = false;
                 break;
         }
         switch (direction2) {
@@ -104,7 +105,7 @@ public class Game extends JFrame implements KeyListener {
                 this.catLabel2.setLocation(this.catLabel2.getX(), this.catLabel2.getY() - 100);
                 break;
             default:
-                this.inGame = false;
+                //this.inGame = false;
                 break;
         }
 
@@ -359,7 +360,6 @@ public class Game extends JFrame implements KeyListener {
         levelMap[2][8] = new Tile(false,false,false,false,false,false,true, false,false);
 
         //Set locations for traps
-
         levelMap[3][6] = new Tile(false,false,false,false,false,false,false, false,true);
         levelMap[4][4] = new Tile(false,false,false,false,false,false,false, false,true);
 
@@ -408,23 +408,31 @@ public class Game extends JFrame implements KeyListener {
                     }
 
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false);
-                    levelMap[cat1.getCurrentY()][cat1.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
-                    levelMap[cat2.getCurrentY()][cat2.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     myMouse.setCurrentX(myMouse.getCurrentX() - 1);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
+                    mouseLabel.setLocation(mouseLabel.getX() - 100, mouseLabel.getY());
+
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     catMoveDraw(direction1, direction2);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
-                    if(levelMap[cat1.getCurrentY()][cat1.getCurrentX()].getIsCharacter() || levelMap[cat2.getCurrentY()][cat2.getCurrentX()].getIsCharacter()) {
-                        inGame = false;
-                    } else {
-                        levelMap[cat1.getCurrentY()][cat1.getCurrentX()] = new Tile(false, false, false, false, false, false, false, true, false);
-                        levelMap[cat2.getCurrentY()][cat2.getCurrentX()] = new Tile(false, false, false, false, false, false, false, true, false);
+
+                    //Collision detection using Catlabels
+                    if(catLabel1.getX() == mouseLabel.getX())
+                    {
+                        if(catLabel1.getY() == mouseLabel.getY())
+                        {
+                            inGame = false;
+                        }
                     }
-                    mouseLabel.setLocation(mouseLabel.getX() - 100, mouseLabel.getY());
-                    if (!inGame) {
-                        System.out.println("Game Over");
+                    if(catLabel2.getX() == mouseLabel.getX())
+                    {
+                        if(catLabel2.getY() == mouseLabel.getY())
+                        {
+                            inGame = false;
+                        }
                     }
+
+
                 }
 
             } else if (direction == "right") {
@@ -467,22 +475,28 @@ public class Game extends JFrame implements KeyListener {
 
 
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false);
-                    levelMap[cat1.getCurrentY()][cat1.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
-                    levelMap[cat2.getCurrentY()][cat2.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     myMouse.setCurrentX(myMouse.getCurrentX() + 1);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
+                    mouseLabel.setLocation(mouseLabel.getX() + 100, mouseLabel.getY());
+
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     catMoveDraw(direction1, direction2);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
-                    if(levelMap[cat1.getCurrentY()][cat1.getCurrentX()].getIsCharacter() || levelMap[cat2.getCurrentY()][cat2.getCurrentX()].getIsCharacter()) {
-                        inGame = false;
-                    } else {
-                        levelMap[cat1.getCurrentY()][cat1.getCurrentX()] = new Tile(false, false, false, false, false, false, false, true, false);
-                        levelMap[cat2.getCurrentY()][cat2.getCurrentX()] = new Tile(false, false, false, false, false, false, false, true, false);
+
+                    //Collision detection using Catlabels
+                    if(catLabel1.getX() == mouseLabel.getX())
+                    {
+                        if(catLabel1.getY() == mouseLabel.getY())
+                        {
+                            inGame = false;
+                        }
                     }
-                    mouseLabel.setLocation(mouseLabel.getX() + 100, mouseLabel.getY());
-                    if (!inGame) {
-                        System.out.println("Game Over");
+                    if(catLabel2.getX() == mouseLabel.getX())
+                    {
+                        if(catLabel2.getY() == mouseLabel.getY())
+                        {
+                            inGame = false;
+                        }
                     }
                 }
             }
@@ -516,23 +530,30 @@ public class Game extends JFrame implements KeyListener {
                     }
 
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false);
-                    levelMap[cat1.getCurrentY()][cat1.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
-                    levelMap[cat2.getCurrentY()][cat2.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     myMouse.setCurrentY(myMouse.getCurrentY() - 1);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
+                    mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() - 100);
+
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     catMoveDraw(direction1, direction2);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
-                    if(levelMap[cat1.getCurrentY()][cat1.getCurrentX()].getIsCharacter() || levelMap[cat2.getCurrentY()][cat2.getCurrentX()].getIsCharacter()) {
-                        inGame = false;
-                    } else {
-                        levelMap[cat1.getCurrentY()][cat1.getCurrentX()] = new Tile(false, false, false, false, false, false, false, true, false);
-                        levelMap[cat2.getCurrentY()][cat2.getCurrentX()] = new Tile(false, false, false, false, false, false, false, true, false);
+
+                    //Collision detection using Catlabels
+                    if(catLabel1.getX() == mouseLabel.getX())
+                    {
+                        if(catLabel1.getY() == mouseLabel.getY())
+                        {
+                            inGame = false;
+                        }
                     }
-                    mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() - 100);
-                    if (!inGame) {
-                        System.out.println("Game Over");
+                    if(catLabel2.getX() == mouseLabel.getX())
+                    {
+                        if(catLabel2.getY() == mouseLabel.getY())
+                        {
+                            inGame = false;
+                        }
                     }
+
                 }
 
             } else if (direction == "down") {
@@ -571,62 +592,39 @@ public class Game extends JFrame implements KeyListener {
 
 
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
-                    levelMap[cat1.getCurrentY()][cat1.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
-                    levelMap[cat2.getCurrentY()][cat2.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     myMouse.setCurrentY(myMouse.getCurrentY() + 1);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
+                    mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() + 100);
+
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     catMoveDraw(direction1, direction2);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
-                    if(levelMap[cat1.getCurrentY()][cat1.getCurrentX()].getIsCharacter() || levelMap[cat2.getCurrentY()][cat2.getCurrentX()].getIsCharacter()) {
-                        inGame = false;
-                    } else {
-                        levelMap[cat1.getCurrentY()][cat1.getCurrentX()] = new Tile(false, false, false, false, false, false, false, true, false);
-                        levelMap[cat2.getCurrentY()][cat2.getCurrentX()] = new Tile(false, false, false, false, false, false, false, true, false);
+
+                    //Collision detection using Catlabels
+                    if(catLabel1.getX() == mouseLabel.getX())
+                    {
+                        if(catLabel1.getY() == mouseLabel.getY())
+                        {
+                            inGame = false;
+                        }
                     }
-                    mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() + 100);
-                    if (!inGame) {
-                        System.out.println("Game Over");
+                    if(catLabel2.getX() == mouseLabel.getX())
+                    {
+                        if(catLabel2.getY() == mouseLabel.getY())
+                        {
+                            inGame = false;
+                        }
                     }
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not move");
         }
-        for(int i = 0; i< 10; i++)
-        {
-            for(int j = 0; j <10; j++)
-            {
-                if(levelMap[i][j].getisBarrier() == true ) {
-                    System.out.print("[ ]");
-                }
-                else if(levelMap[i][j].getisReward() == true)
-                {
-                    System.out.print(" * ");
-                }
-                else if(levelMap[i][j].getIsCharacter() == true)
-                {
-                    System.out.print(" M ");
-                }
-                else if (levelMap[i][j].getisCheese() == true)
-                {
-                    System.out.print(" * ");
-                }
-                else if(levelMap[i][j].getisMouseTrap() == true)
-                {
-                    System.out.print(" T ");
-                }
-                else if(levelMap[i][j].getisCat() == true)
-                {
-                    System.out.print(" C ");
-                }
-                else{
-                    System.out.print("   ");
-                }
-            }
-            System.out.print("\n");
-            //System.out.println(score);
-        }
+
+           if(inGame == false)
+           {
+               System.out.println("GameOver");
+           }
 
     }
 
