@@ -14,7 +14,7 @@ public class Cheese extends Rewards{
         super(x, y, value);
        // drawCheese();
         try {
-            Path cheesePath = Paths.get("Images/cheese.png").toRealPath();;
+            Path cheesePath = Paths.get("MyApp/Images/cheese.png").toRealPath();;
             this.cheeseImg = ImageIO.read(new File(cheesePath.toString()));
         } catch (IOException e) {
             e.printStackTrace();
