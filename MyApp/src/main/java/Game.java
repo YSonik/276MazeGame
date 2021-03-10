@@ -59,9 +59,15 @@ public class Game extends JFrame implements KeyListener {
         trap2.setCurrentY(4);
         createTrapLabel();  
 
+        scoreBelowZero();
+
         createTileMap();
         createFrame();
         createGameMap();
+    }
+
+    public boolean scoreBelowZero(){
+        return score < 0;
     }
 
 
@@ -325,6 +331,9 @@ public class Game extends JFrame implements KeyListener {
                     if( levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()-1].getisMouseTrap() == true)
                     {
                         score -= trap1.getPenalty();
+                        if(scoreBelowZero()){
+                            System.out.println("Game Over");
+                        }
                         System.out.println(score);
                         //Remove Labels
                         trapLabel2.setVisible(false);
@@ -392,6 +401,9 @@ public class Game extends JFrame implements KeyListener {
                     if( levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()+1].getisMouseTrap() == true)
                     {
                         score -= trap1.getPenalty();
+                        if(scoreBelowZero()){
+                            System.out.println("Game Over");
+                        }
                         System.out.println(score);
                         //Remove Labels
                         if(myMouse.getCurrentX()+1 == trap1.getCurrentY())
@@ -467,6 +479,9 @@ public class Game extends JFrame implements KeyListener {
                     if( levelMap[myMouse.getCurrentY()-1][myMouse.getCurrentX()].getisMouseTrap() == true)
                     {
                         score -= trap1.getPenalty();
+                        if(scoreBelowZero()){
+                            System.out.println("Game Over");
+                        }
                         System.out.println(score);
                         //Remove Labels
                         trapLabel1.setVisible(false);
@@ -539,6 +554,9 @@ public class Game extends JFrame implements KeyListener {
                     if( levelMap[myMouse.getCurrentY()+1][myMouse.getCurrentX()].getisMouseTrap() == true)
                     {
                         score -= trap2.getPenalty();
+                        if(scoreBelowZero()){
+                            System.out.println("Game Over");
+                        }
                         System.out.println(score);
                         //Remove Labels
                         trapLabel2.setVisible(false);
