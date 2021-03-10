@@ -1,13 +1,14 @@
+
 public class Cat {
     private int currentX;
     private int currentY;
     private final int catHeight = 25;
     private final int catWidth = 25;
 
-    Cat()
+    Cat(int startX, int startY)
     {
-        this.currentX = 8;
-        this.currentY = 8;
+        this.currentX = startX;
+        this.currentY = startY;
     }
 
     public int chase (int mouseCurrentX, int mouseCurrentY, Tile [][] map) {
@@ -24,20 +25,21 @@ public class Cat {
                 return 2;
             }
         } else {
-            return 0;
-        }
-        if (distanceY > 0) {
-            if (map[this.getCurrentY() + 1][this.getCurrentX()].getisBarrier() == false) {
-                this.setCurrentY(this.getCurrentY() + 1);
-                return 3;
+            if (distanceY > 0) {
+                if (map[this.getCurrentY() + 1][this.getCurrentX()].getisBarrier() == false) {
+                    this.setCurrentY(this.getCurrentY() + 1);
+                    System.out.println("return 3");
+                    return 3;
+                }
+            } else if (distanceY < 0){
+                if (map[this.getCurrentY() - 1][this.getCurrentX()].getisBarrier() == false) {
+                    this.setCurrentY(this.getCurrentY() - 1);
+                    System.out.println("return 4");
+                    return 4;
+                }
+            } else {
+                return 0;
             }
-        } else if (distanceY < 0){
-            if (map[this.getCurrentY() - 1][this.getCurrentX()].getisBarrier() == false) {
-                this.setCurrentY(this.getCurrentY() - 1);
-                return 4;
-            }
-        } else {
-            return 0;
         }
         return 0;
     }
