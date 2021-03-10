@@ -27,33 +27,19 @@ public class Game extends JFrame implements KeyListener {
     JLabel trapLabel1;
     JLabel trapLabel2;
 
-<<<<<<< HEAD
-    private String[] optionsMenu;
-	private static final String START_GAME = "Start Game!";
-	private static final String QUIT_GAME = "Quit game";
-	private int selected;
-=======
    
 
     //JButton Reset;
 
 
     
->>>>>>> master
 
 
     Game()
     {
         //Create a Mouse
         myMouse = new Mouse();//coords set to 8,8
-<<<<<<< HEAD
-        //set score
-        int score = 0;
-        //check score
-        scoreBelowZero();
-=======
         score = 0;
->>>>>>> master
         //Create Cheese
         cheese1 = new Cheese(6,7,5);
         cheese2 = new Cheese(4,3,5);
@@ -81,10 +67,6 @@ public class Game extends JFrame implements KeyListener {
         createFrame();
         createGameMap();
 
-<<<<<<< HEAD
-        GameOver();
-
-=======
         
         inGame = true; 
 
@@ -92,20 +74,8 @@ public class Game extends JFrame implements KeyListener {
 
     public boolean scoreBelowZero(){
         return score < 0;
->>>>>>> master
     }
 
-    public boolean scoreBelowZero(){
-        return score < 0;
-    }
-
-    public void GameOver(Graphics g){
-        if(scoreBelowZero()){
-            g.setColor(Color.white);
-            g.setFont(new Font("arial", Font.BOLD, 50));
-            g.drawString("Game Over", 300, 300);
-        }
-    }
 
   
     
@@ -429,15 +399,6 @@ public class Game extends JFrame implements KeyListener {
                     levelMap[cat1.getCurrentY()][cat1.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     levelMap[cat2.getCurrentY()][cat2.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     myMouse.setCurrentX(myMouse.getCurrentX() - 1);
-<<<<<<< HEAD
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false, false);
-                    mouseLabel.setLocation(mouseLabel.getX() - 100, mouseLabel.getY());
-
-                    cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    catLabel1.setLocation(cat1.getCurrentX()*100, cat1.getCurrentY()*100);
-                    catLabel2.setLocation(cat2.getCurrentX()*100, cat2.getCurrentY()*100);
-=======
                     
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
@@ -453,7 +414,6 @@ public class Game extends JFrame implements KeyListener {
                     if (!inGame) {
                         System.out.println("Game Over");
                     }
->>>>>>> master
                 }
 
             } else if (direction == "right") {
@@ -495,15 +455,6 @@ public class Game extends JFrame implements KeyListener {
                     levelMap[cat1.getCurrentY()][cat1.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     levelMap[cat2.getCurrentY()][cat2.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     myMouse.setCurrentX(myMouse.getCurrentX() + 1);
-<<<<<<< HEAD
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
-                    mouseLabel.setLocation(mouseLabel.getX() + 100, mouseLabel.getY());
-                    
-                    cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    catLabel1.setLocation(cat1.getCurrentX()*100, cat1.getCurrentY()*100);
-                    catLabel2.setLocation(cat2.getCurrentX()*100, cat2.getCurrentY()*100);
-=======
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     catMoveDraw(direction1, direction2);
@@ -518,7 +469,6 @@ public class Game extends JFrame implements KeyListener {
                     if (!inGame) {
                         System.out.println("Game Over");
                     }
->>>>>>> master
                 }
             }
 
@@ -552,16 +502,6 @@ public class Game extends JFrame implements KeyListener {
                     levelMap[cat1.getCurrentY()][cat1.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     levelMap[cat2.getCurrentY()][cat2.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     myMouse.setCurrentY(myMouse.getCurrentY() - 1);
-<<<<<<< HEAD
-                   
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false, false);
-                    mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() - 100);
-                    
-                    cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    catLabel1.setLocation(cat1.getCurrentX()*100, cat1.getCurrentY()*100);
-                    catLabel2.setLocation(cat2.getCurrentX()*100, cat2.getCurrentY()*100);
-=======
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     catMoveDraw(direction1, direction2);
@@ -576,7 +516,6 @@ public class Game extends JFrame implements KeyListener {
                     if (!inGame) {
                         System.out.println("Game Over");
                     }
->>>>>>> master
                 }
 
             } else if (direction == "down") {
@@ -616,17 +555,6 @@ public class Game extends JFrame implements KeyListener {
                     levelMap[cat1.getCurrentY()][cat1.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     levelMap[cat2.getCurrentY()][cat2.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
                     myMouse.setCurrentY(myMouse.getCurrentY() + 1);
-<<<<<<< HEAD
-                    
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
-                    mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() + 100);
-
-                    cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-                    catLabel1.setLocation(cat1.getCurrentX()*100, cat1.getCurrentY()*100);
-                    catLabel2.setLocation(cat2.getCurrentX()*100, cat2.getCurrentY()*100);
-                    
-=======
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     catMoveDraw(direction1, direction2);
@@ -641,7 +569,6 @@ public class Game extends JFrame implements KeyListener {
                     if (!inGame) {
                         System.out.println("Game Over");
                     }
->>>>>>> master
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
