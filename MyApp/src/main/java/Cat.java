@@ -94,7 +94,7 @@ public class Cat {
                 }
 
 
-            } else if (distanceY < 0){
+            } else if (distanceY < 0 ){
                 if (map[this.getCurrentY() - 1][this.getCurrentX()].getisBarrier() == false) {
                     this.setCurrentY(this.getCurrentY() - 1);
                     System.out.println("return 4");
