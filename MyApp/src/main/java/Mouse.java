@@ -26,6 +26,13 @@ public class Mouse {
         }
     }
 
+    void init() {
+        this.currentX = 8;
+        this.currentY = 8;
+        this.cheeseEaten = 0;
+        
+    }
+
     public int getCurrentX() {
         return currentX;
     }

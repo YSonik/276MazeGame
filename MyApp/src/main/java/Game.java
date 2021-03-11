@@ -29,12 +29,6 @@ public class Game extends JFrame implements KeyListener {
 
    
 
-    //JButton Reset;
-
-
-    
-
-
     Game()
     {
         //Create a Mouse
@@ -48,8 +42,9 @@ public class Game extends JFrame implements KeyListener {
 
         createMouseLabel();
         // Create multiple cats
-        cat1 = new Cat(7, 1);
-        cat2 = new Cat(7, 2);
+        cat1 = new Cat(4, 1);
+        cat2 = new Cat(8, 4);
+
         createCatLabel();
 
         // Create mousetraps
@@ -68,16 +63,57 @@ public class Game extends JFrame implements KeyListener {
         createGameMap();
 
         
+        
         inGame = true; 
 
     }
+
+    void reset(){
+        myMouse = new Mouse();//coords set to 8,8
+        score = 0;
+        //Create Cheese
+        cheese1 = new Cheese(6,7,5);
+        cheese2 = new Cheese(4,3,5);
+        cheese3 = new Cheese(2,8,5);
+        //createCheeseLabel();
+
+        //createMouseLabel();
+        // Create multiple cats
+        cat1 = new Cat(7, 1);
+        cat2 = new Cat(7, 2);
+        //createCatLabel();
+
+        // Create mousetraps
+        trap1 = new MouseTrap();
+        trap1.setCurrentX(3);
+        trap1.setCurrentY(6);
+        trap2 = new MouseTrap();
+        trap2.setCurrentX(4);
+        trap2.setCurrentY(4);
+        //createTrapLabel(); 
+    
+    }
+    
 
     public boolean scoreBelowZero(){
         return score < 0;
     }
 
 
-  
+    public void gameOver() {
+		int test = JOptionPane.showConfirmDialog(null, "Game Over" 
+        + "\n" + "Total Score" + score,
+         "Play Again", JOptionPane.YES_NO_OPTION);
+		if(test == 1){
+            System.exit(ABORT);
+        }
+        else{
+            this.setVisible(false);
+            Game game = new Game();
+        }
+        
+	}
+         
     
 
     public void catMoveDraw(int direction1, int direction2) {
@@ -167,7 +203,7 @@ public class Game extends JFrame implements KeyListener {
     public void createMouseLabel()
     {
         mouseLabel = new JLabel();
-        mouseLabel.setBounds(800,900,100,100);
+        mouseLabel.setBounds(myMouse.getCurrentY()*100,(myMouse.getCurrentX()+1)*100,100,100);
         mouseLabel.setBackground(Color.blue);
         mouseLabel.setOpaque(true);
         ImageIcon icon = new ImageIcon(myMouse.getMouseImage());
@@ -385,7 +421,7 @@ public class Game extends JFrame implements KeyListener {
                     {
                         score -= trap1.getPenalty();
                         if(scoreBelowZero()){
-                            System.out.println("Game Over");
+                           gameOver();
                         }
                         System.out.println(score);
                         //Remove Labels
