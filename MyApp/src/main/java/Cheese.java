@@ -1,40 +1,21 @@
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 public class Cheese extends Rewards{
-
+    private BufferedImage cheeseImg;
     Cheese(int x, int y, int value) {
         super(x, y, value);
-
-        this.x = x;
-        this.y = y;
-        this. value = value;
+        try {
+            Path cheesePath = Paths.get("MyApp/Images/cheese.png").toRealPath();;
+            this.cheeseImg = ImageIO.read(new File(cheesePath.toString()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
-    @Override
-    public void setX(int x) {
-        super.setX(x);
-    }
-
-    @Override
-    public void setY(int y) {
-        super.setY(y);
-    }
-
-    @Override
-    public void setValue(int value) {
-        super.setValue(value);
-    }
-
-    @Override
-    public int getX() {
-        return super.getX();
-    }
-
-    @Override
-    public int getY() {
-        return super.getY();
-    }
-
-    @Override
-    public int getValue() {
-        return super.getValue();
+    public BufferedImage getCheeseImg(){
+        return cheeseImg;
     }
 }
