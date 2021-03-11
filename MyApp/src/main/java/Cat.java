@@ -15,7 +15,7 @@ public class Cat {
         int distanceX = mouseCurrentX - this.getCurrentX();
         int distanceY = mouseCurrentY - this.getCurrentY();
         //if Mouse is on the right
-        if (distanceX > 0 || (distanceX > 0 && distanceY == 0)) {
+        if (distanceX > 0) {
             if (map[this.getCurrentY()][this.getCurrentX() + 1].getisBarrier() == false) {
                     this.setCurrentX(this.getCurrentX() + 1);
                     return 1;
@@ -40,7 +40,7 @@ public class Cat {
             }
 
 
-        } else if (distanceX < 0 || (distanceX < 0 && distanceY == 0)){
+        } else if (distanceX < 0){
             if (map[this.getCurrentY()][this.getCurrentX() - 1].getisBarrier() == false) {
                 this.setCurrentX(this.getCurrentX() - 1);
                 return 2;
@@ -67,7 +67,7 @@ public class Cat {
 
 
         } else {
-            if (distanceY > 0 && distanceX == 0 ) {
+            if (distanceY > 0 ) {
                 if (map[this.getCurrentY() + 1][this.getCurrentX()].getisBarrier() == false) {
                     this.setCurrentY(this.getCurrentY() + 1);
                     System.out.println("return 3");
@@ -94,7 +94,7 @@ public class Cat {
                 }
 
 
-            } else if (distanceY < 0 && distanceX == 0){
+            } else if (distanceY < 0){
                 if (map[this.getCurrentY() - 1][this.getCurrentX()].getisBarrier() == false) {
                     this.setCurrentY(this.getCurrentY() - 1);
                     System.out.println("return 4");
