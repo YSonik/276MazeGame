@@ -21,7 +21,7 @@ public class Cat {
             }
             else{
 
-                    if(map[this.getCurrentY()][this.getCurrentY() - 1].getisBarrier() == false){
+                    if(map[this.getCurrentY()-1][this.getCurrentX()].getisBarrier() == false){
                         this.setCurrentY(this.getCurrentY() - 1);
                             System.out.println("return 4");
                             return 4;
@@ -46,7 +46,7 @@ public class Cat {
             }
             else{
 
-                if(map[this.getCurrentY()][this.getCurrentY() - 1].getisBarrier() == false){
+                if(map[this.getCurrentY()-1][this.getCurrentX()].getisBarrier() == false){
                     this.setCurrentY(this.getCurrentY() - 1);
                         System.out.println("return 4");
                         return 4;
@@ -75,7 +75,7 @@ public class Cat {
 
                 else{
 
-                    if(map[this.getCurrentY()][this.getCurrentY() - 1].getisBarrier() == false){
+                    if(map[this.getCurrentY()-1][this.getCurrentX()].getisBarrier() == false){
                         this.setCurrentY(this.getCurrentY() - 1);
                             System.out.println("return 4");
                             return 4;
@@ -94,10 +94,10 @@ public class Cat {
 
 
             } else if (distanceY < 0 && distanceX == 0){
-                if (map[this.getCurrentY() - 1][this.getCurrentX()].getisBarrier() == false) {
+                if(map[this.getCurrentY()-1][this.getCurrentX()].getisBarrier() == false){
                     this.setCurrentY(this.getCurrentY() - 1);
-                    System.out.println("return 4");
-                    return 4;
+                        System.out.println("return 4");
+                        return 4;
                 }
                 else{
 
