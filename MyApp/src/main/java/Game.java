@@ -70,6 +70,19 @@ public class Game extends JFrame implements KeyListener {
     public boolean scoreBelowZero(){
         return score < 0;
     }
+    public void gameOver() {
+		int test = JOptionPane.showConfirmDialog(null, "Game Over" 
+        + "\n" + "Total Score" + score,
+         "Play Again", JOptionPane.YES_NO_OPTION);
+		if(test == 1){
+            System.exit(ABORT);
+        }
+        else{
+            this.setVisible(false);
+            Game game = new Game();
+        }
+        
+	}
 
     public void catMoveDraw(int direction1, int direction2) {
         //Cat Position update
@@ -399,7 +412,7 @@ public class Game extends JFrame implements KeyListener {
                         score -= trap1.getPenalty();
                         scoreText.setText("Cheese Eaten: " + score);
                         if(scoreBelowZero()){
-                            System.out.println("Game Over");
+                            gameOver();
                         }
                         System.out.println(score);
                         //Remove Labels
@@ -421,14 +434,14 @@ public class Game extends JFrame implements KeyListener {
                     {
                         if(catLabel1.getY() == mouseLabel.getY())
                         {
-                            inGame = false;
+                            gameOver();
                         }
                     }
                     if(catLabel2.getX() == mouseLabel.getX())
                     {
                         if(catLabel2.getY() == mouseLabel.getY())
                         {
-                            inGame = false;
+                            gameOver();
                         }
                     }
 
@@ -457,7 +470,7 @@ public class Game extends JFrame implements KeyListener {
                         score -= trap1.getPenalty();
                         scoreText.setText("Cheese Eaten: " + score);
                         if(scoreBelowZero()){
-                            System.out.println("Game Over");
+                            gameOver();
                         }
                         System.out.println(score);
                         //Remove Labels
@@ -488,14 +501,14 @@ public class Game extends JFrame implements KeyListener {
                     {
                         if(catLabel1.getY() == mouseLabel.getY())
                         {
-                            inGame = false;
+                            gameOver();
                         }
                     }
                     if(catLabel2.getX() == mouseLabel.getX())
                     {
                         if(catLabel2.getY() == mouseLabel.getY())
                         {
-                            inGame = false;
+                            gameOver();
                         }
                     }
                 }
@@ -521,7 +534,7 @@ public class Game extends JFrame implements KeyListener {
                         score -= trap1.getPenalty();
                         scoreText.setText("Cheese Eaten: " + score);
                         if(scoreBelowZero()){
-                            System.out.println("Game Over");
+                            gameOver();
                         }
                         System.out.println(score);
                         //Remove Labels
@@ -543,14 +556,14 @@ public class Game extends JFrame implements KeyListener {
                     {
                         if(catLabel1.getY() == mouseLabel.getY())
                         {
-                            inGame = false;
+                            gameOver();
                         }
                     }
                     if(catLabel2.getX() == mouseLabel.getX())
                     {
                         if(catLabel2.getY() == mouseLabel.getY())
                         {
-                            inGame = false;
+                            gameOver();
                         }
                     }
 
@@ -581,7 +594,7 @@ public class Game extends JFrame implements KeyListener {
                     {
                         score -= trap2.getPenalty();
                         if(scoreBelowZero()){
-                            System.out.println("Game Over");
+                            gameOver();
                         }
                         System.out.println(score);
                         //Remove Labels
@@ -605,14 +618,14 @@ public class Game extends JFrame implements KeyListener {
                     {
                         if(catLabel1.getY() == mouseLabel.getY())
                         {
-                            inGame = false;
+                            gameOver();
                         }
                     }
                     if(catLabel2.getX() == mouseLabel.getX())
                     {
                         if(catLabel2.getY() == mouseLabel.getY())
                         {
-                            inGame = false;
+                            gameOver();
                         }
                     }
                 }
@@ -621,10 +634,7 @@ public class Game extends JFrame implements KeyListener {
             System.out.println("Not move");
         }
 
-           if(inGame == false)
-           {
-               System.out.println("GameOver");
-           }
+        
 
     }
 
