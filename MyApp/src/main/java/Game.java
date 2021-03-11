@@ -90,16 +90,16 @@ public class Game extends JFrame implements KeyListener {
         //Cat Position update
         switch (direction1) {
             case 1:
-                this.catLabel1.setLocation(this.catLabel1.getX() + 100, this.catLabel1.getY());
+            catLabel1.setLocation(catLabel1.getX()+100, catLabel1.getY());
                 break;
             case 2:
-                this.catLabel1.setLocation(this.catLabel1.getX() - 100, this.catLabel1.getY());
+            catLabel1.setLocation(catLabel1.getX()-100, catLabel1.getY());
                 break;
             case 3:
-                this.catLabel1.setLocation(this.catLabel1.getX(), this.catLabel1.getY() + 100);
+            catLabel1.setLocation(catLabel1.getX(), catLabel1.getY()+100);
                 break;
             case 4:
-                catLabel1.setLocation(this.catLabel1.getX(), this.catLabel1.getY() - 100);
+            catLabel1.setLocation(catLabel1.getX(), catLabel1.getY()-100);
                 break;
             default:
                 //This was causing gameover issue
@@ -108,16 +108,16 @@ public class Game extends JFrame implements KeyListener {
         }
         switch (direction2) {
             case 1:
-                this.catLabel2.setLocation(this.catLabel2.getX() + 100, this.catLabel2.getY());
+            catLabel2.setLocation(catLabel2.getX()+100, catLabel2.getY());
                 break;
             case 2:
-                this.catLabel2.setLocation(this.catLabel2.getX() - 100, this.catLabel2.getY());
+            catLabel2.setLocation(catLabel2.getX()-100, catLabel2.getY());
                 break;
             case 3:
-                this.catLabel2.setLocation(this.catLabel2.getX(), this.catLabel2.getY() + 100);
+            catLabel2.setLocation(catLabel2.getX(), catLabel2.getY()+100);
                 break;
             case 4:
-                this.catLabel2.setLocation(this.catLabel2.getX(), this.catLabel2.getY() - 100);
+            catLabel2.setLocation(catLabel2.getX(), catLabel2.getY()-100);
                 break;
             default:
                 //this.inGame = false;
@@ -210,14 +210,14 @@ public class Game extends JFrame implements KeyListener {
 
     public void createCatLabel()
     {
-        catLabel1 = new JLabel();
+        catLabel1 = new JLabel("Cat1");
         catLabel1.setBounds(400,200,100,100);
         catLabel1.setBackground(Color.yellow);
         catLabel1.setOpaque(true);
         this.add(catLabel1);
         this.validate();
 
-        catLabel2 = new JLabel();
+        catLabel2 = new JLabel("Cat2");
         catLabel2.setBounds(800,500,100,100);
         catLabel2.setBackground(Color.yellow);
         catLabel2.setOpaque(true);
@@ -428,6 +428,7 @@ public class Game extends JFrame implements KeyListener {
                     myMouse.setCurrentX(myMouse.getCurrentX() - 1);
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
                     mouseLabel.setLocation(mouseLabel.getX() - 100, mouseLabel.getY());
+
 
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
                     int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
