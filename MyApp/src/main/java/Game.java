@@ -2,22 +2,25 @@ package main.java;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Game extends JFrame implements KeyListener {
     private Boolean inGame;
+    private Boolean winGame;
     private int score;
-    private Tile[][] levelMap;//Game Template
-    private JLabel[][] gameMap;//Mapping of levelMap to JFrame
+    private Tile[][] levelMap;
+    private JLabel[][] gameMap;
     private Mouse myMouse;
 
     private Cheese cheese1;
     private Cheese cheese2;
-    private Cheese cheese3;
+//    private Cheese cheese3;
     private JLabel Cheese1;
     private JLabel Cheese2;
-    private JLabel Cheese3;
+//    private JLabel Cheese3;
     private JLabel mouseLabel;
 
     private Cat cat1;
@@ -41,7 +44,7 @@ public class Game extends JFrame implements KeyListener {
         //Create Cheese
         cheese1 = new Cheese(6, 7, 5);
         cheese2 = new Cheese(4, 3, 5);
-        cheese3 = new Cheese(2, 8, 5);
+//        cheese3 = new Cheese(2, 8, 5);
         createCheeseLabel();
 
         createMouseLabel();
@@ -68,7 +71,65 @@ public class Game extends JFrame implements KeyListener {
             scoreText.setText("Cheese Eaten: " + 0);
         }
         inGame = true;
+        winGame = false;
     }
+
+    public void winPage() {
+        this.dispose();
+        JFrame f = new JFrame("Win");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setSize(300,300);
+        ImageIcon cheeseRunImageIcon = new ImageIcon("MyApp/Images/win.png");
+        JLabel cheeseRunLabel = new JLabel(cheeseRunImageIcon);
+        JLabel jLabel1 = new JLabel("Congratulations!!!");
+        JLabel jLabel2 = new JLabel("Your score: " + this.score);
+        JButton button = new JButton("Restart the Game");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                f.dispose();
+                Game myGame = new Game();
+            }
+        });
+        JPanel panel = new JPanel();
+        panel.add(cheeseRunLabel);
+        panel.add(jLabel1);
+        panel.add(jLabel2);
+        panel.add(button);
+        f.getContentPane().add(panel);
+        f.setResizable(false);
+        f.getContentPane().setBackground(Color.WHITE);
+        f.setVisible(true);
+    }
+
+    public void losePage() {
+        this.dispose();
+        JFrame f = new JFrame("Win");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setSize(300,300);
+        ImageIcon cheeseRunImageIcon = new ImageIcon("MyApp/Images/win.png");
+        JLabel cheeseRunLabel = new JLabel(cheeseRunImageIcon);
+        JLabel jLabel1 = new JLabel("Sorry you lose!!!");
+        JLabel jLabel2 = new JLabel("Your score: " + this.score);
+        JButton button = new JButton("Restart the Game");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                f.dispose();
+                Game myGame = new Game();
+            }
+        });
+        JPanel panel = new JPanel();
+        panel.add(cheeseRunLabel);
+        panel.add(jLabel1);
+        panel.add(jLabel2);
+        panel.add(button);
+        f.getContentPane().add(panel);
+        f.setResizable(false);
+        f.getContentPane().setBackground(Color.WHITE);
+        f.setVisible(true);
+    }
+
 
     public boolean scoreBelowZero(){
         return score < 0;
@@ -90,8 +151,6 @@ public class Game extends JFrame implements KeyListener {
                 catLabel1.setLocation(this.catLabel1.getX(), this.catLabel1.getY() - 100);
                 break;
             default:
-                //This was causing gameover issue
-                //this.inGame = false;
                 break;
         }
         switch (direction2) {
@@ -108,7 +167,6 @@ public class Game extends JFrame implements KeyListener {
                 this.catLabel2.setLocation(this.catLabel2.getX(), this.catLabel2.getY() - 100);
                 break;
             default:
-                //this.inGame = false;
                 break;
         }
 
@@ -169,17 +227,17 @@ public class Game extends JFrame implements KeyListener {
         this.add(Cheese2);
         this.validate();
 
-        Cheese3 = new JLabel("Cheese3");
-        Cheese3.setBounds(cheese3.y*100,(cheese3.x+1)*100,100,100);
-        Cheese3.setBackground(Color.white);
-        Cheese3.setOpaque(true);
-        Image cheeseImg3 = cheese3.getCheeseImg().getScaledInstance(Cheese3.getWidth(), Cheese3.getHeight(),
-                Image.SCALE_SMOOTH);
-        ImageIcon icon3 = new ImageIcon(cheeseImg3);
-        Cheese3.setIcon(icon3);
-
-        this.add(Cheese3);
-        this.validate();
+//        Cheese3 = new JLabel("Cheese3");
+//        Cheese3.setBounds(cheese3.y*100,(cheese3.x+1)*100,100,100);
+//        Cheese3.setBackground(Color.white);
+//        Cheese3.setOpaque(true);
+//        Image cheeseImg3 = cheese3.getCheeseImg().getScaledInstance(Cheese3.getWidth(), Cheese3.getHeight(),
+//                Image.SCALE_SMOOTH);
+//        ImageIcon icon3 = new ImageIcon(cheeseImg3);
+//        Cheese3.setIcon(icon3);
+//
+//        this.add(Cheese3);
+//        this.validate();
     }
 
     public void createMouseLabel()
@@ -386,8 +444,8 @@ public class Game extends JFrame implements KeyListener {
                     //Mouse position update plus cheese check
                     if(levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisCheese())
                     {
+                        this.myMouse.setCheeseEaten(this.myMouse.getCheeseEaten() + 1);
                         score += cheese1.value;
-                        System.out.println(score);
                         scoreText.setText("Cheese Eaten: " + score);
                         count++;
                         //Remove Labels
@@ -410,9 +468,8 @@ public class Game extends JFrame implements KeyListener {
                         score -= trap1.getPenalty();
                         scoreText.setText("Cheese Eaten: " + score);
                         if(scoreBelowZero()){
-                            System.out.println("Game Over");
+                            losePage();
                         }
-                        System.out.println(score);
                         //Remove Labels
                         trapLabel2.setVisible(false);
                         this.repaint();
@@ -452,8 +509,8 @@ public class Game extends JFrame implements KeyListener {
                     //Mouse position update plus cheese check
                     if(levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getisCheese())
                     {
+                        this.myMouse.setCheeseEaten(this.myMouse.getCheeseEaten() + 1);
                         score += cheese1.value;
-                        System.out.println(score);
                         //Remove Labels
                         count++;
                         scoreText.setText("Chease Eaten: " + score);
@@ -468,9 +525,8 @@ public class Game extends JFrame implements KeyListener {
                         score -= trap1.getPenalty();
                         scoreText.setText("Cheese Eaten: " + score);
                         if(scoreBelowZero()){
-                            System.out.println("Game Over");
+                            losePage();
                         }
-                        System.out.println(score);
                         //Remove Labels
                         if(myMouse.getCurrentX()+1 == trap1.getCurrentY())
                         {
@@ -517,12 +573,12 @@ public class Game extends JFrame implements KeyListener {
                     //Mouse position update plus cheese check
                     if(levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getisCheese())
                     {
+                        this.myMouse.setCheeseEaten(this.myMouse.getCheeseEaten() + 1);
                         score += cheese1.value;
-                        System.out.println(score);
                         //Remove Labels
                         count++;
                         scoreText.setText("Cheese Eaten: " + score);
-                        Cheese3.setVisible(false);
+//                        Cheese3.setVisible(false);
                         this.repaint();
                     }
 
@@ -532,9 +588,8 @@ public class Game extends JFrame implements KeyListener {
                         score -= trap1.getPenalty();
                         scoreText.setText("Cheese Eaten: " + score);
                         if(scoreBelowZero()){
-                            System.out.println("Game Over");
+                            losePage();
                         }
-                        System.out.println(score);
                         //Remove Labels
                         trapLabel1.setVisible(false);
                         this.repaint();
@@ -572,8 +627,8 @@ public class Game extends JFrame implements KeyListener {
 
                     //Mouse position update plus cheese check
                     if(levelMap[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisCheese()) {
+                        this.myMouse.setCheeseEaten(this.myMouse.getCheeseEaten() + 1);
                         score += cheese1.value;
-                        System.out.println(score);
                         //Remove Labels
                         scoreText.setText("Cheese Eaten: " + score);
                         if(myMouse.getCurrentY()+1 == cheese2.getX())
@@ -583,7 +638,7 @@ public class Game extends JFrame implements KeyListener {
                         }
                         else
                         {
-                            Cheese3.setVisible(false);
+//                            Cheese3.setVisible(false);
                             this.repaint();
                         }
                     }
@@ -592,12 +647,11 @@ public class Game extends JFrame implements KeyListener {
                     {
                         score -= trap2.getPenalty();
                         if(scoreBelowZero()){
-                            System.out.println("Game Over");
+                            losePage();
                         }
-                        System.out.println(score);
                         //Remove Labels
                         trapLabel2.setVisible(false);
-                        Cheese3.setVisible(false);
+//                        Cheese3.setVisible(false);
                         this.repaint();
                     }
 
@@ -632,10 +686,18 @@ public class Game extends JFrame implements KeyListener {
             System.out.println("Not move");
         }
 
-           if(inGame == false)
-           {
-               System.out.println("GameOver");
-           }
+        if(this.myMouse.getCheeseEaten() == 2 && this.myMouse.getCurrentY() == 1 && this.myMouse.getCurrentX() == 0) {
+            winGame = true;
+        }
+
+        if(winGame == true) {
+            winPage();
+        }
+
+       if(inGame == false)
+       {
+           losePage();
+       }
 
     }
 
