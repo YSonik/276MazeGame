@@ -1,11 +1,13 @@
+package main.java;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 
 public class Game extends JFrame implements KeyListener {
     private Boolean inGame;
+    private Boolean isStart;
     private int score;
     private Tile[][] levelMap;//Game Template
     private JLabel[][] gameMap;//Mapping of levelMap to JFrame
@@ -38,9 +40,9 @@ public class Game extends JFrame implements KeyListener {
         //set score
         int score = 0;
         //Create Cheese
-        cheese1 = new Cheese(6,7,5);
-        cheese2 = new Cheese(4,3,5);
-        cheese3 = new Cheese(2,8,5);
+        cheese1 = new Cheese(6, 7, 5);
+        cheese2 = new Cheese(4, 3, 5);
+        cheese3 = new Cheese(2, 8, 5);
         createCheeseLabel();
 
         createMouseLabel();
@@ -63,7 +65,9 @@ public class Game extends JFrame implements KeyListener {
         createFrame();
         createGameMap();
         createScoreText();
-        if (count == 0){scoreText.setText("Cheese Eaten: " + 0);}
+        if (count == 0) {
+            scoreText.setText("Cheese Eaten: " + 0);
+        }
         inGame = true;
     }
 
@@ -634,10 +638,6 @@ public class Game extends JFrame implements KeyListener {
                System.out.println("GameOver");
            }
 
-    }
-
-    public static void main(String[] args) {
-        Game myGame = new Game();
     }
 
     @Override
