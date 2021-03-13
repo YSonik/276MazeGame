@@ -1,8 +1,9 @@
+package main.java;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 
 public class Game extends JFrame implements KeyListener {
     private Boolean inGame;
@@ -38,9 +39,9 @@ public class Game extends JFrame implements KeyListener {
         //set score
         int score = 0;
         //Create Cheese
-        cheese1 = new Cheese(6,7,5);
-        cheese2 = new Cheese(4,3,5);
-        cheese3 = new Cheese(2,8,5);
+        cheese1 = new Cheese(6, 7, 5);
+        cheese2 = new Cheese(4, 3, 5);
+        cheese3 = new Cheese(2, 8, 5);
         createCheeseLabel();
 
         createMouseLabel();
@@ -63,7 +64,9 @@ public class Game extends JFrame implements KeyListener {
         createFrame();
         createGameMap();
         createScoreText();
-        if (count == 0){scoreText.setText("Cheese Eaten: " + 0);}
+        if (count == 0) {
+            scoreText.setText("Cheese Eaten: " + 0);
+        }
         inGame = true;
     }
 
@@ -197,15 +200,23 @@ public class Game extends JFrame implements KeyListener {
     {
         catLabel1 = new JLabel();
         catLabel1.setBounds(400,200,100,100);
-        catLabel1.setBackground(Color.yellow);
+        catLabel1.setBackground(Color.white);
         catLabel1.setOpaque(true);
+        Image catImg = cat1.getCatImage().getScaledInstance(catLabel1.getWidth(), catLabel1.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(catImg);
+        catLabel1.setIcon(icon);
         this.add(catLabel1);
         this.validate();
 
         catLabel2 = new JLabel();
         catLabel2.setBounds(800,500,100,100);
-        catLabel2.setBackground(Color.yellow);
+        catLabel2.setBackground(Color.white);
         catLabel2.setOpaque(true);
+        Image catImg2 = cat1.getCatImage().getScaledInstance(catLabel2.getWidth(), catLabel2.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon2 = new ImageIcon(catImg2);
+        catLabel2.setIcon(icon2);
         this.add(catLabel2);
         this.validate();
     }
@@ -626,10 +637,6 @@ public class Game extends JFrame implements KeyListener {
                System.out.println("GameOver");
            }
 
-    }
-
-    public static void main(String[] args) {
-        Game myGame = new Game();
     }
 
     @Override
