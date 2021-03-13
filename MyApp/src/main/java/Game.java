@@ -7,7 +7,6 @@ import java.awt.event.KeyListener;
 
 public class Game extends JFrame implements KeyListener {
     private Boolean inGame;
-    private Boolean isStart;
     private int score;
     private Tile[][] levelMap;//Game Template
     private JLabel[][] gameMap;//Mapping of levelMap to JFrame
