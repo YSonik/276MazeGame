@@ -1,3 +1,5 @@
+package main.java;
+
 public class Rewards {
     protected int x;
     protected int y;
