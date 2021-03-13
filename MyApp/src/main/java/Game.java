@@ -197,15 +197,23 @@ public class Game extends JFrame implements KeyListener {
     {
         catLabel1 = new JLabel();
         catLabel1.setBounds(400,200,100,100);
-        catLabel1.setBackground(Color.yellow);
+        catLabel1.setBackground(Color.white);
         catLabel1.setOpaque(true);
+        Image catImg = cat1.getCatImage().getScaledInstance(catLabel1.getWidth(), catLabel1.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(catImg);
+        catLabel1.setIcon(icon);
         this.add(catLabel1);
         this.validate();
 
         catLabel2 = new JLabel();
         catLabel2.setBounds(800,500,100,100);
-        catLabel2.setBackground(Color.yellow);
+        catLabel2.setBackground(Color.white);
         catLabel2.setOpaque(true);
+        Image catImg2 = cat1.getCatImage().getScaledInstance(catLabel2.getWidth(), catLabel2.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon2 = new ImageIcon(catImg2);
+        catLabel2.setIcon(icon2);
         this.add(catLabel2);
         this.validate();
     }
