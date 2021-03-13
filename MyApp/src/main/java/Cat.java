@@ -1,14 +1,28 @@
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Cat {
     private int currentX;
     private int currentY;
     private final int catHeight = 25;
     private final int catWidth = 25;
+    private BufferedImage catImage;
+
 
     Cat(int startX, int startY)
     {
         this.currentX = startX;
         this.currentY = startY;
+        try {
+            Path catPath = Paths.get("MyApp/Images/cat.png").toRealPath();;
+            this.catImage = ImageIO.read(new File(catPath.toString()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public int chase (int mouseCurrentX, int mouseCurrentY, Tile [][] map) {
@@ -57,5 +71,9 @@ public class Cat {
 
     public void setCurrentY(int currentY) {
         this.currentY = currentY;
+    }
+
+    public BufferedImage getCatImage () {
+        return catImage;
     }
 }
