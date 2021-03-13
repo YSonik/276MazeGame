@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
@@ -23,6 +25,15 @@ public class Game extends JFrame implements KeyListener {
     private JLabel organic1,organic2;
     private int countSteps = 0;
     private int rand1,rand2,rand3,rand4;
+    JLabel timeLabel = new JLabel();
+    int elapsedTime = 0;
+    int seconds = 0;
+    int minutes = 0;
+    int hours = 0;
+
+    String seconds_string = String.format("%02d", seconds);
+    String minutes_string = String.format("%02d", minutes);
+    String hours_string = String.format("%02d", hours );
 
     private Cat cat1;
     private Cat cat2;
@@ -34,6 +45,7 @@ public class Game extends JFrame implements KeyListener {
     JLabel trapLabel1;
     JLabel trapLabel2;
 
+    Timer timer = new Timer (1000,null);
 
     private int count = 0;
     Game()
@@ -79,6 +91,27 @@ public class Game extends JFrame implements KeyListener {
         createScoreText();
         if (count == 0){scoreText.setText("Score: " + 0);}
         inGame = true;
+        createTimerLabel();
+        timer.start();
+    }
+
+    public void createTimerLabel(){
+        timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
+        timeLabel.setBounds(200,40,400,70 );
+        timeLabel.setFont(new Font("Moon",Font.PLAIN, 20));
+        this.add(timeLabel);
+        this.validate();
+    }
+
+    public void updateTimerLabel(){
+        elapsedTime=elapsedTime+1000;
+        hours = (elapsedTime/3600000);
+        minutes = (elapsedTime/60000) % 60;
+        seconds = (elapsedTime/1000) % 60;
+        seconds_string = String.format("%02d", seconds);
+        minutes_string = String.format("%02d", minutes);
+        hours_string = String.format("%02d", hours);
+        timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
     }
 
     //public
@@ -434,7 +467,6 @@ public class Game extends JFrame implements KeyListener {
                             scoreText.setVisible(true);
                             this.repaint();
                         }
-
                     }
                      if(levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()-1].getIsOrganicCheese())
                     {
@@ -676,39 +708,30 @@ public class Game extends JFrame implements KeyListener {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Not move");
         }
-        for(int i = 0; i< 10; i++)
-        {
-            for(int j = 0; j <10; j++)
-            {
-                if(levelMap[i][j].getisBarrier() == true ) {
+        for(int i = 0; i< 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (levelMap[i][j].getisBarrier() == true) {
                     System.out.print("[ ]");
-                }
-                else if(levelMap[i][j].getisReward() == true)
-                {
+                } else if (levelMap[i][j].getisReward() == true) {
                     System.out.print(" * ");
-                }
-                else if(levelMap[i][j].getIsCharacter() == true)
-                {
+                } else if (levelMap[i][j].getIsCharacter() == true) {
                     System.out.print(" M ");
-                }
-                else if (levelMap[i][j].getisCheese() == true)
-                {
+                } else if (levelMap[i][j].getisCheese() == true) {
                     System.out.print(" * ");
-                }
-                else if(levelMap[i][j].getisMouseTrap() == true)
-                {
+                } else if (levelMap[i][j].getisMouseTrap() == true) {
                     System.out.print(" T ");
-                }
-                else if(levelMap[i][j].getisCat() == true)
-                {
+                } else if (levelMap[i][j].getisCat() == true) {
                     System.out.print(" C ");
-                }
-                else{
+                } else {
                     System.out.print("   ");
                 }
             }
             System.out.print("\n");
             //System.out.println(score);
+        }
+        if(count == 1)
+        {
+            timer.start();
         }
     }
 
@@ -741,8 +764,17 @@ public class Game extends JFrame implements KeyListener {
 
     public static void main(String[] args) {
         Game myGame = new Game();
+        float time = System.nanoTime();
+        while (myGame.inGame) {
+            if (System.nanoTime() - time >= 1) {
+                time++;
+                myGame.updateTimerLabel();
+            }
+            try {
+                    Thread.sleep(1000);
+            } catch (Exception e) {}
+        }
     }
-
     @Override
     public void keyTyped(KeyEvent e) {
     }
