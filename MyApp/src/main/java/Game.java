@@ -191,8 +191,9 @@ public class Game extends JFrame implements KeyListener {
         trapLabel1.setBounds(trap1.currentY*100,(trap1.currentX +1)*100,100,100);
         trapLabel1.setBackground(Color.pink);
         trapLabel1.setOpaque(true);
-        //ImageIcon t1 = new ImageIcon(trap1.getMTImage());
-        //trapLabel1.setIcon(t1);
+        Image trapImg1 = trap1.getMTImage().getScaledInstance(trapLabel1.getWidth(), trapLabel1.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon icon1 = new ImageIcon(trapImg1);
+        trapLabel1.setIcon(icon1);
         this.add(trapLabel1);
         this.validate();
 
@@ -200,8 +201,9 @@ public class Game extends JFrame implements KeyListener {
         trapLabel2.setBounds(trap2.currentY*100,(trap2.currentX +1)*100,100,100);
         trapLabel2.setBackground(Color.pink);
         trapLabel2.setOpaque(true);
-       // ImageIcon t2 = new ImageIcon(trap2.getMTImage());
-        //trapLabel2.setIcon(t2);
+        Image trapImg2 = trap2.getMTImage().getScaledInstance(trapLabel2.getWidth(), trapLabel2.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon icon2 = new ImageIcon(trapImg2);
+        trapLabel2.setIcon(icon2);
         this.add(trapLabel2);
         this.validate();
     }
@@ -417,8 +419,10 @@ public class Game extends JFrame implements KeyListener {
         //Structure2
         levelMap[5][2] = new Tile(true,false,false,false,false,false,false,false,false);
         levelMap[6][2] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[6][3] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[7][3] = new Tile(true,false,false,false,false,false,false,false,false);
+        //levelMap[6][3] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[6][4] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[7][2] = new Tile(true,false,false,false,false,false,false,false,false);
+        //levelMap[7][3] = new Tile(true,false,false,false,false,false,false,false,false);
         levelMap[7][4] = new Tile(true,false,false,false,false,false,false,false,false);
         levelMap[5][4] = new Tile(true,false,false,false,false,false,false,false,false);
 
@@ -439,7 +443,7 @@ public class Game extends JFrame implements KeyListener {
         //Set locations for cheese
         levelMap[6][7] = new Tile(false,false,false,false,false,false,true, false,false);
         levelMap[4][3] = new Tile(false,false,false,false,false,false,true, false,false);
-        levelMap[2][8] = new Tile(false,false,false,false,false,false,true, false,false);
+        //levelMap[2][8] = new Tile(false,false,false,false,false,false,true, false,false);
 
         //Set locations for traps
         levelMap[3][6] = new Tile(false,false,false,false,false,false,false, false,true);
@@ -607,8 +611,15 @@ public class Game extends JFrame implements KeyListener {
                             losePage();
                         }
                         //Remove Labels
-                        trapLabel1.setVisible(false);
-                        this.repaint();
+                        if(myMouse.getCurrentY()-1 == trap1.getCurrentX()){
+                            trapLabel1.setVisible(false);
+                            this.repaint();
+                        }
+                        else{
+                            trapLabel2.setVisible(false);
+                            this.repaint();
+                        }
+                        
                     }
 
                     levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false);
