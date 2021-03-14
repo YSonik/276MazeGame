@@ -30,16 +30,16 @@ public class Cat {
     
 
 
-    public boolean rightblocked(Tile [][] map){
+    public boolean rightblocked(Tile[][] map){
         return map[this.getCurrentY()][this.getCurrentX() + 1].getisBarrier();
     }
-    public boolean leftblocked(Tile [][] map){
+    public boolean leftblocked(Tile[][] map){
         return map[this.getCurrentY()][this.getCurrentX() - 1].getisBarrier();
     }
-    public boolean topblocked(Tile [][] map){
+    public boolean topblocked(Tile[][] map){
         return map[this.getCurrentY()-1][this.getCurrentX()].getisBarrier();
     }
-    public boolean bottomblocked(Tile [][] map){
+    public boolean bottomblocked(Tile[][] map){
         return map[this.getCurrentY()+1][this.getCurrentX()].getisBarrier();
     }
 
