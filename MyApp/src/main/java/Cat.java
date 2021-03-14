@@ -23,16 +23,17 @@ public class Cat {
                         this.setCurrentY(this.getCurrentY() - 1);
                             System.out.println("return 4");
                             return 4;
-                    }
-            else if (map[this.getCurrentY()][this.getCurrentX() - 1].getisBarrier() == false) {
-                        this.setCurrentX(this.getCurrentX() - 1);
-                        return 2;
-            }
+                    } 
             else if(!map[this.getCurrentY()+1][this.getCurrentX()].getisBarrier()){
                         this.setCurrentY(this.getCurrentY() + 1);
                         System.out.println("return 3");
                         return 3;
             }
+            else if (map[this.getCurrentY()][this.getCurrentX() - 1].getisBarrier() == false) {
+                        this.setCurrentX(this.getCurrentX() - 1);
+                        return 2;
+            }
+          
             else{
                 return 0;
             }
@@ -49,14 +50,15 @@ public class Cat {
                         System.out.println("return 4");
                         return 4;
                 }
-                else if (map[this.getCurrentY()][this.getCurrentX() + 1].getisBarrier() == false) {
-                    this.setCurrentX(this.getCurrentX() + 1);
-                    return 1;
-                }
+                
                 else if(map[this.getCurrentY()+1][this.getCurrentX()].getisBarrier() == false){
                     this.setCurrentY(this.getCurrentY() + 1);
                     System.out.println("return 3");
                     return 3;
+                }
+                else if (map[this.getCurrentY()][this.getCurrentX() + 1].getisBarrier() == false) {
+                    this.setCurrentX(this.getCurrentX() + 1);
+                    return 1;
                 }
                 else{
                     return 0;
@@ -71,6 +73,11 @@ public class Cat {
                     System.out.println("return 3");
                     return 3;
                 }
+                else if (map[this.getCurrentY() - 1][this.getCurrentX()].getisBarrier() == false) {
+                        this.setCurrentY(this.getCurrentY() - 1);
+                        System.out.println("return 4");
+                        return 4;
+                    }
 
                 else if(map[this.getCurrentY()][this.getCurrentX()-1].getisBarrier() == false){
                         this.setCurrentX(this.getCurrentX() - 1);
@@ -81,11 +88,7 @@ public class Cat {
                         this.setCurrentX(this.getCurrentX() + 1);
                         return 1;
                     }
-                    else if (map[this.getCurrentY() - 1][this.getCurrentX()].getisBarrier() == false) {
-                        this.setCurrentY(this.getCurrentY() - 1);
-                        System.out.println("return 4");
-                        return 4;
-                    }
+                    
                     else{
                         return 0;
                     }

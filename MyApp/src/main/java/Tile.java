@@ -13,10 +13,10 @@ public class Tile
     private boolean isCat;
     private boolean isMouseTrap;
 
-    Tile(boolean hasBarrier, boolean hasReward, boolean isEntrance, boolean isExit, boolean isCharacter, boolean isEmpty,
+    Tile(boolean isBarrier, boolean hasReward, boolean isEntrance, boolean isExit, boolean isCharacter, boolean isEmpty,
          boolean isCheese, boolean isCat, boolean isMouseTrap)
     {
-        this.isBarrier = hasBarrier;
+        this.isBarrier = isBarrier;
         this.isReward = hasReward;
         this.isEntrance = isEntrance;
         this.isExit = isExit;

@@ -45,8 +45,8 @@ public class Game extends JFrame implements KeyListener {
 
         createMouseLabel();
         // Create multiple cats
-        cat1 = new Cat(4, 1);
-        cat2 = new Cat(8, 4);
+        cat1 = new Cat(1, 6);
+        cat2 = new Cat(1, 3);
         createCatLabel();
 
         // Create mousetraps
@@ -211,14 +211,14 @@ public class Game extends JFrame implements KeyListener {
     public void createCatLabel()
     {
         catLabel1 = new JLabel("Cat1");
-        catLabel1.setBounds(400,200,100,100);
+        catLabel1.setBounds(100,700,100,100);
         catLabel1.setBackground(Color.yellow);
         catLabel1.setOpaque(true);
         this.add(catLabel1);
         this.validate();
 
         catLabel2 = new JLabel("Cat2");
-        catLabel2.setBounds(800,500,100,100);
+        catLabel2.setBounds(100,400,100,100);
         catLabel2.setBackground(Color.yellow);
         catLabel2.setOpaque(true);
         this.add(catLabel2);
