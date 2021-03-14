@@ -1,3 +1,5 @@
+package main.java;
+
 public class Enemies{
     protected int currentX;
     protected int currentY;
