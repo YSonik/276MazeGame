@@ -1,4 +1,4 @@
-package main.java;
+//package Main.java;
 
 import javax.swing.*;
 import java.awt.*;
@@ -502,14 +502,17 @@ public class Game extends JFrame implements KeyListener {
                     {
                         if(catLabel1.getY() == mouseLabel.getY())
                         {
-                            gameOver();
+                            //gameOver();
+                            losePage();
                         }
                     }
                     if(catLabel2.getX() == mouseLabel.getX())
                     {
                         if(catLabel2.getY() == mouseLabel.getY())
                         {
-                            gameOver();
+                            //gameOver();
+                            losePage();
+
                         }
                     }
 
