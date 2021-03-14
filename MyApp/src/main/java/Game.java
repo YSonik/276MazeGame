@@ -104,7 +104,7 @@ public class Game extends JFrame implements KeyListener {
 
     public void losePage() {
         this.dispose();
-        JFrame f = new JFrame("Win");
+        JFrame f = new JFrame("Lose");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(300,300);
         ImageIcon cheeseRunImageIcon = new ImageIcon("MyApp/Images/win.png");

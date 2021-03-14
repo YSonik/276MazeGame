@@ -201,11 +201,11 @@ public class Cat {
                         System.out.println("return 3");
                         return 3;
                 }
-                   else if (!rightblocked(map)) {
+                   else if (!rightblocked(map) ) {
                     this.setCurrentX(this.getCurrentX() + 1);
                     return 1;  
                 }
-                else if (!leftblocked(map)) {
+                else if (!leftblocked(map) ) {
                     this.setCurrentX(this.getCurrentX() - 1);
                     return 2;
                 }
