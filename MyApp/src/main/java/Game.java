@@ -439,7 +439,7 @@ public class Game extends JFrame implements KeyListener {
         //Set locations for cheese
         levelMap[6][7] = new Tile(false,false,false,false,false,false,true, false,false);
         levelMap[4][3] = new Tile(false,false,false,false,false,false,true, false,false);
-        levelMap[2][8] = new Tile(false,false,false,false,false,false,true, false,false);
+        //levelMap[2][8] = new Tile(false,false,false,false,false,false,true, false,false);
 
         //Set locations for traps
         levelMap[3][6] = new Tile(false,false,false,false,false,false,false, false,true);
