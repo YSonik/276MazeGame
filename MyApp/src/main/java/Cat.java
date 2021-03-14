@@ -1,4 +1,4 @@
-package main.java;
+//package main.java;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -28,7 +28,7 @@ public class Cat {
 
     }
 
-    public int chase (int mouseCurrentX, int mouseCurrentY, Tile [][] map) {
+    public int chase (int mouseCurrentX, int mouseCurrentY, Tile[][] map) {
         int distanceX = mouseCurrentX - this.getCurrentX();
         int distanceY = mouseCurrentY - this.getCurrentY();
         //if Mouse is on the right
