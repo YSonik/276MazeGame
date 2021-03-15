@@ -1,4 +1,4 @@
-//package Main.java;
+package main.java;
 
 import javax.swing.*;
 import java.awt.*;
@@ -79,7 +79,7 @@ public class Game extends JFrame implements KeyListener {
         JFrame f = new JFrame("Win");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(300,300);
-        ImageIcon cheeseRunImageIcon = new ImageIcon("MyApp/Images/win.png");
+        ImageIcon cheeseRunImageIcon = new ImageIcon("Images/win.png");
         JLabel cheeseRunLabel = new JLabel(cheeseRunImageIcon);
         JLabel jLabel1 = new JLabel("Congratulations!!!");
         JLabel jLabel2 = new JLabel("Your score: " + this.score);

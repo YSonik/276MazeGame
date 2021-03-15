@@ -1,4 +1,4 @@
-//package main.java;
+package main.java;
 
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -21,7 +21,7 @@ public class Mouse {
         this.currentY = 8;
         this.cheeseEaten = 0;
         try {
-            Path mousePath = Paths.get("MyApp/Images/mouse.png").toRealPath();;
+            Path mousePath = Paths.get("Images/mouse.png").toRealPath();;
             this.mouseImage = ImageIO.read(new File(mousePath.toString()));
         } catch (IOException e) {
             e.printStackTrace();
