@@ -7,6 +7,16 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * <h1> Cat </h1>
+ * The Cat program contains X and Y setters and getters of the moving enemies within a 2D grid map.
+ * In addition, a "chase" method is implemented with a simple algorithm for the moving enemies
+ * to get closer to the player after every tick.
+ * <p>
+ * @author Scott Luu  
+ *
+ */ 
+
 
 public class Cat {
     private int currentX;
@@ -15,6 +25,12 @@ public class Cat {
     private final int catWidth = 25;
     private BufferedImage catImage;
 
+    /**
+     * Constructor for the program which contains X and Y coordinates of the moving enemies
+     * and catImage
+     * @param startX first parameter to Cat
+     * @param startY second parameter to Cat
+     */
     Cat(int startX, int startY)
     {
         this.currentX = startX;
@@ -28,8 +44,30 @@ public class Cat {
 
     }
     
+    public int getCurrentX() {
+        return currentX;
+    }
 
+    public int getCurrentY() {
+        return currentY; }
 
+    public void setCurrentX(int currentX) {
+        this.currentX = currentX;
+    }
+
+    public void setCurrentY(int currentY) {
+        this.currentY = currentY;
+    }
+    
+
+   
+    /**
+     * These methods are used by the chase method to check the surroundings of the moving Enemies 
+     * and determine which direction does not have a barrier. 
+     *
+     * @param map Only parameter to these methods
+     * @return boolean These methods return whether the provided coordinates are Barriers (true), or not (false).
+     */
     public boolean rightblocked(Tile[][] map){
         return map[this.getCurrentY()][this.getCurrentX() + 1].getisBarrier();
     }
@@ -46,7 +84,17 @@ public class Cat {
     
 
 
-
+    /**
+     * The chase method moves the moving enemies closer to the player based on the player's X and Y
+     * coordinates. The method uses the above functions to check
+     * for barriers and adjust the the enemies' coordinates accordingly.
+     * 
+     * @param mouseCurrentX First parameter to the chase method - Player's X-coordinate 
+     * @param mouseCurrentY Second parameter to the chase method - Player's Y-coordinate
+     * @param map Third parameter to the chase method - 2D-grid map
+     * @return int This returns a number in regards to the direction the enemies will move to.
+     * (e.g: 1 = right; 2 = left; 3 = down; 4 = up)
+     */
     public int chase (int mouseCurrentX, int mouseCurrentY, Tile [][] map) {
         int distanceX = mouseCurrentX - this.getCurrentX();
         int distanceY = mouseCurrentY - this.getCurrentY();
@@ -219,20 +267,6 @@ public class Cat {
 
     }
 
-    public int getCurrentX() {
-        return currentX;
-    }
-
-    public int getCurrentY() {
-        return currentY; }
-
-    public void setCurrentX(int currentX) {
-        this.currentX = currentX;
-    }
-
-    public void setCurrentY(int currentY) {
-        this.currentY = currentY;
-    }
 
     public BufferedImage getCatImage () {
         return catImage;
