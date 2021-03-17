@@ -1,4 +1,4 @@
-//package main.java;
+package main.java;
 
 public class OrganicCheese extends Rewards{
     OrganicCheese(int x, int y, int value) {

@@ -12,3 +12,7 @@ MyApp/.idea/
 .idea/
 MyApp/bin/
 .project
+MyApp/target/
+MyApp/CheeseRun.iml
+MyApp/.classpath
+MyApp/.settings/

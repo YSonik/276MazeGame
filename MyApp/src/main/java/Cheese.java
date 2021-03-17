@@ -1,4 +1,4 @@
-//package main.java;
+package main.java;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -11,7 +11,7 @@ public class Cheese extends Rewards{
     Cheese(int x, int y, int value) {
         super(x, y, value);
         try {
-            Path cheesePath = Paths.get("MyApp/Images/cheese.png").toRealPath();;
+            Path cheesePath = Paths.get("Images/cheese.png").toRealPath();;
             this.cheeseImg = ImageIO.read(new File(cheesePath.toString()));
         } catch (IOException e) {
             e.printStackTrace();
