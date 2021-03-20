@@ -36,7 +36,7 @@ public class Cat {
         this.currentX = startX;
         this.currentY = startY;
         try {
-            Path catPath = Paths.get("Images/cat.png").toRealPath();;
+            Path catPath = Paths.get("MyApp/Images/cat.png").toRealPath();;
             this.catImage = ImageIO.read(new File(catPath.toString()));
         } catch (IOException e) {
             e.printStackTrace();

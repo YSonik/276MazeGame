@@ -7,20 +7,13 @@ import java.awt.event.ActionListener;
 
 public class Main extends JFrame{
     public static void main(String[] args) {
-        Game game = new Game();
+        //Game game = new Game();
         JFrame f = new JFrame("Main");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(500,500);
-        ImageIcon cheeseRunImageIcon = new ImageIcon("Images/cheeserun.png");
+        ImageIcon cheeseRunImageIcon = new ImageIcon("MyApp/Images/cheeserun.png");
         JLabel cheeseRunLabel = new JLabel(cheeseRunImageIcon);
         JButton button = new JButton("Play");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                f.dispose();
-                Game myGame = new Game();
-            }
-        });
         JPanel panel = new JPanel();
         panel.add(cheeseRunLabel);
         panel.add(button);
@@ -28,6 +21,13 @@ public class Main extends JFrame{
         f.setResizable(false);
         f.getContentPane().setBackground(Color.WHITE);
         f.setVisible(true);
-        game.runTimer();
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                f.dispose();
+                Game myGame = new Game();
+                //myGame.createTimerLabel();
+            }
+        });
     }
 }

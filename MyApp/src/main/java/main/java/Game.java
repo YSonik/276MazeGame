@@ -27,11 +27,11 @@ public class Game extends JFrame implements KeyListener {
 
     private JLabel Cheese1;
     private JLabel Cheese2;
+    private JLabel Cheese3;
     private JLabel mouseLabel;
     private JLabel organic1,organic2;
     private int countSteps = 0;
     private int rand1,rand2,rand3,rand4;
-    JLabel timeLabel = new JLabel();
     int elapsedTime = 0;
     int seconds = 0;
     int minutes = 0;
@@ -51,10 +51,11 @@ public class Game extends JFrame implements KeyListener {
     JLabel trapLabel1;
     JLabel trapLabel2;
 
-    private JLabel timeLabel;
+    private JLabel  timeLabel2;
+    JLabel timeLabel = new JLabel();
     //Timer timer = new Timer (1000,null);
 
-        private int count = 0;
+    private int count = 0;
     Game()
     {
         //Create a Mouse
@@ -97,17 +98,13 @@ public class Game extends JFrame implements KeyListener {
         createGameMap();
         createScoreText();
         if (count == 0){scoreText.setText("Score: " + 0);}
-        createTimerLabel();
         inGame = true;
         winGame = false;
-
-        //Create a timer.
-        timeLabel = new JLabel(new Date().toString());
-        this.add(timeLabel);
+        createTimerLabel();
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 if(inGame) {
-                    timeLabel.setText( new Date().toString() );
+                    updateTimerLabel();
                 }
             }
         };
@@ -116,16 +113,14 @@ public class Game extends JFrame implements KeyListener {
         timer.start();
     }
 
+
+
     public void createTimerLabel(){
         timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
         timeLabel.setBounds(200,40,400,70 );
         timeLabel.setFont(new Font("Moon",Font.PLAIN, 20));
         this.add(timeLabel);
         this.validate();
-    }
-
-    public boolean isInGame(){
-        return this.inGame;
     }
 
     public void updateTimerLabel(){
@@ -140,32 +135,12 @@ public class Game extends JFrame implements KeyListener {
 
     }
 
-    public void runTimer(){
-        float time = System.nanoTime();
-        boolean loop = true;
-        while (loop) {
-            if (inGame == true) {
-                if (System.nanoTime() - time >= 1) {
-                    time++;
-                    updateTimerLabel();
-                }
-                try {
-                    Thread.sleep(1000);
-                } catch (Exception r) {
-                }
-            }
-            else {
-                loop = false;
-            }
-        }
-    }
-
     public void winPage() {
         this.dispose();
         JFrame f = new JFrame("Win");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(300,300);
-        ImageIcon cheeseRunImageIcon = new ImageIcon("Images/win.png");
+        ImageIcon cheeseRunImageIcon = new ImageIcon("MyApp/Images/win.png");
         JLabel cheeseRunLabel = new JLabel(cheeseRunImageIcon);
         JLabel jLabel1 = new JLabel("Congratulations!!!");
         JLabel jLabel2 = new JLabel("Your score: " + this.score);
@@ -175,6 +150,7 @@ public class Game extends JFrame implements KeyListener {
             public void actionPerformed(ActionEvent e) {
                 f.dispose();
                 Game myGame = new Game();
+
             }
         });
         JPanel panel = new JPanel();
@@ -193,7 +169,7 @@ public class Game extends JFrame implements KeyListener {
         JFrame f = new JFrame("Lose");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(300,300);
-        ImageIcon cheeseRunImageIcon = new ImageIcon("Images/win.png");
+        ImageIcon cheeseRunImageIcon = new ImageIcon("MyApp/Images/win.png");
         JLabel cheeseRunLabel = new JLabel(cheeseRunImageIcon);
         JLabel jLabel1 = new JLabel("Sorry you lose!!!");
         JLabel jLabel2 = new JLabel("Your score: " + this.score);
@@ -226,7 +202,7 @@ public class Game extends JFrame implements KeyListener {
         + "\n" + "Total Score: " + score,
          "Play Again", JOptionPane.DEFAULT_OPTION);*/
 
-        ImageIcon testIcon = new ImageIcon("Images/MouseLose.jpg");
+        ImageIcon testIcon = new ImageIcon("MyApp/Images/MouseLose.jpg");
         Object[] option = { "Play Again" };
         int test = JOptionPane.showOptionDialog(null, "Total Score: " + score + "\n" +"Example Time: 69:42:00", "GAME OVER",
                                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,

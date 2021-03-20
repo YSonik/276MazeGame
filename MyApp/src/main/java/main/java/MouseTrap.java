@@ -30,7 +30,7 @@ public class MouseTrap {
         this.currentY = getCurrentY();
         // Get image for the traps
         try {
-            Path MTPath = Paths.get("Images/mousetrap.jpg").toRealPath();;
+            Path MTPath = Paths.get("MyApp/Images/mousetrap.jpg").toRealPath();;
             this.MTImage = ImageIO.read(new File(MTPath.toString()));
         } catch (IOException e) {
             e.printStackTrace();
