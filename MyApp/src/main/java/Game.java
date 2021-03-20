@@ -120,6 +120,26 @@ public class Game extends JFrame implements KeyListener {
 
     }
 
+    public void runTimer(){
+        float time = System.nanoTime();
+        boolean loop = true;
+        while (loop) {
+            if (inGame == true) {
+                if (System.nanoTime() - time >= 1) {
+                    time++;
+                    updateTimerLabel();
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception r) {
+                }
+            }
+            else {
+                loop = false;
+            }
+        }
+    }
+
     public void winPage() {
         this.dispose();
         JFrame f = new JFrame("Win");
@@ -190,7 +210,6 @@ public class Game extends JFrame implements KeyListener {
             this.setVisible(false);
             Game game = new Game();
         }
-
 	}
 
     public void catMoveDraw(int direction1, int direction2) {
@@ -558,6 +577,7 @@ public class Game extends JFrame implements KeyListener {
                         score -= trap1.getPenalty();
                         scoreText.setText("Score: " + score);
                         if (scoreBelowZero()) {
+                            inGame = false;
                             losePage();
                         }
                         //Remove Labels
@@ -577,11 +597,13 @@ public class Game extends JFrame implements KeyListener {
                     //Collision detection using Catlabels
                     if (catLabel1.getX() == mouseLabel.getX()) {
                         if (catLabel1.getY() == mouseLabel.getY()) {
+                            inGame = false;
                             gameOver();
                         }
                     }
                     if (catLabel2.getX() == mouseLabel.getX()) {
                         if (catLabel2.getY() == mouseLabel.getY()) {
+                            inGame = false;
                             gameOver();
                         }
                     }
@@ -631,6 +653,7 @@ public class Game extends JFrame implements KeyListener {
                         score -= trap1.getPenalty();
                         scoreText.setText("Score: " + score);
                         if (scoreBelowZero()) {
+                            inGame = false;
                             losePage();
                         }
                         //Remove Labels
@@ -695,6 +718,7 @@ public class Game extends JFrame implements KeyListener {
                         score -= trap1.getPenalty();
                         scoreText.setText("Score: " + score);
                         if (scoreBelowZero()) {
+                            inGame = false;
                             losePage();
                         }
                         //Remove Labels
@@ -714,11 +738,13 @@ public class Game extends JFrame implements KeyListener {
                     //Collision detection using Catlabels
                     if (catLabel1.getX() == mouseLabel.getX()) {
                         if (catLabel1.getY() == mouseLabel.getY()) {
+                            inGame = false;
                             gameOver();
                         }
                     }
                     if (catLabel2.getX() == mouseLabel.getX()) {
                         if (catLabel2.getY() == mouseLabel.getY()) {
+                            inGame = false;
                             gameOver();
                         }
                     }
@@ -749,6 +775,7 @@ public class Game extends JFrame implements KeyListener {
                     if (levelMap[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisMouseTrap() == true) {
                         score -= trap2.getPenalty();
                         if (scoreBelowZero()) {
+                            inGame = false;
                             losePage();
                         }
                         //Remove Labels
@@ -770,11 +797,13 @@ public class Game extends JFrame implements KeyListener {
                     //Collision detection using Catlabels
                     if (catLabel1.getX() == mouseLabel.getX()) {
                         if (catLabel1.getY() == mouseLabel.getY()) {
+                            inGame = false;
                             gameOver();
                         }
                     }
                     if (catLabel2.getX() == mouseLabel.getX()) {
                         if (catLabel2.getY() == mouseLabel.getY()) {
+                            inGame = false;
                             gameOver();
                         }
                     }
