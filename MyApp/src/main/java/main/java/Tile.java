@@ -69,7 +69,9 @@ public class Tile
         return isCheese;
     }
 
-    public boolean getIsOrganicCheese(){ return isOrganicCheese; }
+    public boolean getIsOrganicCheese(){
+        return isOrganicCheese;
+    }
 
     public void setBarrier(boolean value)
     {

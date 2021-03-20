@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 public class Main extends JFrame{
     public static void main(String[] args) {
+        Game game = new Game();
         JFrame f = new JFrame("Main");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(500,500);
@@ -27,5 +28,6 @@ public class Main extends JFrame{
         f.setResizable(false);
         f.getContentPane().setBackground(Color.WHITE);
         f.setVisible(true);
+        game.runTimer();
     }
 }
