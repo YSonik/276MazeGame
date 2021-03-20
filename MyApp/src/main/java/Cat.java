@@ -108,7 +108,6 @@ public class Cat {
             else if(distanceY > 0){
                 if (!bottomblocked(map) ) {
                     this.setCurrentY(this.getCurrentY() + 1);
-                    System.out.println("return 3");
                     return 3;
                 }
                 else if (!leftblocked(map)  ) {
@@ -117,7 +116,6 @@ public class Cat {
                 }
                 else if (!topblocked(map)) {
                     this.setCurrentY(this.getCurrentY() - 1);
-                    System.out.println("return 4");
                     return 4;
                 }
                 else{
@@ -130,7 +128,6 @@ public class Cat {
             else if(distanceY < 0){
                 if (!topblocked(map) ) {
                     this.setCurrentY(this.getCurrentY() - 1);
-                    System.out.println("return 4");
                     return 4;
                 }
                 else if (!leftblocked(map) ) {
@@ -139,7 +136,6 @@ public class Cat {
                 }
                 else  if (!bottomblocked(map) ) {
                     this.setCurrentY(this.getCurrentY() + 1);
-                    System.out.println("return 3");
                     return 3;
                 }
                 else{
@@ -163,7 +159,6 @@ public class Cat {
             else if(distanceY > 0){
                 if (!bottomblocked(map)) {
                     this.setCurrentY(this.getCurrentY() + 1);
-                    System.out.println("return 3");
                     return 3;
                 }
                 else if (!rightblocked(map)) {
@@ -172,7 +167,6 @@ public class Cat {
                 }
                 else if (!topblocked(map)) {
                     this.setCurrentY(this.getCurrentY() - 1);
-                    System.out.println("return 4");
                     return 4;
                 }
                 else{
@@ -184,11 +178,9 @@ public class Cat {
             else if(distanceY < 0){
                 if (!topblocked(map)) {
                     this.setCurrentY(this.getCurrentY() - 1);
-                    System.out.println("return 4");
                     return 4;
                 }else if (!bottomblocked(map)) {
                     this.setCurrentY(this.getCurrentY() + 1);
-                    System.out.println("return 3");
                     return 3;
                 }
                 else if (!rightblocked(map)) {
@@ -213,7 +205,6 @@ public class Cat {
         while (distanceY > 0 && distanceX == 0) {
             if (!bottomblocked(map)) {
                 this.setCurrentY(this.getCurrentY() + 1);
-                System.out.println("return 3");
                 return 3;
             }
 
@@ -227,7 +218,6 @@ public class Cat {
             }
             else if (!topblocked(map)) {
                 this.setCurrentY(this.getCurrentY() - 1);
-                System.out.println("return 4");
                 return 4;
             }
             else{
@@ -240,13 +230,11 @@ public class Cat {
         } while (distanceY < 0 && distanceX == 0 ){
             if (!topblocked(map)) {
                 this.setCurrentY(this.getCurrentY() - 1);
-                System.out.println("return 4");
                 return 4;
 
             }
             else if (!bottomblocked(map)) {
                 this.setCurrentY(this.getCurrentY() + 1);
-                System.out.println("return 3");
                 return 3;
             }
             else if (!rightblocked(map) ) {
