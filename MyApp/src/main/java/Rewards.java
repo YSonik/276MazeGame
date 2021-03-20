@@ -5,7 +5,6 @@ public class Rewards {
     protected int y;
     protected int value;
 
-
     Rewards(int x, int y, int value)
     {
         this.x = x;

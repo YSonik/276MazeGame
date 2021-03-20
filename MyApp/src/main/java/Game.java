@@ -6,8 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Date;
+import javax.swing.Timer;
 
 public class Game extends JFrame implements KeyListener {
+    private final static int ONE_SECOND = 1000;
+    private Timer timer;
     private Boolean inGame;
     private Boolean winGame;
     private int score;
@@ -17,10 +21,13 @@ public class Game extends JFrame implements KeyListener {
 
     private Cheese cheese1;
     private Cheese cheese2;
-//    private Cheese cheese3;
+    private Cheese cheese3;
+    private OrganicCheese orgCheese1,orgCheese2;
+
     private JLabel Cheese1;
     private JLabel Cheese2;
-//    private JLabel Cheese3;
+    private JLabel Cheese3;
+    private JLabel organic1,organic2;
     private JLabel mouseLabel;
 
     private Cat cat1;
@@ -33,6 +40,7 @@ public class Game extends JFrame implements KeyListener {
     JLabel trapLabel1;
     JLabel trapLabel2;
 
+    private JLabel timeLabel;
 
     private int count = 0;
     Game()
@@ -44,8 +52,11 @@ public class Game extends JFrame implements KeyListener {
         //Create Cheese
         cheese1 = new Cheese(6, 7, 5);
         cheese2 = new Cheese(4, 3, 5);
-//        cheese3 = new Cheese(2, 8, 5);
+        cheese3 = new Cheese(2, 8, 5);
         createCheeseLabel();
+        orgCheese1 = new OrganicCheese(7,2,10);
+        orgCheese2 = new OrganicCheese(1,3,10);
+        createOrganicCheeseLabel();
 
         createMouseLabel();
         // Create multiple cats
@@ -72,6 +83,20 @@ public class Game extends JFrame implements KeyListener {
         }
         inGame = true;
         winGame = false;
+
+        //Create a timer.
+        timeLabel = new JLabel(new Date().toString());
+        this.add(timeLabel);
+        ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                if(inGame) {
+                    timeLabel.setText( new Date().toString() );
+                }
+            }
+        };
+        Timer timer = new Timer(1000, taskPerformer);
+        timer.setInitialDelay(1);
+        timer.start();
     }
 
     public void winPage() {
@@ -242,18 +267,41 @@ public class Game extends JFrame implements KeyListener {
         this.add(Cheese2);
         this.validate();
 
-//        Cheese3 = new JLabel("Cheese3");
-//        Cheese3.setBounds(cheese3.y*100,(cheese3.x+1)*100,100,100);
-//        Cheese3.setBackground(Color.white);
-//        Cheese3.setOpaque(true);
-//        Image cheeseImg3 = cheese3.getCheeseImg().getScaledInstance(Cheese3.getWidth(), Cheese3.getHeight(),
-//                Image.SCALE_SMOOTH);
-//        ImageIcon icon3 = new ImageIcon(cheeseImg3);
-//        Cheese3.setIcon(icon3);
-//
-//        this.add(Cheese3);
-//        this.validate();
+        Cheese3 = new JLabel("Cheese3");
+        Cheese3.setBounds(cheese3.y*100,(cheese3.x+1)*100,100,100);
+        Cheese3.setBackground(Color.white);
+        Cheese3.setOpaque(true);
+        Image cheeseImg3 = cheese3.getCheeseImg().getScaledInstance(Cheese3.getWidth(), Cheese3.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon3 = new ImageIcon(cheeseImg3);
+        Cheese3.setIcon(icon3);
+
+        this.add(Cheese3);
+        this.validate();
     }
+
+    public void createOrganicCheeseLabel(){
+        organic1 = new JLabel();
+        organic1.setBounds(orgCheese1.y*100, (orgCheese1.x+1)*100, 100, 100);
+        Image orgCheeseImg1 = orgCheese1.getOrgCheeseImg().getScaledInstance(organic1.getWidth(), organic1.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon1 = new ImageIcon(orgCheeseImg1);
+        organic1.setIcon(icon1);
+        this.add(organic1);
+        this.validate();
+
+        organic2 = new JLabel();
+        organic2.setBounds(orgCheese2.y*100, (orgCheese2.x+1)*100, 100, 100);
+        Image orgCheeseImg2 = orgCheese2.getOrgCheeseImg().getScaledInstance(organic2.getWidth(), organic2.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon2 = new ImageIcon(orgCheeseImg2);
+        organic2.setIcon(icon2);
+        this.add(organic2);
+        this.validate();
+        organic1.setVisible(false);
+        organic2.setVisible(false);
+    }
+
 
     public void createMouseLabel()
     {
@@ -369,7 +417,7 @@ public class Game extends JFrame implements KeyListener {
         {
             for(int j = 0; j< 10; j++)
             {
-                levelMap[i][j] = new Tile(false,false,false,false,false, true,false,false,false);
+                levelMap[i][j] = new Tile(false,false,false,false,false,true,false,false,false,false);
             }
         }
 
@@ -403,9 +451,9 @@ public class Game extends JFrame implements KeyListener {
         }
 
         //Set Exit Tile
-        levelMap[1][0]  = new Tile(false,false,false,true,false,false,false,false,false);
+        levelMap[1][0]  = new Tile(false,false,false,true,false,false,false,false,false,false);
         //Set Entrance Tile
-        levelMap[8][9] = new Tile(false,false,true,false,false,false,false,false,false);
+        levelMap[8][9] = new Tile(false,false,true,false,false,false,false,false,false,false);
 
         //Create the internal maze layout
         //Structure1:
@@ -414,40 +462,43 @@ public class Game extends JFrame implements KeyListener {
             levelMap[2][i].setEmpty(false);
             levelMap[2][i].setBarrier(true);
         }
-        levelMap[3][2] = new Tile(true,false,false,false,false,false,false,false, false);
+        levelMap[3][2] = new Tile(true,false,false,false,false,false,false,false,false,false);
 
         //Structure2
-        levelMap[5][2] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[6][2] = new Tile(true,false,false,false,false,false,false,false,false);
-        //levelMap[6][3] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[6][4] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[7][2] = new Tile(true,false,false,false,false,false,false,false,false);
-        //levelMap[7][3] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[7][4] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[5][4] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[5][2] = new Tile(true,false,false,false,false,false,false,false,false,false);
+        levelMap[6][2] = new Tile(true,false,false,false,false,false,false,false,false,false);
+        levelMap[6][4] = new Tile(true,false,false,false,false,false,false,false,false,false);
+        levelMap[7][2] = new Tile(true,false,false,false,false,false,false,false,false,false);
+        levelMap[7][4] = new Tile(true,false,false,false,false,false,false,false,false,false);
+        levelMap[5][4] = new Tile(true,false,false,false,false,false,false,false,false,false);
 
         //Structure3
-        levelMap[5][8] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[5][7] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[5][6] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[6][6] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[7][6] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[7][7] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[5][8] = new Tile(true,false,false,false,false,false,false,false,false,false);
+        levelMap[5][7] = new Tile(true,false,false,false,false,false,false,false,false,false);
+        levelMap[5][6] = new Tile(true,false,false,false,false,false,false,false,false,false);
+        levelMap[6][6] = new Tile(true,false,false,false,false,false,false,false,false,false);
+        levelMap[7][6] = new Tile(true,false,false,false,false,false,false,false,false,false);
+        levelMap[7][7] = new Tile(true,false,false,false,false,false,false,false,false,false);
 
         //Structure4
-        levelMap[2][6] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[2][7] = new Tile(true,false,false,false,false,false,false,false,false);
-        levelMap[3][7] = new Tile(true,false,false,false,false,false,false,false,false);
+        levelMap[2][6] = new Tile(true,false,false,false,false,false,false,false,false,false);
+        levelMap[2][7] = new Tile(true,false,false,false,false,false,false,false,false,false);
+        levelMap[3][7] = new Tile(true,false,false,false,false,false,false,false,false,false);
 
 
         //Set locations for cheese
-        levelMap[6][7] = new Tile(false,false,false,false,false,false,true, false,false);
-        levelMap[4][3] = new Tile(false,false,false,false,false,false,true, false,false);
-        //levelMap[2][8] = new Tile(false,false,false,false,false,false,true, false,false);
+        levelMap[6][7] = new Tile(false,false,false,false,false,false,true,false,false,false);
+        levelMap[4][3] = new Tile(false,false,false,false,false,false,true,false,false,false);
+        levelMap[2][8] = new Tile(false,false,false,false,false,false,true,false,false,false);
+
+
+        //Set locations for organic Cheese
+        levelMap[7][2] = new Tile(false,false,false,false,false,false,false,true,false,false);
+        levelMap[1][3] = new Tile(false,false,false,false,false,false,false,true,false,false);
 
         //Set locations for traps
-        levelMap[3][6] = new Tile(false,false,false,false,false,false,false, false,true);
-        levelMap[4][4] = new Tile(false,false,false,false,false,false,false, false,true);
+        levelMap[3][6] = new Tile(false,false,false,false,false,false,false,false,false,true);
+        levelMap[4][4] = new Tile(false,false,false,false,false,false,false,false,false,true);
 
 
     }
@@ -492,9 +543,9 @@ public class Game extends JFrame implements KeyListener {
                         this.repaint();
                     }
 
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false,false);
                     myMouse.setCurrentX(myMouse.getCurrentX() - 1);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false,false);
                     mouseLabel.setLocation(mouseLabel.getX() - 100, mouseLabel.getY());
 
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
@@ -561,9 +612,9 @@ public class Game extends JFrame implements KeyListener {
                     }
 
 
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false,false);
                     myMouse.setCurrentX(myMouse.getCurrentX() + 1);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false,false);
                     mouseLabel.setLocation(mouseLabel.getX() + 100, mouseLabel.getY());
 
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
@@ -622,9 +673,9 @@ public class Game extends JFrame implements KeyListener {
                         
                     }
 
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true,false,false,false,false);
                     myMouse.setCurrentY(myMouse.getCurrentY() - 1);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false,false);
                     mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() - 100);
 
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
@@ -683,9 +734,9 @@ public class Game extends JFrame implements KeyListener {
                     }
 
 
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false, false);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, false, true, false, false,false, false);
                     myMouse.setCurrentY(myMouse.getCurrentY() + 1);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false);
+                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false,false,false,false,false);
                     mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() + 100);
 
                     int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
