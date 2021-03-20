@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Date;
 import javax.swing.Timer;
+import javax.swing.border.Border;
 import java.util.Random;
 
 public class Game extends JFrame implements KeyListener {
@@ -51,13 +52,13 @@ public class Game extends JFrame implements KeyListener {
     JLabel trapLabel1;
     JLabel trapLabel2;
 
-    private JLabel  timeLabel2;
     JLabel timeLabel = new JLabel();
-    //Timer timer = new Timer (1000,null);
+    JButton backButton = new JButton();
 
     private int count = 0;
     Game()
     {
+
         //Create a Mouse
         myMouse = new Mouse();//coords set to 8,8
         //set score
@@ -76,6 +77,7 @@ public class Game extends JFrame implements KeyListener {
          rand2 = getRandomNumber(20, 25);
          rand3 = getRandomNumber(40,50);
          rand4 = getRandomNumber(20,25);
+        // createBackButton();
 
         createMouseLabel();
         // Create multiple cats
@@ -109,11 +111,45 @@ public class Game extends JFrame implements KeyListener {
             }
         };
         Timer timer = new Timer(1000, taskPerformer);
-        timer.setInitialDelay(1);
         timer.start();
     }
 
 
+    public void createBackButton(){
+        backButton.setText("Back");
+        backButton.setBounds(875,40,100,60);
+        backButton.setFont(new Font("Moon",Font.PLAIN, 20));
+        Border border = BorderFactory.createEmptyBorder();
+        backButton.setBorder(border);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                JFrame f = new JFrame("Main");
+                f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                f.setSize(500,500);
+                ImageIcon cheeseRunImageIcon = new ImageIcon("MyApp/Images/cheeserun.png");
+                JLabel cheeseRunLabel = new JLabel(cheeseRunImageIcon);
+                JButton button = new JButton("Play");
+                JPanel panel = new JPanel();
+                panel.add(cheeseRunLabel);
+                panel.add(button);
+                f.getContentPane().add(panel);
+                f.setResizable(false);
+                f.getContentPane().setBackground(Color.WHITE);
+                f.setVisible(true);
+                button.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        f.dispose();
+                        Game myGame = new Game();
+                    }
+                });
+            }
+        });
+        this.add(backButton);
+        this.validate();
+    }
 
     public void createTimerLabel(){
         timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
@@ -164,33 +200,6 @@ public class Game extends JFrame implements KeyListener {
         f.setVisible(true);
     }
 
-    public void losePage() {
-        this.dispose();
-        JFrame f = new JFrame("Lose");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(300,300);
-        ImageIcon cheeseRunImageIcon = new ImageIcon("MyApp/Images/win.png");
-        JLabel cheeseRunLabel = new JLabel(cheeseRunImageIcon);
-        JLabel jLabel1 = new JLabel("Sorry you lose!!!");
-        JLabel jLabel2 = new JLabel("Your score: " + this.score);
-        JButton button = new JButton("Restart the Game");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                f.dispose();
-                Game myGame = new Game();
-            }
-        });
-        JPanel panel = new JPanel();
-        panel.add(cheeseRunLabel);
-        panel.add(jLabel1);
-        panel.add(jLabel2);
-        panel.add(button);
-        f.getContentPane().add(panel);
-        f.setResizable(false);
-        f.getContentPane().setBackground(Color.WHITE);
-        f.setVisible(true);
-    }
 
 
     public boolean scoreBelowZero(){
@@ -198,13 +207,10 @@ public class Game extends JFrame implements KeyListener {
     }
     public void gameOver() {
 
-		/*int test = JOptionPane.showConfirmDialog(null, "Game Over"
-        + "\n" + "Total Score: " + score,
-         "Play Again", JOptionPane.DEFAULT_OPTION);*/
-
         ImageIcon testIcon = new ImageIcon("MyApp/Images/MouseLose.jpg");
         Object[] option = { "Play Again" };
-        int test = JOptionPane.showOptionDialog(null, "Total Score: " + score + "\n" +"Example Time: 69:42:00", "GAME OVER",
+        int test = JOptionPane.showOptionDialog(null, "Total Score: " + score + "\n" +
+                        "Time: " + hours_string+":"+minutes_string+":"+seconds_string  , "GAME OVER",
                                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
                                     testIcon, option, option[0]);
 		if(test == -1){
@@ -878,7 +884,7 @@ public class Game extends JFrame implements KeyListener {
         }
 
         if (inGame == false) {
-            losePage();
+            //losePage();
         }
     }
 
