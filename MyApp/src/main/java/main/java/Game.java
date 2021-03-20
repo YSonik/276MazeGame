@@ -127,6 +127,7 @@ public class Game extends JFrame implements KeyListener {
         f.setVisible(true);
     }
 
+
     public void losePage() {
         this.dispose();
         JFrame f = new JFrame("Lose");
