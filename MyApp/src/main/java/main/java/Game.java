@@ -99,12 +99,10 @@ public class Game extends JFrame implements KeyListener {
         createCatLabel();
 
         // Create mousetraps
-        trap1 = new MouseTrap();
-        trap1.setCurrentX(3);
-        trap1.setCurrentY(6);
-        trap2 = new MouseTrap();
-        trap2.setCurrentX(4);
-        trap2.setCurrentY(4);
+        trap1 = new MouseTrap(3,6);
+        
+        trap2 = new MouseTrap(4,4);
+        
         createTrapLabel();
 
         scoreBelowZero();

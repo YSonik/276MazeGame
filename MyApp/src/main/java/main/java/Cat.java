@@ -18,9 +18,8 @@ import java.nio.file.Paths;
  */
 
 
-public class Cat {
-    private int currentX;
-    private int currentY;
+public class Cat extends Enemies {
+    
     private BufferedImage catImage;
 
     /**
@@ -29,10 +28,9 @@ public class Cat {
      * @param startX first parameter to Cat
      * @param startY second parameter to Cat
      */
-    Cat(int startX, int startY)
+    Cat(int currentX, int currentY)
     {
-        this.currentX = startX;
-        this.currentY = startY;
+        super(currentX, currentY);
         try {
             Path catPath = Paths.get("Images/cat.png").toRealPath();;
             this.catImage = ImageIO.read(new File(catPath.toString()));
@@ -40,21 +38,6 @@ public class Cat {
             e.printStackTrace();
         }
 
-    }
-
-    public int getCurrentX() {
-        return currentX;
-    }
-
-    public int getCurrentY() {
-        return currentY; }
-
-    public void setCurrentX(int currentX) {
-        this.currentX = currentX;
-    }
-
-    public void setCurrentY(int currentY) {
-        this.currentY = currentY;
     }
 
 
@@ -185,7 +168,6 @@ public class Cat {
                     this.setCurrentX(this.getCurrentX() + 1);
                     return 1;
                 }
-
                 else{
                     //to be sure
                     return 0;
