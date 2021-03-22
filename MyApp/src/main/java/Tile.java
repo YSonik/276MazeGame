@@ -1,10 +1,9 @@
-package main.java;
-
 /**
  * <h1>Tile Class<h1/>
  * This class represents one uniform location on the maze grid that can be occupied by a an object.
  * @author Yogesh sonik
  * */
+
 public class Tile
 {
     private boolean isEntrance;
