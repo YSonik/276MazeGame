@@ -97,7 +97,7 @@ public class Tile
     public void setCheese(boolean cheese) {
         isCheese = cheese;
     }
-
+    public void setIsOrganicCheese(boolean orgCheese){isOrganicCheese = orgCheese;}
     public void setMouseTrap(boolean mouseTrap) {
         isMouseTrap = mouseTrap;
     }

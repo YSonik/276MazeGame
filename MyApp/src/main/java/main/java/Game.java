@@ -89,9 +89,9 @@ public class Game extends JFrame implements KeyListener {
 
         //randomizing appearance of Organic Cheese
          rand1 = getRandomNumber(4,10);
-         rand2 = getRandomNumber(20, 25);
-         rand3 = getRandomNumber(40,50);
-         rand4 = getRandomNumber(20,25);
+         rand2 = getRandomNumber(40,45);
+         rand3 = getRandomNumber(55,60);
+         rand4 = getRandomNumber(25,40);
 
         // Create multiple cats
         cat1 = new Cat(4, 1);
@@ -538,10 +538,6 @@ public class Game extends JFrame implements KeyListener {
         levelMap[6][7] = new Tile(false,false,false,false,false,false,true, false,false);
         levelMap[4][3] = new Tile(false,false,false,false,false,false,true, false,false);
 
-        //Set locations for organic Cheese
-        levelMap[7][3] = new Tile(false,false,false,false,false,false,false,true,false);
-        levelMap[1][3] = new Tile(false,false,false,false,false,false,false,true,false);
-
         //Set locations for traps
         levelMap[3][6] = new Tile(false,false,false,false,false,false,false, false,true);
         levelMap[4][4] = new Tile(false,false,false,false,false,false,false, false,true);
@@ -585,19 +581,14 @@ public class Game extends JFrame implements KeyListener {
                     }
                     //If there wasn't cheese check to see if there was organic cheese
                     if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getIsOrganicCheese()) {
+                            score += orgCheese2.value;
+                            scoreText.setText("Score: " + score);
+                            organic2.setVisible(false);
+                            this.repaint();
+                            levelMap[1][3].setIsOrganicCheese(false);
 
-                        //If there was organic cheese, update score and remove the corresponding jLabel
-                        if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getIsOrganicCheese()) {
-                            if(countSteps < rand2 || countSteps > rand3){
-                                score += 0;}
-                            else
-                            { score += orgCheese1.value;
-                                scoreText.setText("Score: " + score);
-                                organic2.setVisible(false);
-                                this.repaint();
-                            }
-                        }
                     }
+
 
                     //If there isn't any type of reward, check if there was a mousetrap
                      if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisMouseTrap() == true) {
@@ -649,25 +640,14 @@ public class Game extends JFrame implements KeyListener {
 
                     //If there wasn't cheese check to see if there was organic cheese
                     if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getIsOrganicCheese()) {
-                        if(countSteps < rand2 || countSteps > rand3){score += 0;}
-                        else{
-                            if (myMouse.getCurrentX() + 1 == orgCheese2.getY()) {
-                                score += orgCheese1.value;
-                                scoreText.setText("Score: " + score);
-                                organic2.setVisible(false);
-                                this.repaint();
-                            }}
-
-                        if(countSteps < rand1 || countSteps > rand4){score +=0;}
-                        else {
-                            if (myMouse.getCurrentX() + 1 == orgCheese1.getY()) {
-                                score += orgCheese1.value;
-                                scoreText.setText("Score: " + score);
-                                organic1.setVisible(false);
-                                this.repaint();
-                            }}
+                            score += orgCheese2.value;
+                            scoreText.setText("Score: " + score);
+                            organic2.setVisible(false);
+                            this.repaint();
+                            levelMap[1][3].setIsOrganicCheese(false);
 
                     }
+
 
                     //If there isn't any type of reward, check if there was a mousetrap
                     if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getisMouseTrap() == true) {
@@ -701,7 +681,6 @@ public class Game extends JFrame implements KeyListener {
 
             else if (direction == "up") {
                 countSteps++;
-
                 //If the new location is not a barrier, perform checks to see whether there was any cheese there.
                 if (!levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getisBarrier()) {
 
@@ -723,33 +702,16 @@ public class Game extends JFrame implements KeyListener {
                             this.repaint();
                         }
                     }
-                    //If there wasn't cheese check to see if there was organic cheese
-                   /* if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getIsOrganicCheese()) {
 
-                        //If there was organic cheese, update score and remove the corresponding jLabel
-                        if(myMouse.getCurrentX() == orgCheese2.getY() && myMouse.getCurrentY()-1 == orgCheese2.getX()) {
-                            score += orgCheese2.value;
-                            scoreText.setText("Score: " + score);
-                            organic2.setVisible(false);
-                            this.repaint();
-                        }
-                        else
-                        {
+                    if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getIsOrganicCheese()) {
+                            orgCheese1.setValue(10);
                             score += orgCheese1.value;
                             scoreText.setText("Score: " + score);
                             organic1.setVisible(false);
                             this.repaint();
-                        }
-                    }*/
+                            levelMap[7][3].setIsOrganicCheese(false);
 
-                    if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getIsOrganicCheese()) {
-                        if (countSteps < rand1 || countSteps > rand4){score+=0;}
-                        else{
-                            score += orgCheese2.value;
-                            scoreText.setText("Score: " + score);
-                            organic1.setVisible(false);
-                            this.repaint();
-                        }}
+                    }
 
 
                     ///If there isn't any type of reward, check if there was a mousetrap
@@ -804,21 +766,13 @@ public class Game extends JFrame implements KeyListener {
 
                     //If there wasn't cheese check to see if there was organic cheese
                     if (levelMap[myMouse.getCurrentY()+1][myMouse.getCurrentX()].getIsOrganicCheese()) {
-
-                        //If there was organic cheese, update score and remove the corresponding jLabel
-                        if(myMouse.getCurrentX() == orgCheese2.getY() && myMouse.getCurrentY()+1 == orgCheese2.getX()) {
-                            score += orgCheese2.value;
-                            scoreText.setText("Score: " + score);
-                            organic2.setVisible(false);
-                            this.repaint();
-                        }
-                        else
-                        {
+                            orgCheese1.setValue(10);
                             score += orgCheese1.value;
                             scoreText.setText("Score: " + score);
                             organic1.setVisible(false);
                             this.repaint();
-                        }
+                            levelMap[7][3].setIsOrganicCheese(false);
+
                     }
 
 
@@ -872,19 +826,28 @@ public class Game extends JFrame implements KeyListener {
         {
             if (countSteps == rand1) {
                 organic1.setVisible(true);
+                levelMap[7][3] = new Tile(false,false,false,false,false,false,false,true,false);
+
             }
 
             if (countSteps == rand2) {
+                //Set locations for organic Cheese
+                levelMap[1][3] = new Tile(false,false,false,false,false,false,false,true,false);
                 organic2.setVisible(true);
-            }
-
-            if (countSteps == rand4) {
-                organic1.setVisible(false);
             }
 
             if (countSteps == rand3) {
                 organic2.setVisible(false);
+                levelMap[1][3].setIsOrganicCheese(false);
+
             }
+
+            if (countSteps == rand4) {
+                organic1.setVisible(false);
+                levelMap[7][3].setIsOrganicCheese(false);
+
+            }
+            //Set locations for organic Cheese
         }
 
     public int getRandomNumber(int min, int max) {
