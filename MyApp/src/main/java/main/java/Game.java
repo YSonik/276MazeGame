@@ -153,47 +153,10 @@ public class Game extends JFrame implements KeyListener {
     }
 
     public void winPage() {
-        this.dispose();
-        JFrame f = new JFrame("Win");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(300,300);
-        ImageIcon cheeseRunImageIcon = new ImageIcon("MyApp/Images/win.png");
-        JLabel cheeseRunLabel = new JLabel(cheeseRunImageIcon);
-        JLabel jLabel1 = new JLabel("Congratulations!!!");
-        JLabel jLabel2 = new JLabel("Your score: " + this.score);
-        JButton button = new JButton("Restart the Game");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                f.dispose();
-                Game myGame = new Game();
-
-            }
-        });
-        JPanel panel = new JPanel();
-        panel.add(cheeseRunLabel);
-        panel.add(jLabel1);
-        panel.add(jLabel2);
-        panel.add(button);
-        f.getContentPane().add(panel);
-        f.setResizable(false);
-        f.getContentPane().setBackground(Color.WHITE);
-        f.setVisible(true);
-    }
-
-
-
-    public boolean scoreBelowZero(){
-        return score < 0;
-    }
-
-
-    public void gameOver() {
-
-        ImageIcon testIcon = new ImageIcon("MyApp/Images/MouseLose.jpg");
+        ImageIcon testIcon = new ImageIcon("Images/win.png");
         Object[] option = { "Play Again" };
         int test = JOptionPane.showOptionDialog(null, "Total Score: " + score + "\n" +
-                        "Time: " + hours_string+":"+minutes_string+":"+seconds_string  , "GAME OVER",
+                        "Time: " + hours_string+":"+minutes_string+":"+seconds_string  , " Win",
                                     JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
                                     testIcon, option, option[0]);
 		if(test == -1){
@@ -201,7 +164,27 @@ public class Game extends JFrame implements KeyListener {
         }
         else{
             this.setVisible(false);
-            Game game = new Game();
+            new Game();
+        }
+    }
+
+    public boolean scoreBelowZero(){
+        return score < 0;
+    }
+
+    public void gameOver() {
+        ImageIcon testIcon = new ImageIcon("Images/MouseLose.jpg");
+        Object[] option = { "Play Again" };
+        int test = JOptionPane.showOptionDialog(null, "Total Score: " + score + "\n" +
+                        "Time: " + hours_string+":"+minutes_string+":"+seconds_string  , " GAME OVER",
+                                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                                    testIcon, option, option[0]);
+		if(test == -1){
+            System.exit(ABORT);
+        }
+        else{
+            this.setVisible(false);
+            new Game();
         }
 	}
 
