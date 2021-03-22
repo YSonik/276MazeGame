@@ -13,17 +13,13 @@ import java.nio.file.Paths;
  * @author Scott Luu  
  *
  */
-public class MouseTrap {
+public class MouseTrap extends Enemies {
     private int penalty;
     private BufferedImage MTImage;
-    protected int currentX;
-    protected int currentY;
-
     
-    MouseTrap(){
+    MouseTrap(int currentX, int currentY){
+        super(currentX,currentY);
         this.penalty = 6; 
-        this.currentX = getCurrentX();
-        this.currentY = getCurrentY();
         // Get image for the traps
         try {
             Path MTPath = Paths.get("Images/mousetrap.jpg").toRealPath();;
@@ -31,21 +27,6 @@ public class MouseTrap {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public int getCurrentX() {
-        return currentX;
-    }
-
-    public int getCurrentY() {
-        return currentY; }
-
-    public void setCurrentX(int currentX) {
-        this.currentX = currentX;
-    }
-
-    public void setCurrentY(int currentY) {
-        this.currentY = currentY;
     }
     
     //getPenalty method used to obtain the penalty value
