@@ -1,18 +1,24 @@
-package main.java;
-
 import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+/**
+ * <h1>Mouse Class</h1>
+ * This class represents the movable mouse character
+ * @author Yogesh Sonik
+ * */
 public class Mouse {
     private int currentX;
     private int currentY;
     private int cheeseEaten;
     private BufferedImage mouseImage;
 
+    /**
+     * This is the constructor for the Mouse class which sets the starting position of the mouse, sets cheese eaten to zero and imports image for the jLabel.
+     * @author Yogesh Sonik
+     * */
     Mouse()
     {
         this.currentX = 8;
