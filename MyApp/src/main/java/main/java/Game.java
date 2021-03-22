@@ -13,7 +13,7 @@ import java.util.Random;
  * This is the aggregate class which brings together all of the various pieces of CheeseRun. It is here that all of the objects are instantiated through various functions and
  * where their visual representations are created and manipulated.
  *
- *  @Author Yogesh Sonik, Tian Yang Zhou, Scott Luu, and Canh Nhat Minh Le
+ *  @author Yogesh Sonik, Tian Yang Zhou, Scott Luu, and Canh Nhat Minh Le
  * */
 public class Game extends JFrame implements KeyListener {
 
@@ -411,7 +411,7 @@ public class Game extends JFrame implements KeyListener {
                     tempLabel.setBackground(Color.red);
                     tempLabel.setOpaque(true);
                 }
-                else if(levelMap[i][j].getisReward() == true)
+                else if(levelMap[i][j].getisCheese() == true)
                 {
                     tempLabel = new JLabel();
                     tempLabel.setBounds(x,y,100,100);
@@ -463,7 +463,7 @@ public class Game extends JFrame implements KeyListener {
         {
             for(int j = 0; j< 10; j++)
             {
-                levelMap[i][j] = new Tile(false,false,false,false,false, true,false,false,false);
+                levelMap[i][j] = new Tile(false,false,false,false, true,false,false,false);
             }
         }
 
