@@ -13,7 +13,7 @@ import java.util.Random;
  * This is the aggregate class which brings together all of the various pieces of CheeseRun. It is here that all of the objects are instantiated through various functions and
  * where their visual representations are created and manipulated.
  *
- *  @Auhtor Yogesh Sonik, Tian Yang Zhou, Scott Luu, and Canh Nhat Minh Le
+ *  @Author Yogesh Sonik, Tian Yang Zhou, Scott Luu, and Canh Nhat Minh Le
  * */
 public class Game extends JFrame implements KeyListener {
 
@@ -64,7 +64,7 @@ public class Game extends JFrame implements KeyListener {
      * This is the constructor for the game class which instantiates the various objects required for the game such as: mouse, cat, mousetrap, and cheese.
      * It also creates jLables for all objects by calling member functions which have been delegated responsibility for a specific object.
      * Additionally, this function initializes all private data members that belong to the class.
-     * @Author Yogesh Sonik
+     * @author Yogesh Sonik
      * */
 
     Game()
@@ -304,7 +304,7 @@ public class Game extends JFrame implements KeyListener {
 
     /**
      * This is the void function called by the Game constructor to create new jLabels for all cheese object that need to be displayed on the map.
-     * @Author Yogesh Sonik
+     * @author Yogesh Sonik
      * */
     public void createCheeseLabel()
     {
@@ -335,7 +335,7 @@ public class Game extends JFrame implements KeyListener {
 
     /**
      * This is the void function, which is called by the Game constructor, creates a jLabel for the mouse and draws it at the correct location.
-     * @Author Yogesh Sonik
+     * @author Yogesh Sonik
      * */
     public void createMouseLabel()
     {
@@ -379,7 +379,7 @@ public class Game extends JFrame implements KeyListener {
 
    /**
     * This is the void function called by the Game constructor to create the jFrame that corresponds to the game page of CheeseRun where the maze will be displayed.
-    * @Author Yogesh Sonik
+    * @author Yogesh Sonik
     * */
     public void createFrame()
     {
@@ -395,7 +395,7 @@ public class Game extends JFrame implements KeyListener {
     /**
      * This is the void class called by the Game constructor to traverse the Tile array called levelMap and place the jLabels
      * that correspond to static objects like barriers, entrances and exits onto the jFrame at the corresponding coordinates.
-     * @Author Yogesh Sonik
+     * @author Yogesh Sonik
      * */
     private void createGameMap()
     {
@@ -455,7 +455,7 @@ public class Game extends JFrame implements KeyListener {
 
     /**
      * This is the void class called by the Game constructor which creates a 2D array of tiles and encodes all indices to the objects that should be placed at that location in the maze.
-     * @Author Yogesh Sonik
+     * @author Yogesh Sonik
      * */
     private void createTileMap()
     {
@@ -539,7 +539,7 @@ public class Game extends JFrame implements KeyListener {
         //Set locations for cheese
         levelMap[6][7] = new Tile(false,false,false,false,false,false,true, false,false);
         levelMap[4][3] = new Tile(false,false,false,false,false,false,true, false,false);
-        //levelMap[2][8] = new Tile(false,false,false,false,false,false,true, false,false);
+
 
         //Set locations for traps
         levelMap[3][6] = new Tile(false,false,false,false,false,false,false, false,true);
@@ -551,9 +551,8 @@ public class Game extends JFrame implements KeyListener {
     /**
      * This is the void function called by the actionListener method called "KeyPressed" which recieves which direction to move the mouse label as a string and then preforms various checks to validate the movement
      * and then updates the map with regards to any changes that may have occurred.
-     * @Author Yogesh Sonik
+     * @author Yogesh Sonik
      * @param direction the direction in which the mouse label should be moved in response to the key input detected by the KeyPressed method.
-     * @return void
      * */
     public void moveMouse(String direction) {
         setOrgCheeseAp();
@@ -564,7 +563,7 @@ public class Game extends JFrame implements KeyListener {
                 //Check to see if the new location is a barrier
                 if (!levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisBarrier()) {
 
-                    //If the new location is not a barrier, perform checks to see whether there was any cheese there.
+                    //If the new location is not a barrier, perform check to see whether there was any cheese there.
                     if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisCheese()) {
 
                         //if the location had cheese, update score
@@ -584,24 +583,26 @@ public class Game extends JFrame implements KeyListener {
                         }
                     }
                     //If there wasn't cheese check to see if there was organic cheese
-                    else if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getIsOrganicCheese()) {
+                    if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getIsOrganicCheese()) {
 
                         //If there was organic cheese, update score and remove the corresponding jLabel
-                        if(countSteps < rand2 || countSteps > rand3)
-                        {
-                            score += 0;
+                        if(myMouse.getCurrentX()-1 == orgCheese2.getY() && myMouse.getCurrentY() == orgCheese2.getX()) {
+                            score += orgCheese2.value;
+                            scoreText.setText("Score: " + score);
+                            organic2.setVisible(false);
+                            this.repaint();
                         }
                         else
                         {
                             score += orgCheese1.value;
                             scoreText.setText("Score: " + score);
-                            organic2.setVisible(false);
+                            organic1.setVisible(false);
                             this.repaint();
                         }
                     }
 
                     //If there isn't any type of reward, check if there was a mousetrap
-                    else if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisMouseTrap() == true) {
+                     if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisMouseTrap() == true) {
 
                         //Subtract penalty from score and check if the score is negative
                         score -= trap1.getPenalty();
@@ -649,34 +650,26 @@ public class Game extends JFrame implements KeyListener {
                     }
 
                     //If there wasn't cheese check to see if there was organic cheese
-                    else if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getIsOrganicCheese()) {
+                    if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getIsOrganicCheese()) {
 
                         //If there was organic cheese, update score and remove the corresponding jLabel
-                        if (countSteps < rand2 || countSteps > rand3) {
-                            score += 0;
-                        } else {
-                            if (myMouse.getCurrentX() + 1 == orgCheese2.getY() && myMouse.getCurrentY() == orgCheese2.getX()) {
-                                score += orgCheese1.value;
-                                scoreText.setText("Score: " + score);
-                                organic2.setVisible(false);
-                                this.repaint();
-                            }
+                        if(myMouse.getCurrentX()+1 == orgCheese2.getY() && myMouse.getCurrentY() == orgCheese2.getX()) {
+                            score += orgCheese2.value;
+                            scoreText.setText("Score: " + score);
+                            organic2.setVisible(false);
+                            this.repaint();
                         }
-
-                        if (countSteps < rand1 || countSteps > rand4) {
-                            score += 0;
-                        } else {
-                            if (myMouse.getCurrentX() + 1 == orgCheese1.getY() && myMouse.getCurrentY() == orgCheese1.getX()) {
-                                score += orgCheese1.value;
-                                scoreText.setText("Score: " + score);
-                                organic1.setVisible(false);
-                                this.repaint();
-                            }
+                        else
+                        {
+                            score += orgCheese1.value;
+                            scoreText.setText("Score: " + score);
+                            organic1.setVisible(false);
+                            this.repaint();
                         }
                     }
 
                     //If there isn't any type of reward, check if there was a mousetrap
-                    else if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getisMouseTrap() == true) {
+                    if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getisMouseTrap() == true) {
 
                         //Subtract penalty from score and check if the score is negative
                         score -= trap1.getPenalty();
@@ -721,20 +714,27 @@ public class Game extends JFrame implements KeyListener {
                         this.repaint();
 
                         //Remove cheese label for the cheese that the mouse ate
-                        if (myMouse.getCurrentY() - 1 == cheese2.getX() && myMouse.getCurrentX() == cheese2.getY()) {
+                        if (myMouse.getCurrentY() - 1 == cheese1.getX() && myMouse.getCurrentX() == cheese1.getY()) {
+                            Cheese1.setVisible(false);
+                            this.repaint();
+                        } else {
                             Cheese2.setVisible(false);
                             this.repaint();
                         }
                     }
                     //If there wasn't cheese check to see if there was organic cheese
-                    else if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getIsOrganicCheese()) {
+                    if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getIsOrganicCheese()) {
 
                         //If there was organic cheese, update score and remove the corresponding jLabel
-                        if (countSteps < rand1 || countSteps > rand4) {
-                            score += 0;
-                        }
-                        else {
+                        if(myMouse.getCurrentX() == orgCheese2.getY() && myMouse.getCurrentY()-1 == orgCheese2.getX()) {
                             score += orgCheese2.value;
+                            scoreText.setText("Score: " + score);
+                            organic2.setVisible(false);
+                            this.repaint();
+                        }
+                        else
+                        {
+                            score += orgCheese1.value;
                             scoreText.setText("Score: " + score);
                             organic1.setVisible(false);
                             this.repaint();
@@ -742,7 +742,7 @@ public class Game extends JFrame implements KeyListener {
                     }
 
                     ///If there isn't any type of reward, check if there was a mousetrap
-                    else if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getisMouseTrap() == true) {
+                    if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getisMouseTrap() == true) {
 
                         //Subtract penalty from score and check if the score is negative
                         score -= trap1.getPenalty();
@@ -791,8 +791,28 @@ public class Game extends JFrame implements KeyListener {
                         }
                     }
 
+                    //If there wasn't cheese check to see if there was organic cheese
+                    if (levelMap[myMouse.getCurrentY()+1][myMouse.getCurrentX()].getIsOrganicCheese()) {
+
+                        //If there was organic cheese, update score and remove the corresponding jLabel
+                        if(myMouse.getCurrentX() == orgCheese2.getY() && myMouse.getCurrentY()+1 == orgCheese2.getX()) {
+                            score += orgCheese2.value;
+                            scoreText.setText("Score: " + score);
+                            organic2.setVisible(false);
+                            this.repaint();
+                        }
+                        else
+                        {
+                            score += orgCheese1.value;
+                            scoreText.setText("Score: " + score);
+                            organic1.setVisible(false);
+                            this.repaint();
+                        }
+                    }
+
+
                     //Mouse position update plus trap check
-                    else if (levelMap[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisMouseTrap() == true) {
+                    if (levelMap[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisMouseTrap() == true) {
                         score -= trap2.getPenalty();
                         if (scoreBelowZero()) {
                             inGame = false;
