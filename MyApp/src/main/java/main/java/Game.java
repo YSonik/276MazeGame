@@ -623,8 +623,6 @@ public class Game extends JFrame implements KeyListener {
 
             } else if (direction == "right") {
                 countSteps++;
-                System.out.println(countSteps);
-
                 if (!levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getisBarrier()) {
 
                     //Mouse position update plus cheese check
