@@ -26,7 +26,6 @@ public class Main extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 f.dispose();
                 Game myGame = new Game();
-                //myGame.createTimerLabel();
             }
         });
     }

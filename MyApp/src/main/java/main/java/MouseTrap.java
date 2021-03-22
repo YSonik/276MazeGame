@@ -20,8 +20,6 @@ public class MouseTrap {
     private BufferedImage MTImage;
     protected int currentX;
     protected int currentY;
-    protected int EnemyHeight = 25;
-    protected int EnemyWidth = 25;
 
     
     MouseTrap(){

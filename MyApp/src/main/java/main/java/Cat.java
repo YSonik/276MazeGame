@@ -21,8 +21,6 @@ import java.nio.file.Paths;
 public class Cat {
     private int currentX;
     private int currentY;
-    private final int catHeight = 25;
-    private final int catWidth = 25;
     private BufferedImage catImage;
 
     /**

@@ -23,14 +23,13 @@ public class Game extends JFrame implements KeyListener {
 
     private Cheese cheese1;
     private Cheese cheese2;
-    private Cheese cheese3;
     private OrganicCheese orgCheese1,orgCheese2;
 
     private JLabel Cheese1;
     private JLabel Cheese2;
-    private JLabel Cheese3;
     private JLabel mouseLabel;
     private JLabel organic1,organic2;
+
     private int countSteps = 0;
     private int rand1,rand2,rand3,rand4;
     int elapsedTime = 0;
@@ -53,20 +52,21 @@ public class Game extends JFrame implements KeyListener {
     JLabel trapLabel2;
 
     JLabel timeLabel = new JLabel();
-    JButton backButton = new JButton();
 
     private int count = 0;
+
     Game()
     {
 
         //Create a Mouse
         myMouse = new Mouse();//coords set to 8,8
+
         //set score
         int score = 0;
+
         //Create Cheese
         cheese1 = new Cheese(6, 7, 5);
         cheese2 = new Cheese(4, 3, 5);
-        cheese3 = new Cheese(2, 8, 5);
         createCheeseLabel();
         orgCheese1 = new OrganicCheese(7,2,10);
         orgCheese2 = new OrganicCheese(1,3,10);
@@ -77,9 +77,9 @@ public class Game extends JFrame implements KeyListener {
          rand2 = getRandomNumber(20, 25);
          rand3 = getRandomNumber(40,50);
          rand4 = getRandomNumber(20,25);
-        // createBackButton();
 
         createMouseLabel();
+
         // Create multiple cats
         cat1 = new Cat(4, 1);
         cat2 = new Cat(8, 4);
@@ -99,10 +99,13 @@ public class Game extends JFrame implements KeyListener {
         createFrame();
         createGameMap();
         createScoreText();
+
         if (count == 0){scoreText.setText("Score: " + 0);}
+
         inGame = true;
         winGame = false;
         createTimerLabel();
+
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 if(inGame) {
@@ -115,41 +118,6 @@ public class Game extends JFrame implements KeyListener {
     }
 
 
-    public void createBackButton(){
-        backButton.setText("Back");
-        backButton.setBounds(875,40,100,60);
-        backButton.setFont(new Font("Moon",Font.PLAIN, 20));
-        Border border = BorderFactory.createEmptyBorder();
-        backButton.setBorder(border);
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                JFrame f = new JFrame("Main");
-                f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                f.setSize(500,500);
-                ImageIcon cheeseRunImageIcon = new ImageIcon("MyApp/Images/cheeserun.png");
-                JLabel cheeseRunLabel = new JLabel(cheeseRunImageIcon);
-                JButton button = new JButton("Play");
-                JPanel panel = new JPanel();
-                panel.add(cheeseRunLabel);
-                panel.add(button);
-                f.getContentPane().add(panel);
-                f.setResizable(false);
-                f.getContentPane().setBackground(Color.WHITE);
-                f.setVisible(true);
-                button.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        f.dispose();
-                        Game myGame = new Game();
-                    }
-                });
-            }
-        });
-        this.add(backButton);
-        this.validate();
-    }
 
     public void createTimerLabel(){
         timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
@@ -205,6 +173,8 @@ public class Game extends JFrame implements KeyListener {
     public boolean scoreBelowZero(){
         return score < 0;
     }
+
+
     public void gameOver() {
 
         ImageIcon testIcon = new ImageIcon("MyApp/Images/MouseLose.jpg");
@@ -343,18 +313,6 @@ public class Game extends JFrame implements KeyListener {
         ImageIcon icon2 = new ImageIcon(cheeseImg2);
         Cheese2.setIcon(icon2);
         this.add(Cheese2);
-        this.validate();
-
-        Cheese3 = new JLabel("Cheese3");
-        Cheese3.setBounds(cheese3.y*100,(cheese3.x+1)*100,100,100);
-        Cheese3.setBackground(Color.white);
-        Cheese3.setOpaque(true);
-        Image cheeseImg3 = cheese3.getCheeseImg().getScaledInstance(Cheese3.getWidth(), Cheese3.getHeight(),
-                Image.SCALE_SMOOTH);
-        ImageIcon icon3 = new ImageIcon(cheeseImg3);
-        Cheese3.setIcon(icon3);
-
-        this.add(Cheese3);
         this.validate();
     }
 
@@ -545,7 +503,7 @@ public class Game extends JFrame implements KeyListener {
         //Set locations for cheese
         levelMap[6][7] = new Tile(false,false,false,false,false,false,true, false,false,false);
         levelMap[4][3] = new Tile(false,false,false,false,false,false,true, false,false,false);
-        levelMap[2][8] = new Tile(false,false,false,false,false,false,true, false,false,false );
+
 
         //Set locations for organic Cheese
         levelMap[7][2] = new Tile(false,false,false,false,false,false,false,true,false,false);
@@ -595,7 +553,6 @@ public class Game extends JFrame implements KeyListener {
                         score -= trap1.getPenalty();
                         scoreText.setText("Score: " + score);
                         if(scoreBelowZero()){
-                            //losePage();
                             inGame = false;
                             gameOver();
                         }
@@ -617,24 +574,6 @@ public class Game extends JFrame implements KeyListener {
                     if (Catscollide()){
                         gameOver();
                     }
-                    /*if(catLabel1.getX() == mouseLabel.getX())
-                    {
-                        if(catLabel1.getY() == mouseLabel.getY())
-                        {
-                            //gameOver();
-                            losePage();
-                        }
-                    }
-                    if(catLabel2.getX() == mouseLabel.getX())
-                    {
-                        if(catLabel2.getY() == mouseLabel.getY())
-                        {
-                            //gameOver();
-                            losePage();
-
-                        }
-                    }*/
-
 
                 }
 
@@ -710,20 +649,6 @@ public class Game extends JFrame implements KeyListener {
                         gameOver();
                         inGame = false;
                     }
-                    /*if(catLabel1.getX() == mouseLabel.getX())
-                    {
-                        if(catLabel1.getY() == mouseLabel.getY())
-                        {
-                            gameOver();
-                        }
-                    }
-                    if(catLabel2.getX() == mouseLabel.getX())
-                    {
-                        if(catLabel2.getY() == mouseLabel.getY())
-                        {
-                            gameOver();
-                        }
-                    }*/
                 }
             }
 
@@ -737,18 +662,12 @@ public class Game extends JFrame implements KeyListener {
                         //Remove Labels
                         count++;
                         scoreText.setText("Score: " + score);
-                        //Cheese3.setVisible(false);
                         this.repaint();
                         scoreText.setText("Cheese Eaten: " + score);
                         if (myMouse.getCurrentY() - 1 == cheese2.getX()) {
                             Cheese2.setVisible(false);
                             this.repaint();
-                        } else {
-//                            Cheese3.setVisible(false);
-                            this.repaint();
                         }
-//                        Cheese3.setVisible(false);
-
                     }
 
                     if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getIsOrganicCheese()) {
@@ -770,8 +689,8 @@ public class Game extends JFrame implements KeyListener {
                             inGame = false;
                             gameOver();
                         }
-                        //Remove Labels
 
+                        //Remove Labels
                         trapLabel1.setVisible(false);
                         this.repaint();
 
@@ -793,21 +712,6 @@ public class Game extends JFrame implements KeyListener {
                         gameOver();
                     }
 
-                    /*if(catLabel1.getX() == mouseLabel.getX())
-                    {
-                        if(catLabel1.getY() == mouseLabel.getY())
-                        {
-                            gameOver();
-                        }
-                    }
-                    if(catLabel2.getX() == mouseLabel.getX())
-                    {
-                        if(catLabel2.getY() == mouseLabel.getY())
-                        {
-                            gameOver();
-                        }
-                    }*/
-
                 }
 
             } else if (direction == "down") {
@@ -823,9 +727,6 @@ public class Game extends JFrame implements KeyListener {
                         if (myMouse.getCurrentY() + 1 == cheese2.getX()) {
                             Cheese2.setVisible(false);
                             this.repaint();
-                        } else {
-//                            Cheese3.setVisible(false);
-                            this.repaint();
                         }
                     }
 
@@ -835,11 +736,9 @@ public class Game extends JFrame implements KeyListener {
                         if (scoreBelowZero()) {
                             inGame = false;
                             gameOver();
-                            //losePage();
                         }
                         //Remove Labels
                         trapLabel2.setVisible(false);
-//                        Cheese3.setVisible(false);
                         this.repaint();
                     }
 
@@ -858,17 +757,6 @@ public class Game extends JFrame implements KeyListener {
                         inGame = false;
                         gameOver();
                     }
-                    /*if((catLabel1.getX() == mouseLabel.getX()) && (catLabel1.getY() == mouseLabel.getY()))
-                    {
-                        gameOver();
-                    }
-                    if(catLabel2.getX() == mouseLabel.getX())
-                    {
-                        if(catLabel2.getY() == mouseLabel.getY())
-                        {
-                            gameOver();
-                        }
-                    }*/
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -881,10 +769,6 @@ public class Game extends JFrame implements KeyListener {
 
         if(winGame == true) {
             winPage();
-        }
-
-        if (inGame == false) {
-            //losePage();
         }
     }
 
@@ -912,7 +796,7 @@ public class Game extends JFrame implements KeyListener {
         return random.nextInt(max - min) + min;
     }
 
-        @Override
+    @Override
     public void keyTyped(KeyEvent e) {
     }
 

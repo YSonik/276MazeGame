@@ -2,8 +2,6 @@ package main.java;
 
 public class Tile
 {
-    private final int tileHeight = 100;
-    private final int tileWidth = 100;
     private boolean isEntrance;
     private boolean isExit;
     private boolean isBarrier;
