@@ -10,11 +10,10 @@ public class Tile
     private boolean isEmpty;
     private boolean isCheese;
     private boolean isOrganicCheese;
-    private boolean isCat;
     private boolean isMouseTrap;
 
     Tile(boolean hasBarrier, boolean hasReward, boolean isEntrance, boolean isExit, boolean isCharacter, boolean isEmpty,
-         boolean isCheese, boolean isOrganicCheese, boolean isCat, boolean isMouseTrap)
+         boolean isCheese, boolean isOrganicCheese, boolean isMouseTrap)
     {
         this.isBarrier = hasBarrier;
         this.isReward = hasReward;
@@ -24,7 +23,6 @@ public class Tile
         this.isEmpty = isEmpty;
         this.isCheese = isCheese;
         this.isOrganicCheese = isOrganicCheese;
-        this.isCat = isCat;
         this.isMouseTrap = isMouseTrap;
     }
 
@@ -55,9 +53,6 @@ public class Tile
         return this.isExit;
     }
 
-    public boolean getisCat() {
-        return isCat;
-    }
 
     public boolean getisMouseTrap() {
         return isMouseTrap;
@@ -97,10 +92,6 @@ public class Tile
 
     public void setExit(boolean exit) {
         this.isExit = exit;
-    }
-
-    public void setCat(boolean cat) {
-        isCat = cat;
     }
 
     public void setCheese(boolean cheese) {
