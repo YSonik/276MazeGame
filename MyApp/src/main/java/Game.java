@@ -822,13 +822,13 @@ public class Game extends JFrame implements KeyListener {
         {
             if (countSteps == rand1) {
                 organic1.setVisible(true);
-                levelMap[7][3] = new Tile(false,false,false,false,false,false,false,true,false);
+                levelMap[7][3] = new Tile(false,false,false,false,false,false,true,false);
 
             }
 
             if (countSteps == rand2) {
                 //Set locations for organic Cheese
-                levelMap[1][3] = new Tile(false,false,false,false,false,false,false,true,false);
+                levelMap[1][3] = new Tile(false,false,false,false,false,false,true,false);
                 organic2.setVisible(true);
             }
 
