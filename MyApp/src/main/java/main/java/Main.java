@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class Main extends JFrame{
     public static void main(String[] args) {
         //Game game = new Game();
-        JFrame f = new JFrame("Main");
+        JFrame f = new JFrame("CheeseRun");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(500,500);
         ImageIcon cheeseRunImageIcon = new ImageIcon("MyApp/Images/cheeserun.png");
