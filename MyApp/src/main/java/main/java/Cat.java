@@ -25,8 +25,8 @@ public class Cat extends Enemies {
     /**
      * Constructor for the program which contains X and Y coordinates of the moving enemies
      * and catImage
-     * @param startX first parameter to Cat
-     * @param startY second parameter to Cat
+     * @param currentX first parameter to Cat
+     * @param currentY second parameter to Cat
      */
     Cat(int currentX, int currentY)
     {
