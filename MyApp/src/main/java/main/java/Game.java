@@ -571,7 +571,6 @@ public class Game extends JFrame implements KeyListener {
                         //if the location had cheese, update score
                         this.myMouse.setCheeseEaten(this.myMouse.getCheeseEaten() + 1);
                         score += cheese1.value;
-                        System.out.println(score);
                         scoreText.setText("Score: " + score);
                         count++;
 
