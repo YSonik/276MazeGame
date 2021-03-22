@@ -415,7 +415,7 @@ public class Game extends JFrame implements KeyListener {
                 {
                     tempLabel = new JLabel();
                     tempLabel.setBounds(x,y,100,100);
-                    tempLabel.setBackground(Color.yellow);
+                    tempLabel.setBackground(Color.white);
                     tempLabel.setOpaque(true);
 
                 }
