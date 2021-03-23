@@ -126,8 +126,10 @@ public class Game extends JFrame implements KeyListener {
         timer.start();
     }
 
-
-
+    /**
+     * This is the void function, it will draw the timer label
+     * @author Tianyang Zhou
+     * */
     public void createTimerLabel(){
         timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
         timeLabel.setBounds(200,40,400,70 );
@@ -136,6 +138,10 @@ public class Game extends JFrame implements KeyListener {
         this.validate();
     }
 
+    /**
+     * This is the void function, it will update the timer label
+     * @author Tianyang Zhou
+     * */
     public void updateTimerLabel(){
         elapsedTime=elapsedTime+1000;
         hours = (elapsedTime/3600000);
@@ -148,6 +154,10 @@ public class Game extends JFrame implements KeyListener {
 
     }
 
+    /**
+     * This is the void function, it will draw win page
+     * @author Tianyang Zhou
+     * */
     public void winPage() {
         ImageIcon testIcon = new ImageIcon("Images/win.png");
         Object[] option = { "Play Again" };
@@ -164,10 +174,18 @@ public class Game extends JFrame implements KeyListener {
         }
     }
 
+    /**
+     * This is the boolean function, it will check score below zero or not
+     * @author Tianyang Zhou
+     * */
     public boolean scoreBelowZero(){
         return score < 0;
     }
 
+    /**
+     * This is the void function, it will set gameover
+     * @author Tianyang Zhou
+     * */
     public void gameOver() {
         ImageIcon testIcon = new ImageIcon("Images/MouseLose.jpg");
         Object[] option = { "Play Again" };
@@ -184,12 +202,20 @@ public class Game extends JFrame implements KeyListener {
         }
 	}
 
+    /**
+     * This is the boolean function, it will check cat's collision
+     * @author Tianyang Zhou
+     * */
     public boolean Catscollide(){
         return ((catLabel1.getX() == mouseLabel.getX() && catLabel1.getY() == mouseLabel.getY()) ||
                 (catLabel2.getX() == mouseLabel.getX() && catLabel2.getY() == mouseLabel.getY()));
 
     }
 
+    /**
+     * This is the void function, it will create and draw cat label
+     * @author Tianyang Zhou
+     * */
     public void catMoveDraw(int direction1, int direction2) {
         //Cat Position update
         switch (direction1) {
@@ -243,6 +269,10 @@ public class Game extends JFrame implements KeyListener {
 
     }
 
+    /**
+     * This is the void function, it will create mouse trap label
+     * @author Tianyang Zhou
+     * */
     public void createTrapLabel()
     {
         trapLabel1 = new JLabel("Trap1");
@@ -266,6 +296,10 @@ public class Game extends JFrame implements KeyListener {
         this.validate();
     }
 
+    /**
+     * This is the void function, it will set up score text
+     * @author Tianyang Zhou
+     * */
     public void createScoreText()
     {
        scoreText = new JLabel();
@@ -275,6 +309,10 @@ public class Game extends JFrame implements KeyListener {
        this.validate();
     }
 
+    /**
+     * This is the void function, it will create organic cheese label
+     * @author Tianyang Zhou
+     * */
     public void createOrganicCheeseLabel(){
         organic1 = new JLabel();
         organic1.setBounds(orgCheese1.y*100, (orgCheese1.x+1)*100, 100, 100);
@@ -347,7 +385,10 @@ public class Game extends JFrame implements KeyListener {
         this.validate();
     }
 
-
+    /**
+     * This is the void function, it will create cat label
+     * @author Tianyang Zhou
+     * */
     public void createCatLabel()
     {
         catLabel1 = new JLabel();
@@ -818,42 +859,58 @@ public class Game extends JFrame implements KeyListener {
         }
     }
 
-        public void setOrgCheeseAp ()
-        {
-            if (countSteps == rand1) {
-                organic1.setVisible(true);
-                levelMap[7][3] = new Tile(false,false,false,false,false,false,true,false);
+    /**
+     * This is the void function, it will draw organic cheese
+     * @author Tianyang Zhou
+     * */
+    public void setOrgCheeseAp ()
+    {
+        if (countSteps == rand1) {
+            organic1.setVisible(true);
+            levelMap[7][3] = new Tile(false,false,false,false,false,false,true,false);
 
-            }
-
-            if (countSteps == rand2) {
-                //Set locations for organic Cheese
-                levelMap[1][3] = new Tile(false,false,false,false,false,false,true,false);
-                organic2.setVisible(true);
-            }
-
-            if (countSteps == rand3) {
-                organic2.setVisible(false);
-                levelMap[1][3].setIsOrganicCheese(false);
-
-            }
-
-            if (countSteps == rand4) {
-                organic1.setVisible(false);
-                levelMap[7][3].setIsOrganicCheese(false);
-
-            }
         }
 
+        if (countSteps == rand2) {
+            //Set locations for organic Cheese
+            levelMap[1][3] = new Tile(false,false,false,false,false,false,true,false);
+            organic2.setVisible(true);
+        }
+
+        if (countSteps == rand3) {
+            organic2.setVisible(false);
+            levelMap[1][3].setIsOrganicCheese(false);
+
+        }
+
+        if (countSteps == rand4) {
+            organic1.setVisible(false);
+            levelMap[7][3].setIsOrganicCheese(false);
+
+        }
+    }
+
+    /**
+     * This is the integer function, it will return random number
+     * @author Tianyang Zhou
+     * */
     public int getRandomNumber(int min, int max) {
         Random random = new Random();
         return random.nextInt(max - min) + min;
     }
 
+    /**
+     * override method
+     * @author Tianyang Zhou
+     * */
     @Override
     public void keyTyped(KeyEvent e) {
     }
 
+    /**
+     * override method
+     * @author Tianyang Zhou
+     * */
     @Override
     public void keyReleased(KeyEvent e) {
     }
