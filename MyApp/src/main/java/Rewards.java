@@ -1,8 +1,24 @@
+
+/**
+ * <h1> Rewards </h1>
+ * The Rewards program sets and gets the coordinates and the values of
+ * two types of rewards (Cheese and organic cheese)
+ * <p>
+ * @author Canh Nhat Minh Le
+ *
+ */
 public class Rewards {
     protected int x;
     protected int y;
     protected int value;
 
+    /**
+     * This is the constructor for the Rewards class which takes in three integer parameter
+     * @author Canh Nhat Minh Le
+     * @param x indicating the x-coordinate of the reward.
+     * @param y indicating the y-coordinate of the reward.
+     * @param value indicating the score value of the reward.
+     * */
     Rewards(int x, int y, int value)
     {
         this.x = x;

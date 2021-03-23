@@ -102,7 +102,6 @@ public class Game extends JFrame implements KeyListener {
         trap2 = new MouseTrap(4,4);
         
         createTrapLabel();
-
         scoreBelowZero();
         createTileMap();
         createFrame();
@@ -117,18 +116,20 @@ public class Game extends JFrame implements KeyListener {
 
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
+                //If inGame == true, continue to update label
                 if(inGame) {
                     updateTimerLabel();
                 }
             }
         };
+        //Execute taskPerformer every 1000ms, which is 1s
         Timer timer = new Timer(1000, taskPerformer);
         timer.start();
     }
 
     /**
-     * This is the void function, it will draw the timer label
-     * @author Tianyang Zhou
+     * This is void function draws the timer label
+     * @author Canh Nhat Minh Le
      * */
     public void createTimerLabel(){
         timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
@@ -139,8 +140,9 @@ public class Game extends JFrame implements KeyListener {
     }
 
     /**
-     * This is the void function, it will update the timer label
-     * @author Tianyang Zhou
+     * This void function updates each elements of the stopwatch and update Timer Label accordingly
+     * Update Timer Label accordingly
+     * @author Canh Nhat Minh Le
      * */
     public void updateTimerLabel(){
         elapsedTime=elapsedTime+1000;
@@ -297,8 +299,8 @@ public class Game extends JFrame implements KeyListener {
     }
 
     /**
-     * This is the void function, it will set up score text
-     * @author Tianyang Zhou
+     * Void function to locations setup and draw "Score" text
+     * @author Canh Nhat Minh Le
      * */
     public void createScoreText()
     {
@@ -310,10 +312,11 @@ public class Game extends JFrame implements KeyListener {
     }
 
     /**
-     * This is the void function, it will create organic cheese label
-     * @author Tianyang Zhou
+     * Void function to setup locations and draw "Organic Cheese" labels
+     * @author Canh Nhat Minh Le
      * */
     public void createOrganicCheeseLabel(){
+        //Create the first Organic Cheese label and draw on JFrame
         organic1 = new JLabel();
         organic1.setBounds(orgCheese1.y*100, (orgCheese1.x+1)*100, 100, 100);
         Image orgCheeseImg1 = orgCheese1.getOrgCheeseImg().getScaledInstance(organic1.getWidth(), organic1.getHeight(),
@@ -323,6 +326,7 @@ public class Game extends JFrame implements KeyListener {
         this.add(organic1);
         this.validate();
 
+        //Create the second Organic Cheese label and draw on JFrame
         organic2 = new JLabel();
         organic2.setBounds(orgCheese2.y*100, (orgCheese2.x+1)*100, 100, 100);
         Image orgCheeseImg2 = orgCheese2.getOrgCheeseImg().getScaledInstance(organic2.getWidth(), organic2.getHeight(),
@@ -337,8 +341,9 @@ public class Game extends JFrame implements KeyListener {
     }
 
     /**
-     * This is the void function called by the Game constructor to create new jLabels for all cheese object that need to be displayed on the map.
-     * @author Yogesh Sonik
+     * This is the void function called by the Game constructor to create new jLabels for
+     * all cheese object that need to be displayed on the map.
+     * @author Yogesh Sonik, Canh Nhat Minh Le
      * */
     public void createCheeseLabel()
     {
@@ -589,6 +594,7 @@ public class Game extends JFrame implements KeyListener {
      * @param direction the direction in which the mouse label should be moved in response to the key input detected by the KeyPressed method.
      * */
     public void moveMouse(String direction) {
+        //Setup Organic Cheese as mouse starts to move
         setOrgCheeseAp();
         try {
             //Perform checks in each case to see whether the new spot is a valid movement(no barriers)
@@ -801,7 +807,7 @@ public class Game extends JFrame implements KeyListener {
                         }
                     }
 
-                    //If there wasn't cheese check to see if there was organic cheese
+                    //Check to see if there was organic cheese
                     if (levelMap[myMouse.getCurrentY()+1][myMouse.getCurrentX()].getIsOrganicCheese()) {
                             orgCheese1.setValue(10);
                             score += orgCheese1.value;
@@ -860,29 +866,35 @@ public class Game extends JFrame implements KeyListener {
     }
 
     /**
-     * This is the void function, it will draw organic cheese
-     * @author Tianyang Zhou
+     * This void function setup the position of OrganicCheese on the tile map
+     * Randomize the appearance time and disappearance time of organic cheese
+     * @author Canh Nhat Minh Le
      * */
     public void setOrgCheeseAp ()
     {
+        //Randomize the appearance of organic1  and make label and the OrganicCheese
+        //appear when number of key counts == rand1
         if (countSteps == rand1) {
             organic1.setVisible(true);
             levelMap[7][3] = new Tile(false,false,false,false,false,false,true,false);
 
         }
-
+        //Randomize the appearance of organic2 and make label and the OrganicCheese
+        //appear when number of key counts == rand2
         if (countSteps == rand2) {
             //Set locations for organic Cheese
             levelMap[1][3] = new Tile(false,false,false,false,false,false,true,false);
             organic2.setVisible(true);
         }
-
+        //Randomize the disappearance of organic2 and make labels and the
+        //OrganicCheese disappear when number of key counts == rand3
         if (countSteps == rand3) {
             organic2.setVisible(false);
             levelMap[1][3].setIsOrganicCheese(false);
 
         }
-
+        //Randomize the disappearance of organic1 and make the labels and the
+        //OrganicCheese disappear when number of key counts == rand4
         if (countSteps == rand4) {
             organic1.setVisible(false);
             levelMap[7][3].setIsOrganicCheese(false);
