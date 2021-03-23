@@ -710,7 +710,7 @@ public class Game extends JFrame implements KeyListener {
                     }
 
 
-                    ///If there isn't any type of reward, check if there was a mousetrap
+                    //If there isn't any type of reward, check if there was a mousetrap
                     if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getisMouseTrap() == true) {
 
                         //Subtract penalty from score and check if the score is negative
@@ -772,14 +772,14 @@ public class Game extends JFrame implements KeyListener {
                     }
 
 
-                    //Mouse position update plus trap check
+                    //If there isn't any type of reward, check if there was a mousetrap
                     if (levelMap[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisMouseTrap() == true) {
                         score -= trap2.getPenalty();
                         if (scoreBelowZero()) {
                             inGame = false;
                             gameOver();
                         }
-                        //Remove Labels
+                        //Remove trap label
                         trapLabel2.setVisible(false);
                         this.repaint();
                     }
