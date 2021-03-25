@@ -1,3 +1,8 @@
+/** Parent class for Cats and MouseTraps
+ * It  contains the getters and setters for the player's Enemies
+ * @author Scott Luu
+ */
+
 public class Enemies{
     protected int currentX;
     protected int currentY;
