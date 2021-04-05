@@ -645,6 +645,10 @@ public class Game extends JFrame implements KeyListener {
                         scoreText.setText("Score: " + score);
 
                         if(scoreBelowZero()){
+                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true,false,false,false);
+                            myMouse.setCurrentX(myMouse.getCurrentX() - 1);
+                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false,false,false,false);
+                            mouseLabel.setLocation(mouseLabel.getX() - 100, mouseLabel.getY());
                             inGame = false;
                             gameOver();
                         }
@@ -704,6 +708,10 @@ public class Game extends JFrame implements KeyListener {
                         scoreText.setText("Score: " + score);
 
                         if (scoreBelowZero()) {
+                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false, false);
+                            myMouse.setCurrentX(myMouse.getCurrentX() + 1);
+                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false, false, false, false);
+                            mouseLabel.setLocation(mouseLabel.getX() + 100, mouseLabel.getY());
                             inGame = false;
                             gameOver();
                         }
@@ -769,6 +777,10 @@ public class Game extends JFrame implements KeyListener {
                         scoreText.setText("Score: " + score);
 
                         if (scoreBelowZero()) {
+                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false,  false);
+                            myMouse.setCurrentY(myMouse.getCurrentY() - 1);
+                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false, false, false,  false);
+                            mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() - 100);
                             inGame = false;
                             gameOver();
                         }
@@ -827,6 +839,10 @@ public class Game extends JFrame implements KeyListener {
                     if (levelMap[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisMouseTrap() == true) {
                         score -= trap2.getPenalty();
                         if (scoreBelowZero()) {
+                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false,  false);
+                            myMouse.setCurrentY(myMouse.getCurrentY() + 1);
+                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, true, false, false, false,  false);
+                            mouseLabel.setLocation(mouseLabel.getX(), mouseLabel.getY() + 100);
                             inGame = false;
                             gameOver();
                         }
