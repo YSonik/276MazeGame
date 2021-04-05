@@ -78,12 +78,12 @@ public class Game extends JFrame implements KeyListener {
         //Create Cheese
         cheese1 = new Cheese(6, 7, 5);
         cheese2 = new Cheese(4, 3, 5);
-        createCheeseLabel();
+
 
         //Create Organic Cheese
         orgCheese1 = new OrganicCheese(7,3,10);
         orgCheese2 = new OrganicCheese(1,3,10);
-        createOrganicCheeseLabel();
+
 
         //randomizing appearance of Organic Cheese
          rand1 = getRandomNumber(4,10);
@@ -98,9 +98,10 @@ public class Game extends JFrame implements KeyListener {
 
         // Create mousetraps
         trap1 = new MouseTrap(3,6);
-        
         trap2 = new MouseTrap(4,4);
-        
+
+        createOrganicCheeseLabel();
+        createCheeseLabel();
         createTrapLabel();
         scoreBelowZero();
         createTileMap();
@@ -319,6 +320,7 @@ public class Game extends JFrame implements KeyListener {
         //Create the first Organic Cheese label and draw on JFrame
         organic1 = new JLabel();
         organic1.setBounds(orgCheese1.y*100, (orgCheese1.x+1)*100, 100, 100);
+        organic1.setOpaque(true);
         Image orgCheeseImg1 = orgCheese1.getOrgCheeseImg().getScaledInstance(organic1.getWidth(), organic1.getHeight(),
                 Image.SCALE_SMOOTH);
         ImageIcon icon1 = new ImageIcon(orgCheeseImg1);
@@ -329,6 +331,7 @@ public class Game extends JFrame implements KeyListener {
         //Create the second Organic Cheese label and draw on JFrame
         organic2 = new JLabel();
         organic2.setBounds(orgCheese2.y*100, (orgCheese2.x+1)*100, 100, 100);
+        organic2.setOpaque(true);
         Image orgCheeseImg2 = orgCheese2.getOrgCheeseImg().getScaledInstance(organic2.getWidth(), organic2.getHeight(),
                 Image.SCALE_SMOOTH);
         ImageIcon icon2 = new ImageIcon(orgCheeseImg2);
