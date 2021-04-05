@@ -70,7 +70,7 @@ public class Game extends JFrame implements KeyListener {
 
         //Create a Mouse
         myMouse = new Mouse();//coords set to 8,8
-        createMouseLabel();
+
 
         //set score
         score = 0;
@@ -100,6 +100,7 @@ public class Game extends JFrame implements KeyListener {
         trap1 = new MouseTrap(3,6);
         trap2 = new MouseTrap(4,4);
 
+        createMouseLabel();
         createOrganicCheeseLabel();
         createCheeseLabel();
         createTrapLabel();
