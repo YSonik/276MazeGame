@@ -162,7 +162,7 @@ public class Game extends JFrame implements KeyListener {
      * @author Tianyang Zhou
      * */
     public void winPage() {
-        ImageIcon testIcon = new ImageIcon("MyApp/Images/win.png");
+        ImageIcon testIcon = new ImageIcon("Images/win.png");
         Object[] option = { "Play Again" };
         int test = JOptionPane.showOptionDialog(null, "Total Score: " + score + "\n" +
                         "Time: " + hours_string+":"+minutes_string+":"+seconds_string  , " Win",
@@ -190,7 +190,7 @@ public class Game extends JFrame implements KeyListener {
      * @author Tianyang Zhou
      * */
     public void gameOver() {
-        ImageIcon testIcon = new ImageIcon("MyApp/Images/MouseLose.jpg");
+        ImageIcon testIcon = new ImageIcon("Images/MouseLose.jpg");
         Object[] option = { "Play Again" };
         int test = JOptionPane.showOptionDialog(null, "Total Score: " + score + "\n" +
                         "Time: " + hours_string+":"+minutes_string+":"+seconds_string  , " GAME OVER",

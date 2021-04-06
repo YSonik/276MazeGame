@@ -28,7 +28,7 @@ public class OrganicCheese extends Rewards {
     OrganicCheese(int x, int y, int value) {
         super(x, y, value);
         try {
-            Path orgCheesePath = Paths.get("MyApp/Images/stack_of_cheese.png").toRealPath();
+            Path orgCheesePath = Paths.get("Images/stack_of_cheese.png").toRealPath();
             this.orgCheeseImg = ImageIO.read(new File(orgCheesePath.toString()));
         } catch (IOException e) {
             e.printStackTrace();

@@ -30,7 +30,7 @@ public class Cat extends Enemies {
     {
         super(currentX, currentY);
         try {
-            Path catPath = Paths.get("MyApp/Images/cat.png").toRealPath();;
+            Path catPath = Paths.get("Images/cat.png").toRealPath();;
             this.catImage = ImageIO.read(new File(catPath.toString()));
         } catch (IOException e) {
             e.printStackTrace();

@@ -17,7 +17,7 @@ public class Main extends JFrame{
         JFrame f = new JFrame("CheeseRun");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(500,500);
-        ImageIcon cheeseRunImageIcon = new ImageIcon("MyApp/Images/cheeserun.png");
+        ImageIcon cheeseRunImageIcon = new ImageIcon("Images/cheeserun.png");
         JLabel cheeseRunLabel = new JLabel(cheeseRunImageIcon);
         JButton button = new JButton("Play");
         JPanel panel = new JPanel();
