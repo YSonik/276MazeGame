@@ -7,7 +7,7 @@ public class LevelOne {
         createTileMap();
     }
     /**
-     * This is the void class called by the Game constructor which creates a 2D array of tiles and encodes all indices to the objects that should be placed at that location in the maze.
+     * This is the void method called by the LevelOne constructor which creates a 2D array of tiles and encodes all indices to the objects that should be placed at that location in the maze.
      * @author Yogesh Sonik
      * */
     private void createTileMap()
