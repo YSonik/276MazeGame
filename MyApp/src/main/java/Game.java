@@ -58,6 +58,15 @@ public class Game extends JFrame implements KeyListener {
     Game()
     {
 
+        // Create multiple cats
+        cat1 = new Cat(4, 1);
+        this.add(cat1.catLabel);
+        this.validate();
+
+        cat2 = new Cat(8, 4);
+        this.add(cat2.catLabel);
+        this.validate();
+
         //Create a Mouse
         myMouse = new Mouse();//coords set to 8,8
         this.add(myMouse.mouseLabel);
@@ -88,15 +97,6 @@ public class Game extends JFrame implements KeyListener {
          rand2 = getRandomNumber(40,45);
          rand3 = getRandomNumber(55,60);
          rand4 = getRandomNumber(25,40);
-
-        // Create multiple cats
-        cat1 = new Cat(4, 1);
-        this.add(cat1.catLabel);
-        this.validate();
-
-        cat2 = new Cat(8, 4);
-        this.add(cat2.catLabel);
-        this.validate();
 
 
         // Create mousetraps
