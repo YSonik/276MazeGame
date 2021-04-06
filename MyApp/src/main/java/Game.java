@@ -27,12 +27,8 @@ public class Game extends JFrame implements KeyListener {
 
     private Cheese cheese1;
     private Cheese cheese2;
-    private JLabel Cheese1;
-    private JLabel Cheese2;
 
     private OrganicCheese orgCheese1,orgCheese2;
-    private JLabel organic1,organic2;
-
     private Cat cat1;
     private Cat cat2;
     private JLabel scoreText;
@@ -70,19 +66,24 @@ public class Game extends JFrame implements KeyListener {
 
         //Create a Mouse
         myMouse = new Mouse();//coords set to 8,8
-
-
         //set score
         score = 0;
 
         //Create Cheese
         cheese1 = new Cheese(6, 7, 5);
+        this.add(cheese1.cheeseLabel);
+        this.validate();
         cheese2 = new Cheese(4, 3, 5);
-
+        this.add(cheese2.cheeseLabel);
+        this.validate();
 
         //Create Organic Cheese
         orgCheese1 = new OrganicCheese(7,3,10);
+        this.add(orgCheese1.organicLabel);
+        this.validate();
         orgCheese2 = new OrganicCheese(1,3,10);
+        this.add(orgCheese2.organicLabel);
+        this.validate();
 
 
         //randomizing appearance of Organic Cheese
@@ -101,8 +102,6 @@ public class Game extends JFrame implements KeyListener {
         trap2 = new MouseTrap(4,4);
 
         createMouseLabel();
-        createOrganicCheeseLabel();
-        createCheeseLabel();
         createTrapLabel();
         scoreBelowZero();
         createTileMap();
@@ -163,7 +162,7 @@ public class Game extends JFrame implements KeyListener {
      * @author Tianyang Zhou
      * */
     public void winPage() {
-        ImageIcon testIcon = new ImageIcon("Images/win.png");
+        ImageIcon testIcon = new ImageIcon("MyApp/Images/win.png");
         Object[] option = { "Play Again" };
         int test = JOptionPane.showOptionDialog(null, "Total Score: " + score + "\n" +
                         "Time: " + hours_string+":"+minutes_string+":"+seconds_string  , " Win",
@@ -191,7 +190,7 @@ public class Game extends JFrame implements KeyListener {
      * @author Tianyang Zhou
      * */
     public void gameOver() {
-        ImageIcon testIcon = new ImageIcon("Images/MouseLose.jpg");
+        ImageIcon testIcon = new ImageIcon("MyApp/Images/MouseLose.jpg");
         Object[] option = { "Play Again" };
         int test = JOptionPane.showOptionDialog(null, "Total Score: " + score + "\n" +
                         "Time: " + hours_string+":"+minutes_string+":"+seconds_string  , " GAME OVER",
@@ -314,67 +313,10 @@ public class Game extends JFrame implements KeyListener {
     }
 
     /**
-     * Void function to setup locations and draw "Organic Cheese" labels
-     * @author Canh Nhat Minh Le
-     * */
-    public void createOrganicCheeseLabel(){
-        //Create the first Organic Cheese label and draw on JFrame
-        organic1 = new JLabel();
-        organic1.setBounds(orgCheese1.y*100, (orgCheese1.x+1)*100, 100, 100);
-        organic1.setOpaque(true);
-        Image orgCheeseImg1 = orgCheese1.getOrgCheeseImg().getScaledInstance(organic1.getWidth(), organic1.getHeight(),
-                Image.SCALE_SMOOTH);
-        ImageIcon icon1 = new ImageIcon(orgCheeseImg1);
-        organic1.setIcon(icon1);
-        this.add(organic1);
-        this.validate();
-
-        //Create the second Organic Cheese label and draw on JFrame
-        organic2 = new JLabel();
-        organic2.setBounds(orgCheese2.y*100, (orgCheese2.x+1)*100, 100, 100);
-        organic2.setOpaque(true);
-        Image orgCheeseImg2 = orgCheese2.getOrgCheeseImg().getScaledInstance(organic2.getWidth(), organic2.getHeight(),
-                Image.SCALE_SMOOTH);
-        ImageIcon icon2 = new ImageIcon(orgCheeseImg2);
-        organic2.setIcon(icon2);
-        this.add(organic2);
-        this.validate();
-        organic1.setVisible(false);
-        organic2.setVisible(false);
-
-    }
-
-    /**
      * This is the void function called by the Game constructor to create new jLabels for
      * all cheese object that need to be displayed on the map.
      * @author Yogesh Sonik, Canh Nhat Minh Le
      * */
-    public void createCheeseLabel()
-    {
-        //Create jLabel for cheese1 and draw it on the jFrame at the correct location.
-        Cheese1 = new JLabel("Cheese1");
-        Cheese1.setBounds(cheese1.y*100,(cheese1.x+1)*100,100,100);
-        Cheese1.setBackground(Color.white);
-        Cheese1.setOpaque(true);
-        Image cheeseImg = cheese1.getCheeseImg().getScaledInstance(Cheese1.getWidth(), Cheese1.getHeight(),
-                Image.SCALE_SMOOTH);
-        ImageIcon icon = new ImageIcon(cheeseImg);
-        Cheese1.setIcon(icon);
-        this.add(Cheese1);
-        this.validate();
-
-        //Create jLabel for cheese2 and draw it on the jFrame at the correct location.
-        Cheese2 = new JLabel("Cheese2");
-        Cheese2.setBounds(cheese2.y*100,(cheese2.x+1)*100,100,100);
-        Cheese2.setBackground(Color.white);
-        Cheese2.setOpaque(true);
-        Image cheeseImg2 = cheese2.getCheeseImg().getScaledInstance(Cheese2.getWidth(), Cheese2.getHeight(),
-                Image.SCALE_SMOOTH);
-        ImageIcon icon2 = new ImageIcon(cheeseImg2);
-        Cheese2.setIcon(icon2);
-        this.add(Cheese2);
-        this.validate();
-    }
 
     /**
      * This is the void function, which is called by the Game constructor, creates a jLabel for the mouse and draws it at the correct location.
@@ -619,10 +561,10 @@ public class Game extends JFrame implements KeyListener {
 
                         //Remove cheese label for the cheese that the mouse ate
                         if (myMouse.getCurrentX() - 1 == cheese1.getY() && myMouse.getCurrentY() == cheese1.getX()) {
-                            Cheese1.setVisible(false);
+                            cheese1.cheeseLabel.setVisible(false);
                             this.repaint();
                         } else {
-                            Cheese2.setVisible(false);
+                            cheese2.cheeseLabel.setVisible(false);
                             this.repaint();
                         }
                     }
@@ -630,7 +572,7 @@ public class Game extends JFrame implements KeyListener {
                     if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getIsOrganicCheese()) {
                             score += orgCheese2.value;
                             scoreText.setText("Score: " + score);
-                            organic2.setVisible(false);
+                            orgCheese2.organicLabel.setVisible(false);
                             this.repaint();
                             levelMap[1][3].setIsOrganicCheese(false);
 
@@ -681,10 +623,10 @@ public class Game extends JFrame implements KeyListener {
 
                         //Remove cheese label for the cheese that the mouse ate
                         if (myMouse.getCurrentX() + 1 == cheese1.getY() && myMouse.getCurrentY() == cheese1.getX()) {
-                            Cheese1.setVisible(false);
+                            cheese1.cheeseLabel.setVisible(false);
                             this.repaint();
                         } else {
-                            Cheese2.setVisible(false);
+                            cheese2.cheeseLabel.setVisible(false);
                             this.repaint();
                         }
                     }
@@ -693,7 +635,7 @@ public class Game extends JFrame implements KeyListener {
                     if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getIsOrganicCheese()) {
                             score += orgCheese2.value;
                             scoreText.setText("Score: " + score);
-                            organic2.setVisible(false);
+                            orgCheese2.organicLabel.setVisible(false);
                             this.repaint();
                             levelMap[1][3].setIsOrganicCheese(false);
 
@@ -750,10 +692,10 @@ public class Game extends JFrame implements KeyListener {
 
                         //Remove cheese label for the cheese that the mouse ate
                         if (myMouse.getCurrentY() - 1 == cheese1.getX() && myMouse.getCurrentX() == cheese1.getY()) {
-                            Cheese1.setVisible(false);
+                            cheese1.cheeseLabel.setVisible(false);
                             this.repaint();
                         } else {
-                            Cheese2.setVisible(false);
+                            cheese2.cheeseLabel.setVisible(false);
                             this.repaint();
                         }
                     }
@@ -762,7 +704,7 @@ public class Game extends JFrame implements KeyListener {
                             orgCheese1.setValue(10);
                             score += orgCheese1.value;
                             scoreText.setText("Score: " + score);
-                            organic1.setVisible(false);
+                            orgCheese1.organicLabel.setVisible(false);
                             this.repaint();
                             levelMap[7][3].setIsOrganicCheese(false);
 
@@ -815,10 +757,10 @@ public class Game extends JFrame implements KeyListener {
 
                         //Remove cheese label for the cheese that the mouse ate
                         if (myMouse.getCurrentY() + 1 == cheese1.getX() && myMouse.getCurrentX() == cheese1.getY()) {
-                            Cheese1.setVisible(false);
+                            cheese1.cheeseLabel.setVisible(false);
                             this.repaint();
                         } else {
-                            Cheese2.setVisible(false);
+                            cheese2.cheeseLabel.setVisible(false);
                             this.repaint();
                         }
                     }
@@ -828,7 +770,7 @@ public class Game extends JFrame implements KeyListener {
                             orgCheese1.setValue(10);
                             score += orgCheese1.value;
                             scoreText.setText("Score: " + score);
-                            organic1.setVisible(false);
+                            orgCheese1.organicLabel.setVisible(false);
                             this.repaint();
                             levelMap[7][3].setIsOrganicCheese(false);
 
@@ -895,7 +837,7 @@ public class Game extends JFrame implements KeyListener {
         //Randomize the appearance of organic1  and make label and the OrganicCheese
         //appear when number of key counts == rand1
         if (countSteps == rand1) {
-            organic1.setVisible(true);
+            orgCheese1.organicLabel.setVisible(true);
             levelMap[7][3] = new Tile(false,false,false,false,false,false,true,false);
 
         }
@@ -904,21 +846,19 @@ public class Game extends JFrame implements KeyListener {
         if (countSteps == rand2) {
             //Set locations for organic Cheese
             levelMap[1][3] = new Tile(false,false,false,false,false,false,true,false);
-            organic2.setVisible(true);
+            orgCheese2.organicLabel.setVisible(true);
         }
         //Randomize the disappearance of organic2 and make labels and the
         //OrganicCheese disappear when number of key counts == rand3
         if (countSteps == rand3) {
-            organic2.setVisible(false);
+            orgCheese2.organicLabel.setVisible(false);
             levelMap[1][3].setIsOrganicCheese(false);
-
         }
         //Randomize the disappearance of organic1 and make the labels and the
         //OrganicCheese disappear when number of key counts == rand4
         if (countSteps == rand4) {
-            organic1.setVisible(false);
+            orgCheese1.organicLabel.setVisible(false);
             levelMap[7][3].setIsOrganicCheese(false);
-
         }
     }
 
