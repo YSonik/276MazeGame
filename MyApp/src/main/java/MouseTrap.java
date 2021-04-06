@@ -1,5 +1,7 @@
+import java.awt.*;
 import java.io.File;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -16,6 +18,7 @@ import java.nio.file.Paths;
 public class MouseTrap extends Enemies {
     private int penalty;
     private BufferedImage MTImage;
+    public JLabel trapLabel;
     
     MouseTrap(int currentX, int currentY){
         super(currentX,currentY);
@@ -27,6 +30,21 @@ public class MouseTrap extends Enemies {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        createTrapLabel();
+    }
+    /**
+     * This is the void function, it will create mouse trap label
+     * @author Tianyang Zhou
+     * */
+    public void createTrapLabel()
+    {
+        trapLabel = new JLabel("Trap");
+        trapLabel.setBounds(this.currentY*100,(this.currentX +1)*100,100,100);
+        trapLabel.setBackground(Color.pink);
+        trapLabel.setOpaque(true);
+        Image trapImg1 = this.getMTImage().getScaledInstance(trapLabel.getWidth(), trapLabel.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon icon1 = new ImageIcon(trapImg1);
+        trapLabel.setIcon(icon1);
     }
     
     //getPenalty method used to obtain the penalty value
