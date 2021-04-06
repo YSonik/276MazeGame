@@ -21,18 +21,16 @@ public class Game extends JFrame implements KeyListener {
     private Boolean winGame;
     private int score;
 
-    private Tile[][] levelMap;
+    private LevelOne myMap;
     private Mouse myMouse;
     private Cheese cheese1;
     private Cheese cheese2;
-
     private OrganicCheese orgCheese1,orgCheese2;
     private Cat cat1;
     private Cat cat2;
-    private JLabel scoreText;
-
     private MouseTrap trap1, trap2;
 
+    private JLabel scoreText;
     private int countSteps = 0;
     private int rand1,rand2,rand3,rand4;
     int elapsedTime = 0;
@@ -57,6 +55,8 @@ public class Game extends JFrame implements KeyListener {
 
     Game()
     {
+        //Create a TileMap Object
+        myMap = new LevelOne();
 
         // Create multiple cats
         cat1 = new Cat(4, 1);
@@ -107,9 +107,7 @@ public class Game extends JFrame implements KeyListener {
         this.add(trap2.trapLabel);
         this.validate();
 
-
         scoreBelowZero();
-        createTileMap();
         createFrame();
         createGameMap();
         createScoreText();
@@ -292,15 +290,6 @@ public class Game extends JFrame implements KeyListener {
        this.validate();
     }
 
-    /**
-     * This is the void function called by the Game constructor to create new jLabels for
-     * all cheese object that need to be displayed on the map.
-     * @author Yogesh Sonik, Canh Nhat Minh Le
-     * */
-
-
-
-
 
    /**
     * This is the void function called by the Game constructor to create the jFrame that corresponds to the game page of CheeseRun where the maze will be displayed.
@@ -332,13 +321,13 @@ public class Game extends JFrame implements KeyListener {
         {
             for(int j = 0; j <10; j++)
             {
-                if(levelMap[i][j].getisBarrier() == true ) {
+                if(myMap.getLevelMap()[i][j].getisBarrier() == true ) {
                     tempLabel = new JLabel();
                     tempLabel.setBounds(x,y,100,100);
                     tempLabel.setBackground(Color.red);
                     tempLabel.setOpaque(true);
                 }
-                else if(levelMap[i][j].getisCheese() == true)
+                else if(myMap.getLevelMap()[i][j].getisCheese() == true)
                 {
                     tempLabel = new JLabel();
                     tempLabel.setBounds(x,y,100,100);
@@ -346,21 +335,21 @@ public class Game extends JFrame implements KeyListener {
                     tempLabel.setOpaque(true);
 
                 }
-                else if(levelMap[i][j].getisEmpty() == true)
+                else if(myMap.getLevelMap()[i][j].getisEmpty() == true)
                 {
                     tempLabel = new JLabel();
                     tempLabel.setBounds(x,y,100,100);
                     tempLabel.setBackground(Color.white);
                     tempLabel.setOpaque(true);
                 }
-                else if(levelMap[i][j].getisEntrance() == true)
+                else if(myMap.getLevelMap()[i][j].getisEntrance() == true)
                 {
                     tempLabel = new JLabel("Entrance");
                     tempLabel.setBounds(x,y,100,100);
                     tempLabel.setBackground(Color.white);
                     tempLabel.setOpaque(true);
                 }
-                else if (levelMap[i][j].getisExit() == true)
+                else if (myMap.getLevelMap()[i][j].getisExit() == true)
                 {
                     tempLabel = new JLabel("Exit");
                     tempLabel.setBounds(x,y,100,100);
@@ -378,97 +367,6 @@ public class Game extends JFrame implements KeyListener {
 
     }
 
-    /**
-     * This is the void class called by the Game constructor which creates a 2D array of tiles and encodes all indices to the objects that should be placed at that location in the maze.
-     * @author Yogesh Sonik
-     * */
-    private void createTileMap()
-    {
-        //fill map with empty tiles:
-        levelMap = new Tile[10][10];
-        for(int i = 0; i < 10; i++)
-        {
-            for(int j = 0; j< 10; j++)
-            {
-                levelMap[i][j] = new Tile(false,false,false,false, true,false,false,false);
-            }
-        }
-
-        //Left column
-        for(int i = 0; i< 10; i++)
-        {
-            levelMap[i][0].setEmpty(false);
-            levelMap[i][0].setBarrier(true);
-
-        }
-
-        //Top Row
-        for(int i = 0; i < 10; i++)
-        {
-            levelMap[0][i].setEmpty(false);
-            levelMap[0][i].setBarrier(true);
-        }
-
-        //Bottom Row
-        for(int i = 0; i<10;i++)
-        {
-            levelMap[9][i].setEmpty(false);
-            levelMap[9][i].setBarrier(true);
-        }
-
-        //Right Column
-        for(int i = 0; i < 10;i++)
-        {
-            levelMap[i][9].setEmpty(false);
-            levelMap[i][9].setBarrier(true);
-        }
-
-        //Set Exit Tile
-        levelMap[1][0]  = new Tile(false,false,true,false,false,false,false,false);
-        //Set Entrance Tile
-        levelMap[8][9] = new Tile(false,true,false,false,false,false,false,false);
-
-        //Create the internal maze layout
-        //Structure1:
-        for(int i = 2; i <5;i++ )
-        {
-            levelMap[2][i].setEmpty(false);
-            levelMap[2][i].setBarrier(true);
-        }
-        levelMap[3][2] = new Tile(true,false,false,false,false,false,false, false);
-
-        //Structure2
-        levelMap[5][2] = new Tile(true,false,false,false,false,false,false,false);
-        levelMap[6][2] = new Tile(true,false,false,false,false,false,false,false);
-        levelMap[6][4] = new Tile(true,false,false,false,false,false,false,false);
-        levelMap[7][2] = new Tile(true,false,false,false,false,false,false,false);
-        levelMap[7][4] = new Tile(true,false,false,false,false,false,false,false);
-        levelMap[5][4] = new Tile(true,false,false,false,false,false,false,false);
-
-        //Structure3
-        levelMap[5][8] = new Tile(true,false,false,false,false,false,false,false);
-        levelMap[5][7] = new Tile(true,false,false,false,false,false,false,false);
-        levelMap[5][6] = new Tile(true,false,false,false,false,false,false,false);
-        levelMap[6][6] = new Tile(true,false,false,false,false,false,false,false);
-        levelMap[7][6] = new Tile(true,false,false,false,false,false,false,false);
-        levelMap[7][7] = new Tile(true,false,false,false,false,false,false,false);
-
-        //Structure4
-        levelMap[2][6] = new Tile(true,false,false,false,false,false,false,false);
-        levelMap[2][7] = new Tile(true,false,false,false,false,false,false,false);
-        levelMap[3][7] = new Tile(true,false,false,false,false,false,false,false);
-
-
-        //Set locations for cheese
-        levelMap[6][7] = new Tile(false,false,false,false,false,true, false,false);
-        levelMap[4][3] = new Tile(false,false,false,false,false,true, false,false);
-
-        //Set locations for traps
-        levelMap[3][6] = new Tile(false,false,false,false,false,false, false,true);
-        levelMap[4][4] = new Tile(false,false,false,false,false,false, false,true);
-
-
-    }
 
     /**
      * This is the void function called by the actionListener method called "KeyPressed" which recieves which direction to move the mouse label as a string and then preforms various checks to validate the movement
@@ -484,10 +382,10 @@ public class Game extends JFrame implements KeyListener {
             if (direction == "left") {
                 countSteps++;
                 //Check to see if the new location is a barrier
-                if (!levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisBarrier()) {
+                if (!myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisBarrier()) {
 
                     //If the new location is not a barrier, perform check to see whether there was any cheese there.
-                    if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisCheese()) {
+                    if (myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisCheese()) {
 
                         //if the location had cheese, update score
                         this.myMouse.setCheeseEaten(this.myMouse.getCheeseEaten() + 1);
@@ -506,27 +404,27 @@ public class Game extends JFrame implements KeyListener {
                         }
                     }
                     //If there wasn't cheese check to see if there was organic cheese
-                    if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getIsOrganicCheese()) {
+                    if (myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getIsOrganicCheese()) {
                             score += orgCheese2.value;
                             scoreText.setText("Score: " + score);
                             orgCheese2.organicLabel.setVisible(false);
                             this.repaint();
-                            levelMap[1][3].setIsOrganicCheese(false);
+                            myMap.getLevelMap()[1][3].setIsOrganicCheese(false);
 
                     }
 
 
                     //If there isn't any type of reward, check if there was a mousetrap
-                     if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisMouseTrap() == true) {
+                     if (myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX() - 1].getisMouseTrap() == true) {
 
                         //Subtract penalty from score and check if the score is negative
                         score -= trap1.getPenalty();
                         scoreText.setText("Score: " + score);
 
                         if(scoreBelowZero()){
-                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true,false,false,false);
+                            myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true,false,false,false);
                             myMouse.setCurrentX(myMouse.getCurrentX() - 1);
-                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false,false,false,false);
+                            myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false,false,false,false);
                             myMouse.mouseLabel.setLocation(myMouse.mouseLabel.getX() - 100, myMouse.mouseLabel.getY());
                             inGame = false;
                             gameOver();
@@ -537,19 +435,19 @@ public class Game extends JFrame implements KeyListener {
                     }
 
                     //Update the position of the mouse label, the mouse tile, and mouse object
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true,false,false,false);
+                    myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true,false,false,false);
                     myMouse.setCurrentX(myMouse.getCurrentX() - 1);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false,false,false,false);
+                    myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false,false,false,false);
                     myMouse.mouseLabel.setLocation(myMouse.mouseLabel.getX() - 100, myMouse.mouseLabel.getY());
 
                 }
 
             } else if (direction == "right") {
                 countSteps++;
-                if (!levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getisBarrier()) {
+                if (!myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getisBarrier()) {
 
                     //If the new location is not a barrier, perform checks to see whether there was any cheese there.
-                    if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getisCheese()) {
+                    if (myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getisCheese()) {
 
                         //if the location had cheese, update score
                         this.myMouse.setCheeseEaten(this.myMouse.getCheeseEaten() + 1);
@@ -569,27 +467,27 @@ public class Game extends JFrame implements KeyListener {
                     }
 
                     //If there wasn't cheese check to see if there was organic cheese
-                    if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getIsOrganicCheese()) {
+                    if (myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getIsOrganicCheese()) {
                             score += orgCheese2.value;
                             scoreText.setText("Score: " + score);
                             orgCheese2.organicLabel.setVisible(false);
                             this.repaint();
-                            levelMap[1][3].setIsOrganicCheese(false);
+                            myMap.getLevelMap()[1][3].setIsOrganicCheese(false);
 
                     }
 
 
                     //If there isn't any type of reward, check if there was a mousetrap
-                    if (levelMap[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getisMouseTrap() == true) {
+                    if (myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX() + 1].getisMouseTrap() == true) {
 
                         //Subtract penalty from score and check if the score is negative
                         score -= trap1.getPenalty();
                         scoreText.setText("Score: " + score);
 
                         if (scoreBelowZero()) {
-                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false, false);
+                            myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false, false);
                             myMouse.setCurrentX(myMouse.getCurrentX() + 1);
-                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false, false, false, false);
+                            myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false, false, false, false);
                             myMouse.mouseLabel.setLocation(myMouse.mouseLabel.getX() + 100, myMouse.mouseLabel.getY());
                             inGame = false;
                             gameOver();
@@ -605,9 +503,9 @@ public class Game extends JFrame implements KeyListener {
 
                     }
                     //Update the position of the mouse label, the mouse tile, and mouse object
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false, false);
+                    myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false, false);
                     myMouse.setCurrentX(myMouse.getCurrentX() + 1);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false, false, false, false);
+                    myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false, false, false, false);
                     myMouse.mouseLabel.setLocation(myMouse.mouseLabel.getX() + 100, myMouse.mouseLabel.getY());
 
                 }
@@ -616,10 +514,10 @@ public class Game extends JFrame implements KeyListener {
             else if (direction == "up") {
                 countSteps++;
                 //If the new location is not a barrier, perform checks to see whether there was any cheese there.
-                if (!levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getisBarrier()) {
+                if (!myMap.getLevelMap()[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getisBarrier()) {
 
                     //if the location had cheese, update score
-                    if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getisCheese()) {
+                    if (myMap.getLevelMap()[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getisCheese()) {
 
                         this.myMouse.setCheeseEaten(this.myMouse.getCheeseEaten() + 1);
                         score += cheese1.value;
@@ -637,28 +535,28 @@ public class Game extends JFrame implements KeyListener {
                         }
                     }
 
-                    if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getIsOrganicCheese()) {
+                    if (myMap.getLevelMap()[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getIsOrganicCheese()) {
                             orgCheese1.setValue(10);
                             score += orgCheese1.value;
                             scoreText.setText("Score: " + score);
                             orgCheese1.organicLabel.setVisible(false);
                             this.repaint();
-                            levelMap[7][3].setIsOrganicCheese(false);
+                            myMap.getLevelMap()[7][3].setIsOrganicCheese(false);
 
                     }
 
 
                     //If there isn't any type of reward, check if there was a mousetrap
-                    if (levelMap[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getisMouseTrap() == true) {
+                    if (myMap.getLevelMap()[myMouse.getCurrentY() - 1][myMouse.getCurrentX()].getisMouseTrap() == true) {
 
                         //Subtract penalty from score and check if the score is negative
                         score -= trap1.getPenalty();
                         scoreText.setText("Score: " + score);
 
                         if (scoreBelowZero()) {
-                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false,  false);
+                            myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false,  false);
                             myMouse.setCurrentY(myMouse.getCurrentY() - 1);
-                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false, false, false,  false);
+                            myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false, false, false,  false);
                             myMouse.mouseLabel.setLocation(myMouse.mouseLabel.getX(), myMouse.mouseLabel.getY() - 100);
                             inGame = false;
                             gameOver();
@@ -671,19 +569,19 @@ public class Game extends JFrame implements KeyListener {
 
                     }
                     //Update the position of the mouse label, the mouse tile, and mouse object
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false,  false);
+                    myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false,  false);
                     myMouse.setCurrentY(myMouse.getCurrentY() - 1);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false, false, false,  false);
+                    myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, true, false, false, false,  false);
                     myMouse.mouseLabel.setLocation(myMouse.mouseLabel.getX(), myMouse.mouseLabel.getY() - 100);
 
                 }
 
             } else if (direction == "down") {
                 countSteps++;
-                if (!levelMap[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisBarrier()) {
+                if (!myMap.getLevelMap()[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisBarrier()) {
 
                     //If the new location is not a barrier, perform checks to see whether there was any cheese there.
-                    if (levelMap[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisCheese()) {
+                    if (myMap.getLevelMap()[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisCheese()) {
 
                         //if the location had cheese, update score
                         this.myMouse.setCheeseEaten(this.myMouse.getCheeseEaten() + 1);
@@ -703,24 +601,24 @@ public class Game extends JFrame implements KeyListener {
                     }
 
                     //Check to see if there was organic cheese
-                    if (levelMap[myMouse.getCurrentY()+1][myMouse.getCurrentX()].getIsOrganicCheese()) {
+                    if (myMap.getLevelMap()[myMouse.getCurrentY()+1][myMouse.getCurrentX()].getIsOrganicCheese()) {
                             orgCheese1.setValue(10);
                             score += orgCheese1.value;
                             scoreText.setText("Score: " + score);
                             orgCheese1.organicLabel.setVisible(false);
                             this.repaint();
-                            levelMap[7][3].setIsOrganicCheese(false);
+                            myMap.getLevelMap()[7][3].setIsOrganicCheese(false);
 
                     }
 
 
                     //If there isn't any type of reward, check if there was a mousetrap
-                    if (levelMap[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisMouseTrap() == true) {
+                    if (myMap.getLevelMap()[myMouse.getCurrentY() + 1][myMouse.getCurrentX()].getisMouseTrap() == true) {
                         score -= trap2.getPenalty();
                         if (scoreBelowZero()) {
-                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false,  false);
+                            myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false,  false);
                             myMouse.setCurrentY(myMouse.getCurrentY() + 1);
-                            levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, true, false, false, false,  false);
+                            myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, true, false, false, false,  false);
                             myMouse.mouseLabel.setLocation(myMouse.mouseLabel.getX(), myMouse.mouseLabel.getY() + 100);
                             inGame = false;
                             gameOver();
@@ -731,9 +629,9 @@ public class Game extends JFrame implements KeyListener {
                     }
 
                     //Update the position of the mouse label, the mouse tile, and mouse object
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false,  false);
+                    myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile( false, false, false, false, true, false, false,  false);
                     myMouse.setCurrentY(myMouse.getCurrentY() + 1);
-                    levelMap[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, true, false, false, false,  false);
+                    myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, true, false, false, false,  false);
                     myMouse.mouseLabel.setLocation(myMouse.mouseLabel.getX(), myMouse.mouseLabel.getY() + 100);
 
                 }
@@ -743,8 +641,8 @@ public class Game extends JFrame implements KeyListener {
         }
 
         // In response to the movement by the mouse, move the cats
-        int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
-        int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), levelMap);
+        int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), myMap.getLevelMap());
+        int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), myMap.getLevelMap());
         catMoveDraw(direction1, direction2);
 
         //Collision detection using Catlabels
@@ -775,27 +673,27 @@ public class Game extends JFrame implements KeyListener {
         //appear when number of key counts == rand1
         if (countSteps == rand1) {
             orgCheese1.organicLabel.setVisible(true);
-            levelMap[7][3] = new Tile(false,false,false,false,false,false,true,false);
+            myMap.getLevelMap()[7][3] = new Tile(false,false,false,false,false,false,true,false);
 
         }
         //Randomize the appearance of organic2 and make label and the OrganicCheese
         //appear when number of key counts == rand2
         if (countSteps == rand2) {
             //Set locations for organic Cheese
-            levelMap[1][3] = new Tile(false,false,false,false,false,false,true,false);
+            myMap.getLevelMap()[1][3] = new Tile(false,false,false,false,false,false,true,false);
             orgCheese2.organicLabel.setVisible(true);
         }
         //Randomize the disappearance of organic2 and make labels and the
         //OrganicCheese disappear when number of key counts == rand3
         if (countSteps == rand3) {
             orgCheese2.organicLabel.setVisible(false);
-            levelMap[1][3].setIsOrganicCheese(false);
+            myMap.getLevelMap()[1][3].setIsOrganicCheese(false);
         }
         //Randomize the disappearance of organic1 and make the labels and the
         //OrganicCheese disappear when number of key counts == rand4
         if (countSteps == rand4) {
             orgCheese1.organicLabel.setVisible(false);
-            levelMap[7][3].setIsOrganicCheese(false);
+            myMap.getLevelMap()[7][3].setIsOrganicCheese(false);
         }
     }
 
