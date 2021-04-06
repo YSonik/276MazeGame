@@ -12,7 +12,7 @@ public class Screens {
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 450;
 
-    public Screents() {
+    public Screens() {
 		this.frame = new JFrame("Cheese Run");
 		this.frame.setBounds(70, 70, 0, 0);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

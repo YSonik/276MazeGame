@@ -1,146 +1,268 @@
-public class Cat {
-    private int currentX;
-    private int currentY;
-    private final int catHeight = 25;
-    private final int catWidth = 25;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import javax.swing.*;
+import java.awt.*;
 
-    Cat(int startX, int startY)
+/**
+ * <h1> Cat </h1>
+ * The Cat program contains X and Y setters and getters of the moving enemies within a 2D grid map.
+ * In addition, a "chase" method is implemented with a simple algorithm for the moving enemies
+ * to get closer to the player after every tick.
+ * <p>
+ * @author Scott Luu  
+ *
+ */
+
+
+public class Cat extends Enemies {
+    
+    public JLabel catLabel;
+    private BufferedImage catImage;
+
+    /**
+     * Constructor for the program which contains X and Y coordinates of the moving enemies
+     * and catImage
+     * @param currentX first parameter to Cat
+     * @param currentY second parameter to Cat
+     */
+    Cat(int currentX, int currentY)
     {
-        this.currentX = startX;
-        this.currentY = startY;
+        super(currentX, currentY);
+        try {
+            Path catPath = Paths.get("Images/cat.png").toRealPath();;
+            this.catImage = ImageIO.read(new File(catPath.toString()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        createCatLabel();
+
     }
 
+ /**
+     * This is the void function, it will create cat label
+     * @author Scott Luu
+     * */
+    public void createCatLabel()
+    {
+        catLabel = new JLabel();
+        catLabel.setBounds(this.currentX*100,(this.currentY+1)*100,100,100);
+        catLabel.setBackground(Color.white);
+        catLabel.setOpaque(true);
+        Image catImg = getCatImage().getScaledInstance(catLabel.getWidth(), catLabel.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(catImg);
+        catLabel.setIcon(icon);
+       
+
+
+        //catLabel2.setBounds(800,500,100,100);
+        
+
+    }
+
+    /**
+     * These methods are used by the chase method to check the surroundings of the moving Enemies
+     * and determine which direction does not have a barrier.
+     *
+     * @param map Only parameter to these methods
+     * @return boolean These methods return whether the provided coordinates are Barriers (true), or not (false).
+     */
+    public boolean rightblocked(Tile[][] map){
+        return map[this.getCurrentY()][this.getCurrentX() + 1].getisBarrier();
+    }
+    public boolean leftblocked(Tile[][] map){
+        return map[this.getCurrentY()][this.getCurrentX() - 1].getisBarrier();
+    }
+    public boolean topblocked(Tile[][] map){
+        return map[this.getCurrentY()-1][this.getCurrentX()].getisBarrier();
+    }
+    public boolean bottomblocked(Tile[][] map){
+        return map[this.getCurrentY()+1][this.getCurrentX()].getisBarrier();
+    }
+
+
+
+
+    /**
+     * The chase method moves the moving enemies closer to the player based on the player's X and Y
+     * coordinates. The method uses the above functions to check
+     * for barriers and adjust the the enemies' coordinates accordingly.
+     *
+     * @param mouseCurrentX First parameter to the chase method - Player's X-coordinate
+     * @param mouseCurrentY Second parameter to the chase method - Player's Y-coordinate
+     * @param map Third parameter to the chase method - 2D-grid map
+     * @return int This returns a number in regards to the direction the enemies will move to.
+     * (e.g: 1 = right; 2 = left; 3 = down; 4 = up)
+     */
     public int chase (int mouseCurrentX, int mouseCurrentY, Tile [][] map) {
         int distanceX = mouseCurrentX - this.getCurrentX();
         int distanceY = mouseCurrentY - this.getCurrentY();
         //if Mouse is on the right
         while (distanceX > 0) {
-            if (map[this.getCurrentY()][this.getCurrentX() + 1].getisBarrier() == false) {
-                    this.setCurrentX(this.getCurrentX() + 1);
-                    return 1;
+            if (!rightblocked(map)) {
+                this.setCurrentX(this.getCurrentX() + 1);
+                return 1;
             }
-            else if (map[this.getCurrentY()][this.getCurrentX() - 1].getisBarrier() == false) {
-                        this.setCurrentX(this.getCurrentX() - 1);
-                        return 2;
+            //If Mouse is at bottom right
+            else if(distanceY > 0){
+                if (!bottomblocked(map) ) {
+                    this.setCurrentY(this.getCurrentY() + 1);
+                    return 3;
+                }
+                else if (!leftblocked(map)  ) {
+                    this.setCurrentX(this.getCurrentX() - 1);
+                    return 2;
+                }
+                else if (!topblocked(map)) {
+                    this.setCurrentY(this.getCurrentY() - 1);
+                    return 4;
+                }
+                else{
+                    //to be sure
+                    return 0;
+                }
             }
-            else if(!map[this.getCurrentY()-1][this.getCurrentX()].getisBarrier()){
-                        this.setCurrentY(this.getCurrentY() - 1);
-                            System.out.println("return 4");
-                            return 4;
-                    } 
-            else if(!map[this.getCurrentY()+1][this.getCurrentX()].getisBarrier()){
-                        this.setCurrentY(this.getCurrentY() + 1);
-                        System.out.println("return 3");
-                        return 3;
+
+            //Mouse is top right
+            else if(distanceY < 0){
+                if (!topblocked(map) ) {
+                    this.setCurrentY(this.getCurrentY() - 1);
+                    return 4;
+                }
+                else if (!leftblocked(map) ) {
+                    this.setCurrentX(this.getCurrentX() - 1);
+                    return 2;
+                }
+                else  if (!bottomblocked(map) ) {
+                    this.setCurrentY(this.getCurrentY() + 1);
+                    return 3;
+                }
+                else{
+                    //to be sure
+                    return 0;
+                }
             }
-            
-          
+
             else{
                 return 0;
             }
+        }
 
-        
-        } 
+
+        //If Mouse is on left
         while (distanceX < 0){
-            if (map[this.getCurrentY()][this.getCurrentX() - 1].getisBarrier() == false) {
+            if (!leftblocked(map)) {
                 this.setCurrentX(this.getCurrentX() - 1);
                 return 2;
             }
-            else if(map[this.getCurrentY()-1][this.getCurrentX()].getisBarrier() == false){
-                    this.setCurrentY(this.getCurrentY() - 1);
-                        System.out.println("return 4");
-                        return 4;
-                }
-                
-                else if(map[this.getCurrentY()+1][this.getCurrentX()].getisBarrier() == false){
+            else if(distanceY > 0){
+                if (!bottomblocked(map)) {
                     this.setCurrentY(this.getCurrentY() + 1);
-                    System.out.println("return 3");
                     return 3;
                 }
-                else if (map[this.getCurrentY()][this.getCurrentX() + 1].getisBarrier() == false) {
+                else if (!rightblocked(map)) {
+                    this.setCurrentX(this.getCurrentX() + 1);
+                    return 1;
+                }
+                else if (!topblocked(map)) {
+                    this.setCurrentY(this.getCurrentY() - 1);
+                    return 4;
+                }
+                else{
+                    //to be sure
+                    return 0;
+                }
+            }
+
+            else if(distanceY < 0){
+                if (!topblocked(map)) {
+                    this.setCurrentY(this.getCurrentY() - 1);
+                    return 4;
+                }else if (!bottomblocked(map)) {
+                    this.setCurrentY(this.getCurrentY() + 1);
+                    return 3;
+                }
+                else if (!rightblocked(map)) {
                     this.setCurrentX(this.getCurrentX() + 1);
                     return 1;
                 }
                 else{
+                    //to be sure
                     return 0;
                 }
-
-            
-
-        } 
-        while (distanceY > 0 && distanceX == 0) {
-                if (map[this.getCurrentY() + 1][this.getCurrentX()].getisBarrier() == false) {
-                    this.setCurrentY(this.getCurrentY() + 1);
-                    System.out.println("return 3");
-                    return 3;
-                }
-                else if(map[this.getCurrentY()][this.getCurrentX()-1].getisBarrier() == false){
-                        this.setCurrentX(this.getCurrentX() - 1);
-                            System.out.println("return 2");
-                            return 2;
-                    } 
-                else if (map[this.getCurrentY()][this.getCurrentX() + 1].getisBarrier() == false) {
-                        this.setCurrentX(this.getCurrentX() + 1);
-                        return 1;
-                    }
-                else if (map[this.getCurrentY() - 1][this.getCurrentX()].getisBarrier() == false) {
-                        this.setCurrentY(this.getCurrentY() - 1);
-                        System.out.println("return 4");
-                        return 4;
-                    }
-
-                
-                   
-                    
-                    else{
-                        return 0;
-                    }
-    
-                
+            }
 
 
-        } while (distanceY < 0 && distanceX == 0 ){
-                if (map[this.getCurrentY() - 1][this.getCurrentX()].getisBarrier() == false) {
-                    this.setCurrentY(this.getCurrentY() - 1);
-                    System.out.println("return 4");
-                    return 4;
-                } else if (map[this.getCurrentY()][this.getCurrentX() + 1].getisBarrier() == false) {
-                        this.setCurrentX(this.getCurrentX() + 1);
-                        return 1;
-                    }
-                    else if (map[this.getCurrentY()][this.getCurrentX() - 1].getisBarrier() == false) {
-                        this.setCurrentX(this.getCurrentX() - 1);
-                        System.out.println("return 2");
-                        return 2;
-                    }
-                else if(map[this.getCurrentY()+1][this.getCurrentX() ].getisBarrier() == false){
-                        this.setCurrentY(this.getCurrentY() + 1);
-                            System.out.println("return 3");
-                            return 3;
-                }
-                   
-                    else{
-                        return 0;
-                    }
-    
-                
-            } 
+            else{
                 return 0;
+            }
+
+        }
+
+        //Mouse is at bottom
+        while (distanceY > 0 && distanceX == 0) {
+            if (!bottomblocked(map)) {
+                this.setCurrentY(this.getCurrentY() + 1);
+                return 3;
+            }
+
+            else if (!leftblocked(map)) {
+                this.setCurrentX(this.getCurrentX() - 1);
+                return 2;
+            }
+            else if (!rightblocked(map)) {
+                this.setCurrentX(this.getCurrentX() + 1);
+                return 1;
+            }
+            else if (!topblocked(map)) {
+                this.setCurrentY(this.getCurrentY() - 1);
+                return 4;
+            }
+            else{
+                return 0;
+            }
+
+
+
+            //Mouse is at top
+        } while (distanceY < 0 && distanceX == 0 ){
+            if (!topblocked(map)) {
+                this.setCurrentY(this.getCurrentY() - 1);
+                return 4;
+
+            }
+            else if (!bottomblocked(map)) {
+                this.setCurrentY(this.getCurrentY() + 1);
+                return 3;
+            }
+            else if (!rightblocked(map) ) {
+                this.setCurrentX(this.getCurrentX() + 1);
+                return 1;
+            }
+            else if (!leftblocked(map) ) {
+                this.setCurrentX(this.getCurrentX() - 1);
+                return 2;
+            }
+
+            else{
+                return 0;
+            }
+
+        }
+        return 0;
 
     }
 
-    public int getCurrentX() {
-        return currentX;
+   
+
+    
+
+    public BufferedImage getCatImage () {
+        return catImage;
     }
 
-    public int getCurrentY() {
-        return currentY; }
-
-    public void setCurrentX(int currentX) {
-        this.currentX = currentX;
-    }
-
-    public void setCurrentY(int currentY) {
-        this.currentY = currentY;
-    }
 }

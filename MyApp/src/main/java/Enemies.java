@@ -1,15 +1,23 @@
+/** Parent class for Cats and MouseTraps
+ * It  contains the getters and setters for the player's Enemies
+ * @author Scott Luu
+ */
+
 public class Enemies{
-    protected int currentX;
-    protected int currentY;
-    protected int EnemyHeight = 25;
-    protected int EnemyWidth = 25;
+    public int currentX;
+    public int currentY;
+
+    Enemies(int currentX, int currentY){
+        this.currentX = currentX;
+        this.currentY = currentY;
+    }
 
     public int getCurrentX() {
-        return currentX;
+        return this.currentX;
     }
 
     public int getCurrentY() {
-        return currentY; }
+        return this.currentY; }
 
     public void setCurrentX(int currentX) {
         this.currentX = currentX;
