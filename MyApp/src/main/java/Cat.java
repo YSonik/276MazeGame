@@ -44,7 +44,6 @@ public class Cat extends Enemies {
 
  /**
      * This is the void function, it will create cat label
-     * @author Scott Luu
      * */
     public void createCatLabel()
     {
@@ -56,11 +55,10 @@ public class Cat extends Enemies {
                 Image.SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(catImg);
         catLabel.setIcon(icon);
-       
 
 
-        //catLabel2.setBounds(800,500,100,100);
-        
+
+
 
     }
 
