@@ -52,13 +52,6 @@ public class Mouse {
         mouseLabel.setIcon(icon);
     }
 
-    void init() {
-        this.currentX = 8;
-        this.currentY = 8;
-        this.cheeseEaten = 0;
-        
-    }
-
     public int getCurrentX() {
         return currentX;
     }
