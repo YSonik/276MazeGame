@@ -243,6 +243,7 @@ public class Game extends JFrame implements KeyListener {
         switch (direction2) {
             case 1:
                 cat2.catLabel.setLocation(cat2.catLabel.getX() + 100, cat2.catLabel.getY());
+                //undo cat2's movement if colliding with cat1
                 if((cat1.catLabel.getX() == cat2.catLabel.getX()) && (cat1.catLabel.getY() == cat2.catLabel.getY())){
                    cat2.setCurrentX(cat2.getCurrentX()-1);
                    cat2.catLabel.setLocation(cat2.catLabel.getX() - 100, cat2.catLabel.getY());
