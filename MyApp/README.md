@@ -4,4 +4,4 @@
 2. java -jar .\target\CheeseRun.jar
 
 # Run Test
-1. mvn test
+3. mvn test
