@@ -30,6 +30,10 @@ public class Game extends JFrame implements KeyListener {
     private Cat cat2;
     private MouseTrap trap1, trap2;
 
+    public void setRand1(int rand1) {
+        this.rand1 = rand1;
+    }
+
     public Boolean getInGame() {
         return inGame;
     }
