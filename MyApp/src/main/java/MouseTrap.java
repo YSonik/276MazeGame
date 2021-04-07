@@ -34,7 +34,6 @@ public class MouseTrap extends Enemies {
     }
     /**
      * This is the void function, it will create mouse trap label
-     * @author Tianyang Zhou
      * */
     public void createTrapLabel()
     {

@@ -40,7 +40,6 @@ public class Cheese extends Rewards{
 
     /**
      * Void function to setup locations and draw "Cheese" labels
-     * @author Canh Nhat Minh Le
      * */
     public void createCheeseLabel()
     {   cheeseLabel = new JLabel();

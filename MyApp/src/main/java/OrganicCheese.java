@@ -41,7 +41,6 @@ public class OrganicCheese extends Rewards {
     }
     /**
      * Void function to setup locations and draw "Organic Cheese" labels
-     * @author Canh Nhat Minh Le
      * */
     public void createOrganicCheeseLabel(){
         //Create the first Organic Cheese label and draw on JFrame

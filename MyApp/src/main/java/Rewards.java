@@ -14,7 +14,6 @@ public class Rewards {
 
     /**
      * This is the constructor for the Rewards class which takes in three integer parameter
-     * @author Canh Nhat Minh Le
      * @param x indicating the x-coordinate of the reward.
      * @param y indicating the y-coordinate of the reward.
      * @param value indicating the score value of the reward.
