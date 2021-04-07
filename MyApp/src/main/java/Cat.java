@@ -48,7 +48,7 @@ public class Cat extends Enemies {
     public void createCatLabel()
     {
         catLabel = new JLabel();
-        catLabel.setBounds(this.currentX*100,(this.currentY+1)*100,100,100);
+        catLabel.setBounds(this.getCurrentX()*100,(this.getCurrentY()+1)*100,100,100);
         catLabel.setBackground(Color.white);
         catLabel.setOpaque(true);
         Image catImg = getCatImage().getScaledInstance(catLabel.getWidth(), catLabel.getHeight(),
