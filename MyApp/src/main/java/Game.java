@@ -74,6 +74,14 @@ public class Game extends JFrame implements KeyListener {
         return score;
     }
 
+    public void setRand2(int rand2) {
+        this.rand2 = rand2;
+    }
+
+    public void setCountSteps(int steps) {
+        this.countSteps = steps;
+    }
+
     private JLabel scoreText;
     private int countSteps = 0;
     private int rand1,rand2,rand3,rand4;
