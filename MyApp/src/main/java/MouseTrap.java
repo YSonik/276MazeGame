@@ -12,7 +12,8 @@ import java.nio.file.Paths;
  * The MouseTrap program sets and gets the coordinates
  * for the stationary enemies, and has a penalty used to reduce player's score. 
  * <p>
- * @author Scott Luu  
+ * @author Scott Luu
+ * @version 2.1
  *
  */
 public class MouseTrap extends Enemies {

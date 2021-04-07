@@ -13,7 +13,7 @@ public class TestGenMap {
     void setup(){
         map = new LevelOne();
         layout = map.getLevelMap();
-        check = true;
+        check = false;
     }
 
     @Test
@@ -24,7 +24,7 @@ public class TestGenMap {
         //check Left column
         for (int i = 2; i< 10; i++){
             if(!(layout[i][0].getisBarrier())){
-                check  = false;
+                assertEquals(true, check);
                 break;
             }
         }
@@ -32,7 +32,7 @@ public class TestGenMap {
         for(int i = 0; i < 10; i++)
         {
             if(!(layout[0][i].getisBarrier())){
-                check  = false;
+                assertEquals(true, check);
                 break;
             }
         }
@@ -40,7 +40,7 @@ public class TestGenMap {
         for(int i = 0; i<10;i++)
         {
             if(!(layout[9][i].getisBarrier())){
-                check  = false;
+                assertEquals(true, check);
                 break;
             }
         }
@@ -48,29 +48,25 @@ public class TestGenMap {
         //check Right Column
         for (int i = 0; i< 8; i++){
             if(!(layout[i][9].getisBarrier())){
-                check  = false;
+                assertEquals(true, check);
                 break;
             }
         }
-
-
-        assertEquals(true, check);
     }
 
     @Test
     public void checkExit(){
         if(!(layout[1][0].getisExit())){
-            check = false;
+            assertEquals(true, check);
         }
-        assertEquals(true, check);
     }
 
     @Test
     public void checkEntrance(){
         if(!(layout[8][9].getisEntrance())){
-            check = false;
+            assertEquals(true, check);
         }
-        assertEquals(true, check);
+        
     }
 
     @Test
@@ -79,27 +75,83 @@ public class TestGenMap {
         //check Structure1
         for(int i = 2; i <5;i++ )
         {   if(!(layout[2][i].getisBarrier())){
-                check = false;
+                assertEquals(true, check);
                 break;
             }    
         }
         if((!layout[3][2].getisBarrier())){
-            check = false;
+            assertEquals(true, check);
         }
 
         
 
         //Check Structure2
         for (int i = 5; i<8; i++){
-            if(!(layout[i][2].getisBarrier() || layout[i][4].getisBarrier())){
-                check = false;
+            if(!(layout[i][2].getisBarrier())){
+                assertEquals(true, check);
+                break;
+            }
+            if(!(layout[i][4].getisBarrier())){
+                assertEquals(true, check);
                 break;
             }
         }
 
+        //Check Structure3
+        for(int i = 5; i<8; i++){
+            if(!(layout[i][6].getisBarrier())){
+                assertEquals(true, check);
+                break;
+            }
+        }
+        if (!layout[5][7].getisBarrier()){
+            assertEquals(true, check);
+        }
+        if (!layout[5][8].getisBarrier()){
+            assertEquals(true, check);
+        }
+        if (!layout[7][7].getisBarrier()){
+            assertEquals(true, check);
+        }
 
-        assertEquals(true, check);
+        //Check Structure4
+        if (!layout[2][7].getisBarrier()){
+            assertEquals(true, check);
+        }
+        if (!layout[3][7].getisBarrier()){
+            assertEquals(true, check);
+        }
+        if (!layout[2][6].getisBarrier()){
+            assertEquals(true, check);
+        }
+
     }
+
+    @Test
+    public void checkCheeselocs(){
+    //Check Cheese's locations
+        if (!layout[6][7].getisCheese()){
+            assertEquals(true, check);
+        }
+        if (!layout[4][3].getisCheese()){
+            assertEquals(true, check);
+        }
+    }
+
+    @Test
+    public void checkTraplocs(){
+        if (!layout[3][6].getisMouseTrap()){
+            assertEquals(true, check);
+        }
+        if (!layout[4][4].getisMouseTrap()){
+            assertEquals(true, check);
+        }
+    }
+    
+
+
+
+
 
 
 
