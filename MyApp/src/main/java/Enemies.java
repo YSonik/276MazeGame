@@ -4,8 +4,8 @@
  */
 
 public class Enemies{
-    public int currentX;
-    public int currentY;
+    private int currentX;
+    private int currentY;
 
     Enemies(int currentX, int currentY){
         this.currentX = currentX;
