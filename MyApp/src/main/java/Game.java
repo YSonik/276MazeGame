@@ -284,7 +284,6 @@ public class Game extends JFrame implements KeyListener {
     public boolean Catscollide(){
         return ((cat1.catLabel.getX() == myMouse.mouseLabel.getX() && cat1.catLabel.getY() == myMouse.mouseLabel.getY()) ||
                 (cat2.catLabel.getX() == myMouse.mouseLabel.getX() && cat2.catLabel.getY() == myMouse.mouseLabel.getY()));
-
     }
 
      /**

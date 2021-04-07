@@ -46,6 +46,7 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMap().getLevelMap()[6][7].getisCheese(), false);
         assertFalse(myGame.getCheese1().cheeseLabel.isVisible());
     }
+
     @Test
     void MoveLeftIsOrgCheese() {
         myGame.getMyMouse().setCurrentX(8);
@@ -154,7 +155,6 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMap().getLevelMap()[1][3].getIsCharacter(),true );
         assertEquals(myGame.getMyMap().getLevelMap()[1][3].getIsOrganicCheese(), false);
         assertFalse(myGame.getOrgCheese2().organicLabel.isVisible());
-
     }
     @Test
     void MoveRightIsTrap() {

@@ -56,10 +56,6 @@ public class Cat extends Enemies {
         ImageIcon icon = new ImageIcon(catImg);
         catLabel.setIcon(icon);
 
-
-
-
-
     }
 
     /**
