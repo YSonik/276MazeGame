@@ -13,14 +13,19 @@ public class TestCatMovement {
         myGame = new Game();
     }
 
+    //Test two Cats
     @Test
-    void MoveLeftIsEmpty() {
-        myGame.getMyMouse().setCurrentX(8);
-        myGame.getMyMouse().setCurrentY(8);
-        myGame.validate();
+    void Cats_MoveLeftIsEmpty() {
+        myGame.getCat1().setCurrentX(4);
+        myGame.getCat1().setCurrentY(1);
+        myGame.getCat2().setCurrentX(8);
+        myGame.getCat2().setCurrentY(4);
         myGame.moveMouse("left");
-        assertEquals(myGame.getMyMouse().getCurrentX(), 7);
-        assertEquals(myGame.getMyMouse().getCurrentY(), 8);
+        myGame.validate();
+        assertEquals(myGame.getCat1().getCurrentX(), 5);
+        assertEquals(myGame.getCat1().getCurrentY(), 1);
+        assertEquals(myGame.getCat2().getCurrentX(), 7);
+        assertEquals(myGame.getCat2().getCurrentY(), 4);
     }
 
     @Test
@@ -46,6 +51,7 @@ public class TestCatMovement {
         assertEquals(myGame.getMyMap().getLevelMap()[6][7].getisCheese(), false);
         assertFalse(myGame.getCheese1().cheeseLabel.isVisible());
     }
+
     @Test
     void MoveLeftIsOrgCheese() {
         myGame.getMyMouse().setCurrentX(8);
