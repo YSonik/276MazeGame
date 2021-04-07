@@ -21,7 +21,6 @@ public class Game extends JFrame implements KeyListener {
     private Boolean inGame;
     private Boolean winGame;
     private int score;
-
     private LevelOne myMap;
     private Mouse myMouse;
     private Cheese cheese1;
@@ -30,6 +29,50 @@ public class Game extends JFrame implements KeyListener {
     private Cat cat1;
     private Cat cat2;
     private MouseTrap trap1, trap2;
+
+    public Mouse getMyMouse() {
+        return myMouse;
+    }
+
+    public Cheese getCheese1() {
+        return cheese1;
+    }
+
+    public Cheese getCheese2() {
+        return cheese2;
+    }
+
+    public OrganicCheese getOrgCheese1() {
+        return orgCheese1;
+    }
+
+    public OrganicCheese getOrgCheese2() {
+        return orgCheese2;
+    }
+
+    public MouseTrap getTrap2() {
+        return trap2;
+    }
+
+    public MouseTrap getTrap1() {
+        return trap1;
+    }
+
+    public Cat getCat2() {
+        return cat2;
+    }
+
+    public Cat getCat1() {
+        return cat1;
+    }
+
+    public LevelOne getMyMap() {
+        return myMap;
+    }
+
+    public int getScore() {
+        return score;
+    }
 
     private JLabel scoreText;
     private int countSteps = 0;
@@ -68,7 +111,7 @@ public class Game extends JFrame implements KeyListener {
         this.validate();
 
         //Create a Mouse
-        myMouse = new Mouse();//coords set to 8,8
+        myMouse = new Mouse(8,8);//coords set to 8,8
         this.add(myMouse.mouseLabel);
         this.validate();
 

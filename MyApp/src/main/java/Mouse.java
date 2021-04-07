@@ -22,10 +22,10 @@ public class Mouse {
     /**
      * This is the constructor for the Mouse class which sets the starting position of the mouse, sets cheese eaten to zero and imports image for the jLabel.
      * */
-    Mouse()
+    Mouse(int x, int y)
     {
-        this.currentX = 8;
-        this.currentY = 8;
+        this.currentX = x;
+        this.currentY = y;
         this.cheeseEaten = 0;
         try {
             Path mousePath = Paths.get("Images/mouse.png").toRealPath();;
@@ -42,7 +42,7 @@ public class Mouse {
     public void createMouseLabel()
     {
         mouseLabel = new JLabel();
-        mouseLabel.setBounds(800,900,100,100);
+        mouseLabel.setBounds(currentX*100,(currentY + 1)*100,100,100);
         mouseLabel.setBackground(Color.blue);
         mouseLabel.setOpaque(true);
         Image mouseImg = this.getMouseImage().getScaledInstance(mouseLabel.getWidth(), mouseLabel.getHeight(),
@@ -69,10 +69,12 @@ public class Mouse {
 
     public void setCurrentX(int currentX) {
         this.currentX = currentX;
+        mouseLabel.setLocation(this.currentX*100,(this.currentY+1)*100);
     }
 
     public void setCurrentY(int currentY) {
         this.currentY = currentY;
+        mouseLabel.setLocation(this.currentX*100,(this.currentY+1)*100);
     }
 
     public void setCheeseEaten(int cheeseEaten) {
