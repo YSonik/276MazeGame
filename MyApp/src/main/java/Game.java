@@ -7,11 +7,12 @@ import java.awt.event.KeyListener;
 import javax.swing.Timer;
 import java.util.Random;
 
-/**
+/**<h1>Game Class<h1/>
  * This is the aggregate class which brings together all of the various pieces of CheeseRun. It is here that all of the objects are instantiated through various functions and
  * where their visual representations are created and manipulated.
  *
  *  @author Yogesh Sonik, Tian Yang Zhou, Scott Luu, and Canh Nhat Minh Le
+ *  @version 2.0
  * */
 public class Game extends JFrame implements KeyListener {
 
@@ -50,7 +51,6 @@ public class Game extends JFrame implements KeyListener {
      * This is the constructor for the game class which instantiates the various objects required for the game such as: mouse, cat, mousetrap, and cheese.
      * It also creates jLables for all objects by calling member functions which have been delegated responsibility for a specific object.
      * Additionally, this function initializes all private data members that belong to the class.
-     * @author Yogesh Sonik
      * */
 
     Game()
@@ -133,7 +133,6 @@ public class Game extends JFrame implements KeyListener {
 
     /**
      * This is void function draws the timer label
-     * @author Canh Nhat Minh Le
      * */
     public void createTimerLabel(){
         timeLabel.setText(hours_string+":"+minutes_string+":"+seconds_string);
@@ -146,7 +145,6 @@ public class Game extends JFrame implements KeyListener {
     /**
      * This void function updates each elements of the stopwatch and update Timer Label accordingly
      * Update Timer Label accordingly
-     * @author Canh Nhat Minh Le
      * */
     public void updateTimerLabel(){
         elapsedTime=elapsedTime+1000;
@@ -162,7 +160,6 @@ public class Game extends JFrame implements KeyListener {
 
     /**
      * This is the void function, it will draw win page
-     * @author Tianyang Zhou
      * */
     public void winPage() {
         ImageIcon testIcon = new ImageIcon("Images/win.png");
@@ -182,7 +179,6 @@ public class Game extends JFrame implements KeyListener {
 
     /**
      * This is the boolean function, it will check score below zero or not
-     * @author Scott Luu
      * */
     public boolean scoreBelowZero(){
         return score < 0;
@@ -190,7 +186,6 @@ public class Game extends JFrame implements KeyListener {
 
     /**
      * This is the void function, it will set gameover
-     * @author Scott Luu
      * */
     public void gameOver() {
         ImageIcon testIcon = new ImageIcon("Images/MouseLose.jpg");
@@ -210,7 +205,6 @@ public class Game extends JFrame implements KeyListener {
 
     /**
      * This is the boolean function, it will check cat's collision
-     * @author Scott Luu
      * */
     public boolean Catscollide(){
         return ((cat1.catLabel.getX() == myMouse.mouseLabel.getX() && cat1.catLabel.getY() == myMouse.mouseLabel.getY()) ||
@@ -220,7 +214,6 @@ public class Game extends JFrame implements KeyListener {
 
      /**
      * This is the void function, it will create and draw cat label
-     * @author Tianyang Zhou, Scott Luu
      * */
     public void catMoveDraw(int direction1, int direction2) {
         //Cat Position update
@@ -280,7 +273,6 @@ public class Game extends JFrame implements KeyListener {
 
     /**
      * Void function to locations setup and draw "Score" text
-     * @author Canh Nhat Minh Le
      * */
     public void createScoreText()
     {
@@ -294,7 +286,6 @@ public class Game extends JFrame implements KeyListener {
 
    /**
     * This is the void function called by the Game constructor to create the jFrame that corresponds to the game page of CheeseRun where the maze will be displayed.
-    * @author Yogesh Sonik
     * */
     public void createFrame()
     {
@@ -310,7 +301,6 @@ public class Game extends JFrame implements KeyListener {
     /**
      * This is the void class called by the Game constructor to traverse the Tile array called levelMap and place the jLabels
      * that correspond to static objects like barriers, entrances and exits onto the jFrame at the corresponding coordinates.
-     * @author Yogesh Sonik,
      * */
     private void createGameMap()
     {
@@ -372,7 +362,6 @@ public class Game extends JFrame implements KeyListener {
     /**
      * This is the void function called by the actionListener method called "KeyPressed" which recieves which direction to move the mouse label as a string and then preforms various checks to validate the movement
      * and then updates the map with regards to any changes that may have occurred.
-     * @author Yogesh Sonik
      * @param direction the direction in which the mouse label should be moved in response to the key input detected by the KeyPressed method.
      * */
     public void moveMouse(String direction) {
@@ -389,22 +378,8 @@ public class Game extends JFrame implements KeyListener {
 
                 //If the new location a cheese.
                 else if (isaCheese(myMouse.getCurrentY(), myMouse.getCurrentX() - 1)) {
+                    eatCheese(myMouse.getCurrentX(), cheese1.getY(), myMouse.getCurrentY(), cheese1.getX());
 
-                    //update score
-                    this.myMouse.setCheeseEaten(this.myMouse.getCheeseEaten() + 1);
-                    score += cheese1.value;
-                    scoreText.setText("Score: " + score);
-                    count++;
-                    this.repaint();
-
-                    //Remove cheese label for the cheese that the mouse ate
-                    if (myMouse.getCurrentX() - 1 == cheese1.getY() && myMouse.getCurrentY() == cheese1.getX()) {
-                        cheese1.cheeseLabel.setVisible(false);
-                        this.repaint();
-                    } else {
-                        cheese2.cheeseLabel.setVisible(false);
-                        this.repaint();
-                    }
                 }
 
                 //If the new location is an organic cheese
@@ -633,12 +608,6 @@ public class Game extends JFrame implements KeyListener {
 
         countSteps++;
 
-        //Collision detection using Catlabels
-        if (Catscollide()){
-            inGame = false;
-            gameOver();
-        }
-
         if(this.myMouse.getCheeseEaten() == 2 && this.myMouse.getCurrentY() == 1 && this.myMouse.getCurrentX() == 0) {
             inGame = false;
             winGame = true;
@@ -650,6 +619,29 @@ public class Game extends JFrame implements KeyListener {
         }
     }
 
+    private void eatCheese(int currentX, int y, int currentY, int x) {
+        //update score
+        this.myMouse.setCheeseEaten(this.myMouse.getCheeseEaten() + 1);
+        score += cheese1.value;
+        scoreText.setText("Score: " + score);
+        count++;
+        this.repaint();
+
+        //Remove cheese label for the cheese that the mouse ate
+        if (currentX - 1 == y && currentY == x) {
+            cheese1.cheeseLabel.setVisible(false);
+            this.repaint();
+        } else {
+            cheese2.cheeseLabel.setVisible(false);
+            this.repaint();
+        }
+    }
+
+    /**
+ * This void function handles updating the levelmap's encoding of the mouse's position in addition to updating the mouse's jLabel when the mouse is moved up or down
+ * @param yCoord the int by which we want to change the mouse's y coordinate both on the levelmap and the mouse object
+ * @param yPixel the int by which we want to change the mouse label's y position measured int pixels
+ */
     private void UpdateMouseCoordY(int yCoord, int yPixel) {
         myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false, false, false);
         myMouse.setCurrentY(yCoord);
@@ -657,6 +649,11 @@ public class Game extends JFrame implements KeyListener {
         myMouse.mouseLabel.setLocation(myMouse.mouseLabel.getX(), yPixel);
     }
 
+    /**
+     * This void function handles updating the levelmap's encoding of the mouse's position in addition to updating the mouse's jLabel when the mouse is moved left or right
+     * @param xCoord the int by which we want to change the mouse's x coordinate both on the levelmap and the mouse object
+     * @param xPixel the int by which we want to change the mouse label's x position measured int pixels
+     */
     private void UpdateMouseCoordX(int xCoord, int xPixel) {
         myMap.getLevelMap()[myMouse.getCurrentY()][myMouse.getCurrentX()] = new Tile(false, false, false, false, true, false, false, false);
         myMouse.setCurrentX(xCoord);
@@ -664,33 +661,65 @@ public class Game extends JFrame implements KeyListener {
         myMouse.mouseLabel.setLocation(xPixel, myMouse.mouseLabel.getY());
     }
 
-    private boolean isaMouseTrap(int i, int currentX) {
-        return myMap.getLevelMap()[i][currentX].getisMouseTrap() == true;
+    /**
+     * This function checks to see if the position passed has a barrier or not within the levelmap.
+     * @param x the x coordinate at which to check
+     * @param y the y coordinate at which to check
+     * @return  the boolean result of the check condition
+     */
+    private boolean isaBarrier(int y, int x) {
+        return myMap.getLevelMap()[y][x].getisBarrier();
     }
 
-    private boolean isOrganicCheese(int currentY, int i) {
-        return myMap.getLevelMap()[currentY][i].getIsOrganicCheese();
+    /**
+     * This function checks to see if the position passed has a mouse trap or not within the levelmap.
+     * @param x the
+     * @param y the
+     * @return  the boolean result of the check condition
+     */
+    private boolean isaMouseTrap(int y, int x) {
+        return myMap.getLevelMap()[y][x].getisMouseTrap();
     }
 
-    private boolean isaCheese(int currentY, int i) {
-        return myMap.getLevelMap()[currentY][i].getisCheese();
+    /**
+     * This function checks to see if the position passed has a Qrganic Cheese or not within the levelmap.
+     * @param x the x coordinate at which to check
+     * @param y the y coordinate at which to check
+     * @return  the boolean result of the check condition
+     */
+    private boolean isOrganicCheese(int y, int x) {
+        return myMap.getLevelMap()[y][x].getIsOrganicCheese();
     }
 
+    /**
+     * This function checks to see if the position passed has a Cheese or not within the levelmap.
+     * @param x the x coordinate at which to check
+     * @param y the y coordinate at which to check
+     * @return  the boolean result of the check condition
+     */
+    private boolean isaCheese(int y, int x) {
+        return myMap.getLevelMap()[y][x].getisCheese();
+    }
+
+    /**
+     * This void function calls the chase function on both cats to update their position within their objects and then calls the catMovedraw function which updates the cat labels according to the new coordinates.
+     * It also calls the Catscollide function which checks whether either of the cats have collided with the mouse to end the game.
+     */
     private void MoveCats() {
         int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), myMap.getLevelMap());
         int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), myMap.getLevelMap());
         catMoveDraw(direction1, direction2);
-    }
-
-    private boolean isaBarrier(int currentY, int i) {
-        return myMap.getLevelMap()[currentY][i].getisBarrier();
+        //Collision detection using Catlabels
+        if (Catscollide()){
+            inGame = false;
+            gameOver();
+        }
     }
 
     /**
      * This void function setup the position of OrganicCheese on the tile map
      * Randomize the appearance time and disappearance time of organic cheese
-     * @author Canh Nhat Minh Le
-     * */
+     */
     public void setOrgCheeseAp ()
     {
         //Randomize the appearance of organic1  and make label and the OrganicCheese
@@ -723,8 +752,7 @@ public class Game extends JFrame implements KeyListener {
 
     /**
      * This is the integer function, it will return random number
-     * @author Tianyang Zhou
-     * */
+     */
     public int getRandomNumber(int min, int max) {
         Random random = new Random();
         return random.nextInt(max - min) + min;
@@ -732,7 +760,6 @@ public class Game extends JFrame implements KeyListener {
 
     /**
      * override method
-     * @author Tianyang Zhou
      * */
     @Override
     public void keyTyped(KeyEvent e) {
@@ -740,7 +767,6 @@ public class Game extends JFrame implements KeyListener {
 
     /**
      * override method
-     * @author Tianyang Zhou
      * */
     @Override
     public void keyReleased(KeyEvent e) {
@@ -748,7 +774,6 @@ public class Game extends JFrame implements KeyListener {
 
     /**
      * This is the void function that belongs to the keyListener interface which monitors for keyboard input and calls move mouse accordingly.
-     * @author Yogesh Sonik
      * */
 
     @Override

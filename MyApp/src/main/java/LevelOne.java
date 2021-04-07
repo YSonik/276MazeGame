@@ -1,3 +1,9 @@
+
+/**
+ * This is the Level class which is responsible for the creation and maintenance of the maze's layout
+ * @author Yogesh Sonik
+ * @version 1.0
+ * */
 public class LevelOne {
 
     private Tile[][] levelMap;
@@ -8,7 +14,6 @@ public class LevelOne {
     }
     /**
      * This is the void method called by the LevelOne constructor which creates a 2D array of tiles and encodes all indices to the objects that should be placed at that location in the maze.
-     * @author Yogesh Sonik
      * */
     private void createTileMap()
     {

@@ -2,6 +2,7 @@
  * <h1>Tile Class<h1/>
  * This class represents one uniform location on the maze grid that can be occupied by a an object.
  * @author Yogesh sonik
+ *  @version 1.0
  * */
 
 public class Tile
@@ -17,7 +18,6 @@ public class Tile
 
     /**
      * This is the constructor for the tile class which takes in 8 boolean parameters from which only one will be true to distinguish the identity of the object that it represents.
-     * @author Yogesh Sonik
      * @param hasBarrier distinguishes the tile to represent a barrier
      * @param isCharacter distinguishes the tile as the location of the mouse
      * @param isCheese distinguishes the tile as the location of a cheese
