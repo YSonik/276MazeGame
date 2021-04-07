@@ -224,8 +224,8 @@ public class TestCatMovement {
         assertEquals(myGame.getCat1().getCurrentY(), 2);
         assertEquals(myGame.getCat2().getCurrentX(), 5);
         assertEquals(myGame.getCat2().getCurrentY(), 5);
-        assertEquals(myGame.getCat1().leftblocked(myGame.getMyMap().getLevelMap()),  false);
-        assertEquals(myGame.getCat2().leftblocked(myGame.getMyMap().getLevelMap()), false);
+        assertEquals(myGame.getCat1().bottomblocked(myGame.getMyMap().getLevelMap()),  false);
+        assertEquals(myGame.getCat2().bottomblocked(myGame.getMyMap().getLevelMap()), false);
     }
 
     //When Mouse and Cats have same X. Check if there's Barrier
