@@ -14,7 +14,7 @@ import java.awt.*;
  * to get closer to the player after every tick.
  * <p>
  * @author Scott Luu  
- *
+ * @version 2.0
  */
 
 
@@ -42,7 +42,7 @@ public class Cat extends Enemies {
 
     }
 
- /**
+    /**
      * This is the void function, it will create cat label
      * */
     public void createCatLabel()
@@ -257,7 +257,7 @@ public class Cat extends Enemies {
 
    
 
-    
+    /** This method gets and returns Cat's BufferedImage CatImage*/    
 
     public BufferedImage getCatImage () {
         return catImage;
