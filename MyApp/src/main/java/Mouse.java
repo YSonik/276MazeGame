@@ -10,6 +10,7 @@ import java.nio.file.Paths;
  * <h1>Mouse Class</h1>
  * This class represents the movable mouse character
  * @author Yogesh Sonik
+ * @version 2.0
  * */
 public class Mouse {
     private int currentX;
@@ -20,7 +21,6 @@ public class Mouse {
 
     /**
      * This is the constructor for the Mouse class which sets the starting position of the mouse, sets cheese eaten to zero and imports image for the jLabel.
-     * @author Yogesh Sonik
      * */
     Mouse()
     {
@@ -38,7 +38,6 @@ public class Mouse {
 
     /**
      * This is the void function, which is called by the Game constructor, creates a jLabel for the mouse and draws it at the correct location.
-     * @author Yogesh Sonik
      * */
     public void createMouseLabel()
     {
