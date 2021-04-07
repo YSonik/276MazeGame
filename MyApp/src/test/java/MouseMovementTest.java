@@ -66,6 +66,7 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMap().getLevelMap()[1][3].getIsCharacter(),true );
         assertEquals(myGame.getMyMap().getLevelMap()[1][3].getIsOrganicCheese(), false);
         assertFalse(myGame.getOrgCheese2().organicLabel.isVisible());
+        //Add integration tests here by checking the position of the jLabel
 
     }
     @Test
@@ -83,6 +84,22 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMap().getLevelMap()[4][4].getisMouseTrap(), false);
         assertFalse(myGame.getTrap2().trapLabel.isVisible());
     }
+
+    @Test
+    void MoveLeftIsTrap2(){
+        myGame.testing = true;
+        myGame.getMyMouse().setCurrentX(5);
+        myGame.getMyMouse().setCurrentY(4);
+        myGame.validate();
+        myGame.moveMouse("left");
+        assertEquals(myGame.getMyMouse().getCurrentX(), 4);
+        assertEquals(myGame.getMyMouse().getCurrentY(), 4);
+        assertEquals(myGame.getScore(),-6);
+        assertEquals(myGame.getMyMap().getLevelMap()[4][4].getIsCharacter(),true );
+        assertEquals(myGame.getMyMap().getLevelMap()[4][4].getisMouseTrap(), false);
+    }
+
+
 
     @Test
     void MoveRightIsEmpty() {
@@ -156,6 +173,20 @@ public class MouseMovementTest {
     }
 
     @Test
+    void MoveRightIsTrap2(){
+        myGame.testing = true;
+        myGame.getMyMouse().setCurrentX(5);
+        myGame.getMyMouse().setCurrentY(3);
+        myGame.validate();
+        myGame.moveMouse("right");
+        assertEquals(myGame.getMyMouse().getCurrentX(), 6);
+        assertEquals(myGame.getMyMouse().getCurrentY(), 3);
+        assertEquals(myGame.getScore(),-6);
+        assertEquals(myGame.getMyMap().getLevelMap()[3][6].getIsCharacter(),true );
+        assertEquals(myGame.getMyMap().getLevelMap()[3][6].getisMouseTrap(), false);
+    }
+
+    @Test
     void MoveUpIsEmpty() {
         myGame.getMyMouse().setCurrentX(8);
         myGame.getMyMouse().setCurrentY(8);
@@ -221,6 +252,20 @@ public class MouseMovementTest {
     }
 
     @Test
+    void MoveUpIsTrap2(){
+        myGame.testing = true;
+        myGame.getMyMouse().setCurrentX(6);
+        myGame.getMyMouse().setCurrentY(4);
+        myGame.validate();
+        myGame.moveMouse("up");
+        assertEquals(myGame.getMyMouse().getCurrentX(), 6);
+        assertEquals(myGame.getMyMouse().getCurrentY(), 3);
+        assertEquals(myGame.getScore(),-6);
+        assertEquals(myGame.getMyMap().getLevelMap()[3][6].getIsCharacter(),true );
+        assertEquals(myGame.getMyMap().getLevelMap()[3][6].getisMouseTrap(), false);
+    }
+
+    @Test
     void MoveDownIsEmpty() {
         myGame.getMyMouse().setCurrentX(8);
         myGame.getMyMouse().setCurrentY(7);
@@ -283,6 +328,20 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMap().getLevelMap()[4][4].getIsCharacter(),true );
         assertEquals(myGame.getMyMap().getLevelMap()[4][4].getisMouseTrap(), false);
         assertFalse(myGame.getTrap2().trapLabel.isVisible());
+    }
+
+    @Test
+    void MoveDownIsTrap2(){
+        myGame.testing = true;
+        myGame.getMyMouse().setCurrentX(4);
+        myGame.getMyMouse().setCurrentY(3);
+        myGame.validate();
+        myGame.moveMouse("down");
+        assertEquals(myGame.getMyMouse().getCurrentX(), 4);
+        assertEquals(myGame.getMyMouse().getCurrentY(), 4);
+        assertEquals(myGame.getScore(),-6);
+        assertEquals(myGame.getMyMap().getLevelMap()[4][4].getIsCharacter(),true );
+        assertEquals(myGame.getMyMap().getLevelMap()[4][4].getisMouseTrap(), false);
     }
 
 

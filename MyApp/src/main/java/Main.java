@@ -27,14 +27,14 @@ public class Main extends JFrame{
         f.setResizable(false);
         f.getContentPane().setBackground(Color.WHITE);
         f.setVisible(true);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // dispose the old frame
-                f.dispose();
-                // initial the new frame
-                Game myGame = new Game();
-            }
-        });
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // dispose the old frame
+                    f.dispose();
+                    // initial the new frame
+                    Game myGame = new Game();
+                }
+            });
     }
 }

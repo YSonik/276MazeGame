@@ -29,6 +29,7 @@ public class Game extends JFrame implements KeyListener {
     private Cat cat1;
     private Cat cat2;
     private MouseTrap trap1, trap2;
+    public boolean testing;
 
     public void setRand1(int rand1) {
         this.rand1 = rand1;
@@ -122,6 +123,8 @@ public class Game extends JFrame implements KeyListener {
 
     Game()
     {
+        testing = false;
+
         //Create a TileMap Object
         myMap = new LevelOne();
 
@@ -229,19 +232,19 @@ public class Game extends JFrame implements KeyListener {
      * This is the void function, it will draw win page
      * */
     public void winPage() {
-        ImageIcon testIcon = new ImageIcon("Images/win.png");
-        Object[] option = { "Play Again" };
-        int test = JOptionPane.showOptionDialog(null, "Total Score: " + score + "\n" +
-                        "Time: " + hours_string+":"+minutes_string+":"+seconds_string  , " Win",
-                                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-                                    testIcon, option, option[0]);
-		if(test == -1){
-            System.exit(ABORT);
-        }
-        else{
-            this.setVisible(false);
-            new Game();
-        }
+
+            ImageIcon testIcon = new ImageIcon("Images/win.png");
+            Object[] option = {"Play Again"};
+            int test = JOptionPane.showOptionDialog(null, "Total Score: " + score + "\n" +
+                            "Time: " + hours_string + ":" + minutes_string + ":" + seconds_string, " Win",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                    testIcon, option, option[0]);
+            if (test == -1) {
+                System.exit(ABORT);
+            } else {
+                this.setVisible(false);
+                new Game();
+            }
     }
 
     /**
@@ -255,19 +258,20 @@ public class Game extends JFrame implements KeyListener {
      * This is the void function, it will set gameover
      * */
     public void gameOver() {
-        ImageIcon testIcon = new ImageIcon("Images/MouseLose.jpg");
-        Object[] option = { "Play Again" };
-        int test = JOptionPane.showOptionDialog(null, "Total Score: " + score + "\n" +
-                        "Time: " + hours_string+":"+minutes_string+":"+seconds_string  , " GAME OVER",
-                                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-                                    testIcon, option, option[0]);
-		if(test == -1){
-            System.exit(ABORT);
-        }
-        else{
-            this.setVisible(false);
-            new Game();
-        }
+
+            ImageIcon testIcon = new ImageIcon("Images/MouseLose.jpg");
+            Object[] option = {"Play Again"};
+            int test = JOptionPane.showOptionDialog(null, "Total Score: " + score + "\n" +
+                            "Time: " + hours_string + ":" + minutes_string + ":" + seconds_string, " GAME OVER",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                    testIcon, option, option[0]);
+            if (test == -1) {
+                System.exit(ABORT);
+            } else {
+                this.setVisible(false);
+                new Game();
+            }
+
 	}
 
     /**
@@ -467,6 +471,10 @@ public class Game extends JFrame implements KeyListener {
 
                     if(scoreBelowZero()){
                         UpdateMouseCoordX(myMouse.getCurrentX() - 1, myMouse.mouseLabel.getX() - 100);
+                        if(testing)
+                        {
+                            return;
+                        }
                         inGame = false;
                         gameOver();
                     }
@@ -528,6 +536,10 @@ public class Game extends JFrame implements KeyListener {
 
                     if (scoreBelowZero()) {
                         UpdateMouseCoordX(myMouse.getCurrentX() + 1, myMouse.mouseLabel.getX() + 100);
+                        if(testing)
+                        {
+                            return;
+                        }
                         inGame = false;
                         gameOver();
                     }
@@ -595,6 +607,10 @@ public class Game extends JFrame implements KeyListener {
 
                     if (scoreBelowZero()) {
                         UpdateMouseCoordY(myMouse.getCurrentY() - 1, myMouse.mouseLabel.getY() - 100);
+                        if(testing)
+                        {
+                            return;
+                        }
                         inGame = false;
                         gameOver();
                     }
@@ -654,6 +670,10 @@ public class Game extends JFrame implements KeyListener {
                     score -= trap2.getPenalty();
                     if (scoreBelowZero()) {
                         UpdateMouseCoordY(myMouse.getCurrentY() + 1, myMouse.mouseLabel.getY() + 100);
+                        if(testing)
+                        {
+                            return;
+                        }
                         inGame = false;
                         gameOver();
                     }
