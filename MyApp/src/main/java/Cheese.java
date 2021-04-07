@@ -11,6 +11,7 @@ import java.nio.file.Paths;
  * This Cheese class setup the Cheese rewards
  * <p>
  * @author Canh Nhat Minh Le
+ * @version 2.0
  *
  */
 public class Cheese extends Rewards{
@@ -38,9 +39,8 @@ public class Cheese extends Rewards{
         return cheeseImg;
     }
 
-    /**
-     * Void function to setup locations and draw "Cheese" labels
-     * */
+
+     // Void function to setup locations and draw "Cheese" labels
     public void createCheeseLabel()
     {   cheeseLabel = new JLabel();
         cheeseLabel.setBounds(y*100,(x+1)*100,100,100);

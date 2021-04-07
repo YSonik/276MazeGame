@@ -14,6 +14,7 @@ import java.nio.file.Paths;
  * of Organic Cheese Rewards while also import the image
  * <p>
  * @author Canh Nhat Minh Le
+ * @version 2.0
  */
 public class OrganicCheese extends Rewards {
     private BufferedImage orgCheeseImg;
@@ -39,9 +40,9 @@ public class OrganicCheese extends Rewards {
     public BufferedImage getOrgCheeseImg(){
         return orgCheeseImg;
     }
-    /**
-     * Void function to setup locations and draw "Organic Cheese" labels
-     * */
+
+    // * Void function to setup locations and draw "Organic Cheese" labels
+
     public void createOrganicCheeseLabel(){
         //Create the first Organic Cheese label and draw on JFrame
         organicLabel = new JLabel();

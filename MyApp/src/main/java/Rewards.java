@@ -5,7 +5,7 @@
  * two types of rewards (Cheese and organic cheese)
  * <p>
  * @author Canh Nhat Minh Le
- *
+ * @version 1.0
  */
 public class Rewards {
     protected int x;

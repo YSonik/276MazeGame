@@ -28,6 +28,7 @@ public class TestGenMap {
                 break;
             }
         }
+
         //check Top row
         for(int i = 0; i < 10; i++)
         {
