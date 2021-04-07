@@ -14,7 +14,7 @@ import java.awt.*;
  * to get closer to the player after every tick.
  * <p>
  * @author Scott Luu  
- * @version 2.0
+ * @version 2.1
  */
 
 
