@@ -38,7 +38,7 @@ public class MouseTrap extends Enemies {
     public void createTrapLabel()
     {
         trapLabel = new JLabel("Trap");
-        trapLabel.setBounds(this.currentY*100,(this.currentX +1)*100,100,100);
+        trapLabel.setBounds(this.getCurrentY()*100,(this.getCurrentX() +1)*100,100,100);
         trapLabel.setBackground(Color.pink);
         trapLabel.setOpaque(true);
         Image trapImg1 = this.getMTImage().getScaledInstance(trapLabel.getWidth(), trapLabel.getHeight(), Image.SCALE_SMOOTH);
