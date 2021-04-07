@@ -15,8 +15,8 @@ public class MouseMovementTest {
 
     @Test
     void MoveLeftIsEmpty() {
-        myGame.getMyMouse().setCurrentX(4);
-        myGame.getMyMouse().setCurrentY(1);
+        myGame.getMyMouse().setCurrentX(8);
+        myGame.getMyMouse().setCurrentY(8);
         myGame.validate();
         myGame.moveMouse("left");
         assertEquals(myGame.getMyMouse().getCurrentX(), 7);
