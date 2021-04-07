@@ -31,6 +31,10 @@ public class Game extends JFrame implements KeyListener {
     private MouseTrap trap1, trap2;
     public boolean testing;
 
+    public Boolean getWinGame() {
+        return winGame;
+    }
+
     public void setRand1(int rand1) {
         this.rand1 = rand1;
     }
@@ -696,13 +700,18 @@ public class Game extends JFrame implements KeyListener {
         countSteps++;
 
         if(this.myMouse.getCheeseEaten() == 2 && this.myMouse.getCurrentY() == 1 && this.myMouse.getCurrentX() == 0) {
-            inGame = false;
+            if(!testing) {
+                inGame = false;
+            }
+
             winGame = true;
         }
 
         if(winGame == true) {
-            inGame = false;
-            winPage();
+            if(!testing) {
+                inGame = false;
+                winPage();
+            }
         }
     }
 
@@ -799,7 +808,9 @@ public class Game extends JFrame implements KeyListener {
         //Collision detection using Catlabels
         if (Catscollide()){
             inGame = false;
-            gameOver();
+            if(!testing) {
+                gameOver();
+            }
         }
     }
 
