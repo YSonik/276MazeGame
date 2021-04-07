@@ -30,6 +30,14 @@ public class Game extends JFrame implements KeyListener {
     private Cat cat2;
     private MouseTrap trap1, trap2;
 
+    public Boolean getInGame() {
+        return inGame;
+    }
+
+    public void setInGame(Boolean inGame) {
+        this.inGame = inGame;
+    }
+
     public Mouse getMyMouse() {
         return myMouse;
     }
@@ -80,6 +88,10 @@ public class Game extends JFrame implements KeyListener {
 
     public void setCountSteps(int steps) {
         this.countSteps = steps;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     private JLabel scoreText;
