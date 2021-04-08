@@ -29,19 +29,22 @@ public class Cat extends Enemies {
      * @param currentX first parameter to Cat
      * @param currentY second parameter to Cat
      */
-    Cat(int currentX, int currentY)
+    Cat(int currentX, int currentY,String path)
     {
         super(currentX, currentY);
-        try {
-            Path catPath = Paths.get("Images/cat.png").toRealPath();;
-            this.catImage = ImageIO.read(new File(catPath.toString()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SetCatImage(path);
         createCatLabel();
 
     }
 
+    private void SetCatImage(String path) {
+        try {
+            Path catPath = Paths.get(path).toRealPath();;
+            this.catImage = ImageIO.read(new File(catPath.toString()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     /**

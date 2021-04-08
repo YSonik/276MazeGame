@@ -30,6 +30,8 @@ public class Game extends JFrame implements KeyListener {
     private Cat cat2;
     private MouseTrap trap1, trap2;
     public boolean testing;
+    public String catImage1 = "Images/cat1.png";
+    public String catImage2 = "Images/cat2.png";
 
     public Boolean getWinGame() {
         return winGame;
@@ -133,11 +135,11 @@ public class Game extends JFrame implements KeyListener {
         myMap = new LevelOne();
 
         // Create multiple cats
-        cat1 = new Cat(4, 1);
+        cat1 = new Cat(4, 1,catImage1);
         this.add(cat1.catLabel);
         this.validate();
 
-        cat2 = new Cat(8, 4);
+        cat2 = new Cat(8, 4,catImage2);
         this.add(cat2.catLabel);
         this.validate();
 
@@ -701,6 +703,7 @@ public class Game extends JFrame implements KeyListener {
 
         countSteps++;
 
+
         if(this.myMouse.getCheeseEaten() == 2 && this.myMouse.getCurrentY() == 1 && this.myMouse.getCurrentX() == 0) {
 
             inGame = false;
@@ -802,6 +805,13 @@ public class Game extends JFrame implements KeyListener {
      * It also calls the Catscollide function which checks whether either of the cats have collided with the mouse to end the game.
      */
     private void MoveCats() {
+        if (Catscollide()){
+            inGame = false;
+            if(!testing) {
+                gameOver();
+            }
+            return;
+        }
         int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), myMap.getLevelMap());
         int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), myMap.getLevelMap());
         catMoveDraw(direction1, direction2);
