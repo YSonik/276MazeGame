@@ -42,6 +42,8 @@ public class Cat extends Enemies {
 
     }
 
+
+
     /**
      * This is the void function, it will create cat label
      * */
