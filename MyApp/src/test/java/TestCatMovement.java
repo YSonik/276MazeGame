@@ -391,46 +391,144 @@ public class TestCatMovement {
         assertEquals(myGame.getCat2().getCurrentY(), 1);
         assertFalse(myGame.getWinGame());
     }
-//
-//    //When Mouse and Cats have same X. Check if there's Barrier
-//    @Test
-//    void MouseDown(){
-////        myGame.getCat1().setCurrentX(5);
-////        myGame.getCat1().setCurrentY(1);
-////        myGame.getCat2().setCurrentX(5);
-////        myGame.getCat2().setCurrentY(4);
-////        myGame.getMyMouse().setCurrentX(5);
-////        myGame.getMyMouse().setCurrentY(7);
-////        myGame.moveMouse("down");
-////        assertEquals(myGame.getCat1().getCurrentX(), 5);
-////        assertEquals(myGame.getCat1().getCurrentY(), 2);
-////        assertEquals(myGame.getCat2().getCurrentX(), 5);
-////        assertEquals(myGame.getCat2().getCurrentY(), 5);
-////        assertEquals(myGame.getCat1().leftblocked(myGame.getMyMap().getLevelMap()),  false);
-////        assertEquals(myGame.getCat2().leftblocked(myGame.getMyMap().getLevelMap()), false);
-//    }
-//
-//    //When Mouse and Cats have same X. Check if there's Barrier
-//    @Test
-//    void MouseUp(){
-//        myGame.getCat1().setCurrentX(5);
-//        myGame.getCat1().setCurrentY(1);
-//        myGame.getCat2().setCurrentX(5);
-//        myGame.getCat2().setCurrentY(4);
-//        myGame.getMyMouse().setCurrentX(5);
-//        myGame.getMyMouse().setCurrentY(7);
-//        int x = myGame.getMyMouse().getCurrentX();
-//        int y = myGame.getMyMouse().getCurrentY();
-//        int move = myGame.getCat1().chase(x,y, myGame.getMyMap().getLevelMap());
-//        int move2 = myGame.getCat2().chase(x,y, myGame.getMyMap().getLevelMap());
-//        assertEquals(move, 3);
-//        assertEquals(move2, 3);
-//        assertEquals(myGame.getCat1().getCurrentX(), 5);
-//        assertEquals(myGame.getCat1().getCurrentY(), 2);
-//        assertEquals(myGame.getCat2().getCurrentX(), 5);
-//        assertEquals(myGame.getCat2().getCurrentY(), 5);
-//        assertEquals(myGame.getCat1().bottomblocked(myGame.getMyMap().getLevelMap()),  false);
-//        assertEquals(myGame.getCat2().bottomblocked(myGame.getMyMap().getLevelMap()), false);
-//    }
 
+    //When Mouse and Cats have same X. Check if there's Barrier
+    @Test
+    void MouseUp(){
+        myGame.getCat1().setCurrentX(5);
+        myGame.getCat1().setCurrentY(1);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),500);
+        assertEquals(myGame.getCat1().catLabel.getY(),200);
+
+        myGame.getCat2().setCurrentX(5);
+        myGame.getCat2().setCurrentY(4);
+        myGame.validate();
+        assertEquals(myGame.getCat2().catLabel.getX(),500);
+        assertEquals(myGame.getCat2().catLabel.getY(),500);
+
+        myGame.getMyMouse().setCurrentX(5);
+        myGame.getMyMouse().setCurrentY(8);
+        myGame.validate();
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),500);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),900);
+        myGame.moveMouse("up");
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),500);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),800);
+
+        assertEquals(myGame.getCat1().getCurrentX(), 5);
+        assertEquals(myGame.getCat1().getCurrentY(), 2);
+        assertEquals(myGame.getCat2().getCurrentX(), 5);
+        assertEquals(myGame.getCat2().getCurrentY(), 5);
+    }
+
+    //When Mouse and Cats have same X. Check if there's Barrier
+    @Test
+    void MouseDown(){
+        myGame.getCat1().setCurrentX(5);
+        myGame.getCat1().setCurrentY(2);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),500);
+        assertEquals(myGame.getCat1().catLabel.getY(),300);
+
+        myGame.getCat2().setCurrentX(5);
+        myGame.getCat2().setCurrentY(5);
+        myGame.validate();
+        assertEquals(myGame.getCat2().catLabel.getX(),500);
+        assertEquals(myGame.getCat2().catLabel.getY(),600);
+
+        myGame.getMyMouse().setCurrentX(5);
+        myGame.getMyMouse().setCurrentY(7);
+        myGame.validate();
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),500);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),800);
+        myGame.moveMouse("down");
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),500);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),900);
+
+        assertEquals(myGame.getCat1().getCurrentX(), 5);
+        assertEquals(myGame.getCat1().getCurrentY(), 3);
+        assertEquals(myGame.getCat2().getCurrentX(), 5);
+        assertEquals(myGame.getCat2().getCurrentY(), 6);
+    }
+    //WHen mouse move up and a cat is on the left. Different X and Y
+    @Test
+    void MouseUpTopLeft(){
+        myGame.getCat1().setCurrentX(4);
+        myGame.getCat1().setCurrentY(1);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),400);
+        assertEquals(myGame.getCat1().catLabel.getY(),200);
+
+        myGame.getMyMouse().setCurrentX(8);
+        myGame.getMyMouse().setCurrentY(8);
+        myGame.validate();
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),800);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),900);
+        myGame.moveMouse("up");
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),800);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),800);
+        assertEquals(myGame.getCat1().getCurrentX(), 5);
+        assertEquals(myGame.getCat1().getCurrentY(), 1);
+    }
+
+    //When mouse is moving up and collide with Cat
+    @Test
+    void EatMouseUp(){
+        myGame.getCat1().setCurrentX(5);
+        myGame.getCat1().setCurrentY(5);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),500);
+        assertEquals(myGame.getCat1().catLabel.getY(),600);
+
+        myGame.getCat2().setCurrentX(5);
+        myGame.getCat2().setCurrentY(6);
+        myGame.validate();
+        assertEquals(myGame.getCat2().catLabel.getX(),500);
+        assertEquals(myGame.getCat2().catLabel.getY(),700);
+
+        myGame.getMyMouse().setCurrentX(5);
+        myGame.getMyMouse().setCurrentY(7);
+        myGame.validate();
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),500);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),800);
+        myGame.moveMouse("up");
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),500);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),700);
+
+        assertEquals(myGame.getCat1().getCurrentX(), 5);
+        assertEquals(myGame.getCat1().getCurrentY(), 6);
+        assertEquals(myGame.getCat2().getCurrentX(), 5);
+        assertEquals(myGame.getCat2().getCurrentY(), 6);
+    }
+
+    //When mouse is moving up and collide with Cat
+    @Test
+    void EatMouseDown(){
+        myGame.getCat1().setCurrentX(1);
+        myGame.getCat1().setCurrentY(4);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),100);
+        assertEquals(myGame.getCat1().catLabel.getY(),500);
+
+        myGame.getCat2().setCurrentX(1);
+        myGame.getCat2().setCurrentY(3);
+        myGame.validate();
+        assertEquals(myGame.getCat2().catLabel.getX(),100);
+        assertEquals(myGame.getCat2().catLabel.getY(),400);
+
+        myGame.getMyMouse().setCurrentX(1);
+        myGame.getMyMouse().setCurrentY(2);
+        myGame.validate();
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),100);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),300);
+        myGame.moveMouse("down");
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),100);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),400);
+
+        assertEquals(myGame.getCat1().getCurrentX(), 1);
+        assertEquals(myGame.getCat1().getCurrentY(), 3);
+        assertEquals(myGame.getCat2().getCurrentX(), 1);
+        assertEquals(myGame.getCat2().getCurrentY(), 3);
+    }
 }
