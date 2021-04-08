@@ -42,8 +42,8 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 7);
         assertEquals(myGame.getMyMouse().getCurrentY(), 6);
         assertEquals(myGame.getScore(),5);
-        assertEquals(myGame.getMyMap().getLevelMap()[6][7].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[6][7].getisCheese(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[6][7].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[6][7].getisCheese());
         assertFalse(myGame.getCheese1().cheeseLabel.isVisible());
     }
 
@@ -64,8 +64,8 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 3);
         assertEquals(myGame.getMyMouse().getCurrentY(), 1);
         assertEquals(myGame.getScore(),10);
-        assertEquals(myGame.getMyMap().getLevelMap()[1][3].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[1][3].getIsOrganicCheese(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[1][3].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[1][3].getIsOrganicCheese());
         assertFalse(myGame.getOrgCheese2().organicLabel.isVisible());
         //Add integration tests here by checking the position of the jLabel
 
@@ -81,8 +81,8 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 4);
         assertEquals(myGame.getMyMouse().getCurrentY(), 4);
         assertEquals(myGame.getScore(),0);
-        assertEquals(myGame.getMyMap().getLevelMap()[4][4].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[4][4].getisMouseTrap(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[4][4].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[4][4].getisMouseTrap());
         assertFalse(myGame.getTrap2().trapLabel.isVisible());
     }
 
@@ -96,8 +96,9 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 4);
         assertEquals(myGame.getMyMouse().getCurrentY(), 4);
         assertEquals(myGame.getScore(),-6);
-        assertEquals(myGame.getMyMap().getLevelMap()[4][4].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[4][4].getisMouseTrap(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[4][4].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[4][4].getisMouseTrap());
+        assertFalse(myGame.getInGame());
     }
 
 
@@ -131,8 +132,8 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 3);
         assertEquals(myGame.getMyMouse().getCurrentY(), 4);
         assertEquals(myGame.getScore(),5);
-        assertEquals(myGame.getMyMap().getLevelMap()[4][3].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[4][3].getisCheese(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[4][3].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[4][3].getisCheese());
         assertFalse(myGame.getCheese2().cheeseLabel.isVisible());
     }
     @Test
@@ -152,8 +153,8 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 3);
         assertEquals(myGame.getMyMouse().getCurrentY(), 1);
         assertEquals(myGame.getScore(),10);
-        assertEquals(myGame.getMyMap().getLevelMap()[1][3].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[1][3].getIsOrganicCheese(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[1][3].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[1][3].getIsOrganicCheese());
         assertFalse(myGame.getOrgCheese2().organicLabel.isVisible());
     }
     @Test
@@ -167,8 +168,8 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 6);
         assertEquals(myGame.getMyMouse().getCurrentY(), 3);
         assertEquals(myGame.getScore(),0);
-        assertEquals(myGame.getMyMap().getLevelMap()[3][6].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[3][6].getisMouseTrap(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[3][6].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[3][6].getisMouseTrap());
         assertFalse(myGame.getTrap1().trapLabel.isVisible());
     }
 
@@ -182,8 +183,9 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 6);
         assertEquals(myGame.getMyMouse().getCurrentY(), 3);
         assertEquals(myGame.getScore(),-6);
-        assertEquals(myGame.getMyMap().getLevelMap()[3][6].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[3][6].getisMouseTrap(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[3][6].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[3][6].getisMouseTrap());
+        assertFalse(myGame.getInGame());
     }
 
     @Test
@@ -215,8 +217,8 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 3);
         assertEquals(myGame.getMyMouse().getCurrentY(), 4);
         assertEquals(myGame.getScore(),5);
-        assertEquals(myGame.getMyMap().getLevelMap()[4][3].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[4][3].getisCheese(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[4][3].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[4][3].getisCheese());
         assertFalse(myGame.getCheese2().cheeseLabel.isVisible());
     }
     @Test
@@ -230,9 +232,9 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 3);
         assertEquals(myGame.getMyMouse().getCurrentY(), 7);
         assertEquals(myGame.getScore(),10);
-        assertEquals(myGame.getMyMap().getLevelMap()[7][3].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[7][3].getIsOrganicCheese(), false);
-        assertFalse(myGame.getOrgCheese2().organicLabel.isVisible());
+        assertTrue(myGame.getMyMap().getLevelMap()[7][3].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[7][3].getIsOrganicCheese());
+        assertFalse(myGame.getOrgCheese1().organicLabel.isVisible());
 
     }
     @Test
@@ -246,8 +248,8 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 6);
         assertEquals(myGame.getMyMouse().getCurrentY(), 3);
         assertEquals(myGame.getScore(),0);
-        assertEquals(myGame.getMyMap().getLevelMap()[3][6].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[3][6].getisMouseTrap(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[3][6].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[3][6].getisMouseTrap());
         assertFalse(myGame.getTrap1().trapLabel.isVisible());
     }
 
@@ -261,8 +263,9 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 6);
         assertEquals(myGame.getMyMouse().getCurrentY(), 3);
         assertEquals(myGame.getScore(),-6);
-        assertEquals(myGame.getMyMap().getLevelMap()[3][6].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[3][6].getisMouseTrap(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[3][6].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[3][6].getisMouseTrap());
+        assertFalse(myGame.getInGame());
     }
 
     @Test
@@ -294,8 +297,8 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 3);
         assertEquals(myGame.getMyMouse().getCurrentY(), 4);
         assertEquals(myGame.getScore(),5);
-        assertEquals(myGame.getMyMap().getLevelMap()[4][3].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[4][3].getisCheese(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[4][3].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[4][3].getisCheese());
         assertFalse(myGame.getCheese2().cheeseLabel.isVisible());
     }
     @Test
@@ -309,8 +312,8 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 3);
         assertEquals(myGame.getMyMouse().getCurrentY(), 7);
         assertEquals(myGame.getScore(),10);
-        assertEquals(myGame.getMyMap().getLevelMap()[7][3].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[7][3].getIsOrganicCheese(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[7][3].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[7][3].getIsOrganicCheese());
         assertFalse(myGame.getOrgCheese1().organicLabel.isVisible());
 
     }
@@ -325,8 +328,8 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 4);
         assertEquals(myGame.getMyMouse().getCurrentY(), 4);
         assertEquals(myGame.getScore(),0);
-        assertEquals(myGame.getMyMap().getLevelMap()[4][4].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[4][4].getisMouseTrap(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[4][4].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[4][4].getisMouseTrap());
         assertFalse(myGame.getTrap2().trapLabel.isVisible());
     }
 
@@ -340,9 +343,90 @@ public class MouseMovementTest {
         assertEquals(myGame.getMyMouse().getCurrentX(), 4);
         assertEquals(myGame.getMyMouse().getCurrentY(), 4);
         assertEquals(myGame.getScore(),-6);
-        assertEquals(myGame.getMyMap().getLevelMap()[4][4].getIsCharacter(),true );
-        assertEquals(myGame.getMyMap().getLevelMap()[4][4].getisMouseTrap(), false);
+        assertTrue(myGame.getMyMap().getLevelMap()[4][4].getIsCharacter());
+        assertFalse(myGame.getMyMap().getLevelMap()[4][4].getisMouseTrap());
+        assertFalse(myGame.getInGame());
     }
 
+    @Test //This is the case where the mouse reaches the exit without eating all regular cheese
+    void MouseReachExit(){
+        myGame.testing = true;
+        myGame.getMyMouse().setCurrentX(1);
+        myGame.getMyMouse().setCurrentY(1);
+        myGame.validate();
+        myGame.moveMouse("left");
+        assertEquals(myGame.getMyMouse().getCurrentX(),0);
+        assertEquals(myGame.getMyMouse().getCurrentY(),1);
+        assertFalse(myGame.getWinGame());
+
+    }
+
+    @Test //This is the case where the mouse reaches the exit after eating all regular cheese
+    void MouseReachExit2(){
+        myGame.testing = true;
+        //eat cheese 1
+        myGame.getMyMouse().setCurrentX(8);
+        myGame.getMyMouse().setCurrentY(6);
+        myGame.validate();
+        myGame.moveMouse("left");
+        //eat cheese 2
+        myGame.getMyMouse().setCurrentX(3);
+        myGame.getMyMouse().setCurrentY(5);
+        myGame.validate();
+        myGame.moveMouse("up");
+        assertEquals(myGame.getScore(),10);
+        assertEquals(myGame.getMyMouse().getCheeseEaten(),2);
+        //Reach Exit
+        myGame.getMyMouse().setCurrentX(1);
+        myGame.getMyMouse().setCurrentY(1);
+        myGame.validate();
+        myGame.moveMouse("left");
+        assertEquals(myGame.getMyMouse().getCurrentX(),0);
+        assertEquals(myGame.getMyMouse().getCurrentY(),1);
+        assertTrue(myGame.getWinGame());
+        assertFalse(myGame.getInGame());
+    }
+
+    @Test
+    void CatCollisionLeft(){
+        myGame.testing = true;
+        myGame.getMyMouse().setCurrentX(5);
+        myGame.getMyMouse().setCurrentY(1);
+        myGame.validate();
+        myGame.moveMouse("left");
+        assertEquals(myGame.getMyMouse().getCurrentX(),4);
+        assertEquals(myGame.getMyMouse().getCurrentY(),1);
+        assertFalse(myGame.getInGame());
+        assertEquals(myGame.getCat1().getCurrentX(),myGame.getMyMouse().getCurrentX());
+        assertEquals(myGame.getCat1().getCurrentY(),myGame.getMyMouse().getCurrentY());
+    }
+
+    @Test
+    void CatCollisionRight(){
+        myGame.testing = true;
+        myGame.getMyMouse().setCurrentX(7);
+        myGame.getMyMouse().setCurrentY(4);
+        myGame.validate();
+        myGame.moveMouse("right");
+        assertEquals(myGame.getMyMouse().getCurrentX(),8);
+        assertEquals(myGame.getMyMouse().getCurrentY(),4);
+        assertFalse(myGame.getInGame());
+        assertEquals(myGame.getCat2().getCurrentX(),myGame.getMyMouse().getCurrentX());
+        assertEquals(myGame.getCat2().getCurrentY(),myGame.getMyMouse().getCurrentY());
+    }
+
+    @Test
+    void CatCollisionDown(){
+        myGame.testing = true;
+        myGame.getMyMouse().setCurrentX(8);
+        myGame.getMyMouse().setCurrentY(3);
+        myGame.validate();
+        myGame.moveMouse("down");
+        assertEquals(myGame.getMyMouse().getCurrentX(),8);
+        assertEquals(myGame.getMyMouse().getCurrentY(),4);
+        assertFalse(myGame.getInGame());
+        assertEquals(myGame.getCat2().getCurrentX(),myGame.getMyMouse().getCurrentX());
+        assertEquals(myGame.getCat2().getCurrentY(),myGame.getMyMouse().getCurrentY());
+    }
 
 }

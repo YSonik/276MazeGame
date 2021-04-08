@@ -4,8 +4,8 @@
  */
 
 public class Enemies{
-    private int currentX;
-    private int currentY;
+    protected int currentX;
+    protected int currentY;
 
     Enemies(int currentX, int currentY){
         this.currentX = currentX;
@@ -13,19 +13,10 @@ public class Enemies{
     }
 
     public int getCurrentX() {
-        return this.currentX;
+        return currentX;
     }
 
     public int getCurrentY() {
-        return this.currentY; }
+        return currentY; }
 
-    public void setCurrentX(int currentX) {
-        this.currentX = currentX;
-    }
-
-    public void setCurrentY(int currentY) {
-        this.currentY = currentY;
-    }
-
-    
 }

@@ -31,6 +31,10 @@ public class Game extends JFrame implements KeyListener {
     private MouseTrap trap1, trap2;
     public boolean testing;
 
+    public Boolean getWinGame() {
+        return winGame;
+    }
+
     public void setRand1(int rand1) {
         this.rand1 = rand1;
     }
@@ -289,15 +293,19 @@ public class Game extends JFrame implements KeyListener {
         //Cat Position update
         switch (direction1) {
             case 1:
+                cat1.setCurrentX(cat1.getCurrentX() + 1);
                 cat1.catLabel.setLocation(cat1.catLabel.getX() + 100, cat1.catLabel.getY());
                 break;
             case 2:
+                cat1.setCurrentX(cat1.getCurrentX() - 1);
                 cat1.catLabel.setLocation(cat1.catLabel.getX() - 100, cat1.catLabel.getY());
                 break;
             case 3:
+                cat1.setCurrentY(cat1.getCurrentY() + 1);
                 cat1.catLabel.setLocation(cat1.catLabel.getX(), cat1.catLabel.getY() + 100);
                 break;
             case 4:
+                cat1.setCurrentY(cat1.getCurrentY() - 1);
                 cat1.catLabel.setLocation(cat1.catLabel.getX(), cat1.catLabel.getY() - 100);
                 break;
             default:
@@ -305,6 +313,7 @@ public class Game extends JFrame implements KeyListener {
         }
         switch (direction2) {
             case 1:
+                cat2.setCurrentX(cat2.getCurrentX() + 1);
                 cat2.catLabel.setLocation(cat2.catLabel.getX() + 100, cat2.catLabel.getY());
                 //undo cat2's movement if colliding with cat1
                 if((cat1.catLabel.getX() == cat2.catLabel.getX()) && (cat1.catLabel.getY() == cat2.catLabel.getY())){
@@ -313,6 +322,7 @@ public class Game extends JFrame implements KeyListener {
                 }
                 break;
             case 2:
+                cat2.setCurrentX(cat2.getCurrentX() - 1);
                 cat2.catLabel.setLocation(cat2.catLabel.getX() - 100, cat2.catLabel.getY());
                 if((cat1.catLabel.getX() == cat2.catLabel.getX()) && (cat1.catLabel.getY() == cat2.catLabel.getY())){
                    cat2.setCurrentX(cat2.getCurrentX()+1);
@@ -320,6 +330,7 @@ public class Game extends JFrame implements KeyListener {
                 }
                 break;
             case 3:
+                cat2.setCurrentY(cat2.getCurrentY() + 1);
                 cat2.catLabel.setLocation(cat2.catLabel.getX(), cat2.catLabel.getY() + 100);
                 if((cat1.catLabel.getX() == cat2.catLabel.getX()) && (cat1.catLabel.getY() == cat2.catLabel.getY())){
                     cat2.setCurrentY(cat2.getCurrentY()-1);
@@ -327,6 +338,7 @@ public class Game extends JFrame implements KeyListener {
                 }
                 break;
             case 4:
+                cat2.setCurrentY(cat2.getCurrentY() - 1);
                 cat2.catLabel.setLocation(cat2.catLabel.getX(), cat2.catLabel.getY() - 100);
                 if((cat1.catLabel.getX() == cat2.catLabel.getX()) && (cat1.catLabel.getY() == cat2.catLabel.getY())){
                     cat2.setCurrentY(cat2.getCurrentY()+1);
@@ -470,12 +482,11 @@ public class Game extends JFrame implements KeyListener {
 
                     if(scoreBelowZero()){
                         UpdateMouseCoordX(myMouse.getCurrentX() - 1, myMouse.mouseLabel.getX() - 100);
-                        if(testing)
-                        {
-                            return;
-                        }
                         inGame = false;
-                        gameOver();
+                        if(!testing)
+                        {
+                            gameOver();
+                        }
                     }
                     //Remove trap label
                     trap2.trapLabel.setVisible(false);
@@ -483,7 +494,7 @@ public class Game extends JFrame implements KeyListener {
                 }
 
                 //Update the position of the mouse and cat positions,given that the new location was not a barrier
-                if(!isaBarrier(myMouse.getCurrentY(), myMouse.getCurrentX() - 1)) {
+                if(!isaBarrier(myMouse.getCurrentY(), myMouse.getCurrentX() - 1) && !scoreBelowZero()) {
 
                     UpdateMouseCoordX(myMouse.getCurrentX() - 1, myMouse.mouseLabel.getX() - 100);
                     MoveCats();
@@ -535,12 +546,11 @@ public class Game extends JFrame implements KeyListener {
 
                     if (scoreBelowZero()) {
                         UpdateMouseCoordX(myMouse.getCurrentX() + 1, myMouse.mouseLabel.getX() + 100);
-                        if(testing)
-                        {
-                            return;
-                        }
                         inGame = false;
-                        gameOver();
+                        if(!testing)
+                        {
+                            gameOver();
+                        }
                     }
                     //Remove trap label
                     if(myMouse.getCurrentX() + 1 == trap1.getCurrentY() && myMouse.getCurrentY() == trap1.getCurrentX()) {
@@ -553,7 +563,7 @@ public class Game extends JFrame implements KeyListener {
                 }
 
                 //Update the position of the mouse and cat positions,given that the new location was not a barrier
-                if(!isaBarrier(myMouse.getCurrentY(), myMouse.getCurrentX() + 1)) {
+                if(!isaBarrier(myMouse.getCurrentY(), myMouse.getCurrentX() + 1) && !scoreBelowZero()) {
 
                     UpdateMouseCoordX(myMouse.getCurrentX() + 1, myMouse.mouseLabel.getX() + 100);
                     MoveCats();
@@ -606,12 +616,12 @@ public class Game extends JFrame implements KeyListener {
 
                     if (scoreBelowZero()) {
                         UpdateMouseCoordY(myMouse.getCurrentY() - 1, myMouse.mouseLabel.getY() - 100);
-                        if(testing)
-                        {
-                            return;
-                        }
                         inGame = false;
-                        gameOver();
+                        if(!testing)
+                        {
+                            gameOver();
+                        }
+
                     }
 
                     //Remove trap label
@@ -620,7 +630,7 @@ public class Game extends JFrame implements KeyListener {
                 }
 
                 //Update the position of the mouse and cat positions,given that the new location was not a barrier
-                if(!isaBarrier(myMouse.getCurrentY() - 1, myMouse.getCurrentX())) {
+                if(!isaBarrier(myMouse.getCurrentY() - 1, myMouse.getCurrentX()) && !scoreBelowZero()) {
 
                     UpdateMouseCoordY(myMouse.getCurrentY() - 1, myMouse.mouseLabel.getY() - 100);
                     MoveCats();
@@ -669,12 +679,11 @@ public class Game extends JFrame implements KeyListener {
                     score -= trap2.getPenalty();
                     if (scoreBelowZero()) {
                         UpdateMouseCoordY(myMouse.getCurrentY() + 1, myMouse.mouseLabel.getY() + 100);
-                        if(testing)
-                        {
-                            return;
-                        }
                         inGame = false;
-                        gameOver();
+                        if(!testing)
+                        {
+                            gameOver();
+                        }
                     }
                     //Remove trap label
                     trap2.trapLabel.setVisible(false);
@@ -682,7 +691,7 @@ public class Game extends JFrame implements KeyListener {
                 }
 
                 //Update the position of the mouse and cat positions,given that the new location was not a barrier
-                if(!isaBarrier(myMouse.getCurrentY() + 1, myMouse.getCurrentX())) {
+                if(!isaBarrier(myMouse.getCurrentY() + 1, myMouse.getCurrentX()) && !scoreBelowZero()) {
 
                     UpdateMouseCoordY(myMouse.getCurrentY() + 1, myMouse.mouseLabel.getY() + 100);
                     MoveCats();
@@ -695,13 +704,16 @@ public class Game extends JFrame implements KeyListener {
         countSteps++;
 
         if(this.myMouse.getCheeseEaten() == 2 && this.myMouse.getCurrentY() == 1 && this.myMouse.getCurrentX() == 0) {
+
             inGame = false;
             winGame = true;
         }
 
         if(winGame == true) {
             inGame = false;
-            winPage();
+            if(!testing) {
+                winPage();
+            }
         }
     }
 
@@ -798,7 +810,9 @@ public class Game extends JFrame implements KeyListener {
         //Collision detection using Catlabels
         if (Catscollide()){
             inGame = false;
-            gameOver();
+            if(!testing) {
+                gameOver();
+            }
         }
     }
 
