@@ -98,21 +98,19 @@ public class Cat extends Enemies {
         //if Mouse is on the right
         while (distanceX > 0) {
             if (!rightblocked(map)) {
-                this.setCurrentX(this.getCurrentX() + 1);
                 return 1;
             }
             //If Mouse is at bottom right
             else if(distanceY > 0){
                 if (!bottomblocked(map) ) {
-                    this.setCurrentY(this.getCurrentY() + 1);
                     return 3;
                 }
                 else if (!leftblocked(map)  ) {
-                    this.setCurrentX(this.getCurrentX() - 1);
+                    
                     return 2;
                 }
                 else if (!topblocked(map)) {
-                    this.setCurrentY(this.getCurrentY() - 1);
+                    
                     return 4;
                 }
                 else{
@@ -124,15 +122,12 @@ public class Cat extends Enemies {
             //Mouse is top right
             else if(distanceY < 0){
                 if (!topblocked(map) ) {
-                    this.setCurrentY(this.getCurrentY() - 1);
                     return 4;
                 }
                 else if (!leftblocked(map) ) {
-                    this.setCurrentX(this.getCurrentX() - 1);
                     return 2;
                 }
                 else  if (!bottomblocked(map) ) {
-                    this.setCurrentY(this.getCurrentY() + 1);
                     return 3;
                 }
                 else{
@@ -150,20 +145,20 @@ public class Cat extends Enemies {
         //If Mouse is on left
         while (distanceX < 0){
             if (!leftblocked(map)) {
-                this.setCurrentX(this.getCurrentX() - 1);
+               
                 return 2;
             }
             else if(distanceY > 0){
                 if (!bottomblocked(map)) {
-                    this.setCurrentY(this.getCurrentY() + 1);
+                    
                     return 3;
                 }
                 else if (!rightblocked(map)) {
-                    this.setCurrentX(this.getCurrentX() + 1);
+                   
                     return 1;
                 }
                 else if (!topblocked(map)) {
-                    this.setCurrentY(this.getCurrentY() - 1);
+                    
                     return 4;
                 }
                 else{
@@ -174,14 +169,14 @@ public class Cat extends Enemies {
 
             else if(distanceY < 0){
                 if (!topblocked(map)) {
-                    this.setCurrentY(this.getCurrentY() - 1);
+                   
                     return 4;
                 }else if (!bottomblocked(map)) {
-                    this.setCurrentY(this.getCurrentY() + 1);
+                    
                     return 3;
                 }
                 else if (!rightblocked(map)) {
-                    this.setCurrentX(this.getCurrentX() + 1);
+    
                     return 1;
                 }
                 else{
@@ -200,20 +195,20 @@ public class Cat extends Enemies {
         //Mouse is at bottom
         while (distanceY > 0 && distanceX == 0) {
             if (!bottomblocked(map)) {
-                this.setCurrentY(this.getCurrentY() + 1);
+               
                 return 3;
             }
 
             else if (!leftblocked(map)) {
-                this.setCurrentX(this.getCurrentX() - 1);
+               
                 return 2;
             }
             else if (!rightblocked(map)) {
-                this.setCurrentX(this.getCurrentX() + 1);
+               
                 return 1;
             }
             else if (!topblocked(map)) {
-                this.setCurrentY(this.getCurrentY() - 1);
+              
                 return 4;
             }
             else{
@@ -225,20 +220,20 @@ public class Cat extends Enemies {
             //Mouse is at top
         } while (distanceY < 0 && distanceX == 0 ){
             if (!topblocked(map)) {
-                this.setCurrentY(this.getCurrentY() - 1);
+               
                 return 4;
 
             }
             else if (!bottomblocked(map)) {
-                this.setCurrentY(this.getCurrentY() + 1);
+               
                 return 3;
             }
             else if (!rightblocked(map) ) {
-                this.setCurrentX(this.getCurrentX() + 1);
+              
                 return 1;
             }
             else if (!leftblocked(map) ) {
-                this.setCurrentX(this.getCurrentX() - 1);
+              
                 return 2;
             }
 
