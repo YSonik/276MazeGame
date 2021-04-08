@@ -44,6 +44,39 @@ public class TestCatMovement {
         assertEquals(myGame.getCat2().getCurrentY(), 4);
 
     }
+    //One cat hits barrier while the other does not
+    @Test
+    void OneCatHitBarrier(){
+        myGame.getCat1().setCurrentX(3);
+        myGame.getCat1().setCurrentY(3);
+        myGame.validate();
+        //Integration test here
+
+        myGame.getCat2().setCurrentX(5);
+        myGame.getCat2().setCurrentY(8);
+        myGame.validate();
+        //Integration test here
+
+        myGame.getMyMouse().setCurrentX(3);
+        myGame.getMyMouse().setCurrentY(8);
+        myGame.validate();
+        //Integration test here
+
+        myGame.moveMouse("left");
+
+        assertEquals(2, myGame.getMyMouse().getCurrentX());
+        assertEquals(8, myGame.getMyMouse().getCurrentY());
+        //Integration test here
+
+        assertEquals(3, myGame.getCat1().getCurrentX());
+        assertEquals(4, myGame.getCat1().getCurrentY());
+        //Integration test here
+
+        assertEquals(4, myGame.getCat2().getCurrentX());
+        assertEquals(8, myGame.getCat2().getCurrentY());
+        //Integration test here
+
+    }
 
     //When Cats have same X with Mouse and Mouse move right
     @Test
