@@ -293,28 +293,26 @@ public class Game extends JFrame implements KeyListener {
         //Cat Position update
         switch (direction1) {
             case 1:
-                cat1.setCurrentX(cat1.getCurrentX() + 1);
-                cat1.catLabel.setLocation(cat1.catLabel.getX() + 100, cat1.catLabel.getY());
+                cat1.catLabel.setLocation(cat1.getCurrentX()*100 , (cat1.getCurrentY()+1)*100);
                 break;
             case 2:
-                cat1.setCurrentX(cat1.getCurrentX() - 1);
-                cat1.catLabel.setLocation(cat1.catLabel.getX() - 100, cat1.catLabel.getY());
+
+                cat1.catLabel.setLocation(cat1.getCurrentX()*100 , (cat1.getCurrentY()+1)*100);
                 break;
             case 3:
-                cat1.setCurrentY(cat1.getCurrentY() + 1);
-                cat1.catLabel.setLocation(cat1.catLabel.getX(), cat1.catLabel.getY() + 100);
+                cat1.catLabel.setLocation(cat1.getCurrentX()*100, (cat1.getCurrentY()+1)*100 );
                 break;
             case 4:
-                cat1.setCurrentY(cat1.getCurrentY() - 1);
-                cat1.catLabel.setLocation(cat1.catLabel.getX(), cat1.catLabel.getY() - 100);
+
+                cat1.catLabel.setLocation(cat1.getCurrentX()*100, (cat1.getCurrentY()+1)*100 );
                 break;
             default:
                 break;
         }
         switch (direction2) {
             case 1:
-                cat2.setCurrentX(cat2.getCurrentX() + 1);
-                cat2.catLabel.setLocation(cat2.catLabel.getX() + 100, cat2.catLabel.getY());
+
+                cat2.catLabel.setLocation(cat2.getCurrentX()*100 , (cat2.getCurrentY()+1)*100);
                 //undo cat2's movement if colliding with cat1
                 if((cat1.catLabel.getX() == cat2.catLabel.getX()) && (cat1.catLabel.getY() == cat2.catLabel.getY())){
                    cat2.setCurrentX(cat2.getCurrentX()-1);
@@ -322,24 +320,24 @@ public class Game extends JFrame implements KeyListener {
                 }
                 break;
             case 2:
-                cat2.setCurrentX(cat2.getCurrentX() - 1);
-                cat2.catLabel.setLocation(cat2.catLabel.getX() - 100, cat2.catLabel.getY());
+
+                cat2.catLabel.setLocation(cat2.getCurrentX()*100 , (cat2.getCurrentY()+1)*100);
                 if((cat1.catLabel.getX() == cat2.catLabel.getX()) && (cat1.catLabel.getY() == cat2.catLabel.getY())){
                    cat2.setCurrentX(cat2.getCurrentX()+1);
                    cat2.catLabel.setLocation(cat2.catLabel.getX() + 100, cat2.catLabel.getY());
                 }
                 break;
             case 3:
-                cat2.setCurrentY(cat2.getCurrentY() + 1);
-                cat2.catLabel.setLocation(cat2.catLabel.getX(), cat2.catLabel.getY() + 100);
+
+                cat2.catLabel.setLocation(cat2.getCurrentX()*100 , (cat2.getCurrentY()+1)*100);
                 if((cat1.catLabel.getX() == cat2.catLabel.getX()) && (cat1.catLabel.getY() == cat2.catLabel.getY())){
                     cat2.setCurrentY(cat2.getCurrentY()-1);
                     cat2.catLabel.setLocation(cat2.catLabel.getX(), cat2.catLabel.getY() - 100);
                 }
                 break;
             case 4:
-                cat2.setCurrentY(cat2.getCurrentY() - 1);
-                cat2.catLabel.setLocation(cat2.catLabel.getX(), cat2.catLabel.getY() - 100);
+
+                cat2.catLabel.setLocation(cat2.getCurrentX()*100 , (cat2.getCurrentY()+1)*100);
                 if((cat1.catLabel.getX() == cat2.catLabel.getX()) && (cat1.catLabel.getY() == cat2.catLabel.getY())){
                     cat2.setCurrentY(cat2.getCurrentY()+1);
                     cat2.catLabel.setLocation(cat2.catLabel.getX(), cat2.catLabel.getY() + 100);
