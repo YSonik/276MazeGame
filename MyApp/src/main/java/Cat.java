@@ -26,12 +26,12 @@ public class Cat extends Enemies {
     /**
      * Constructor for the program which contains X and Y coordinates of the moving enemies
      * and catImage
-     * @param currentX first parameter to Cat
-     * @param currentY second parameter to Cat
+     * @param X first parameter to Cat
+     * @param Y second parameter to Cat
      */
-    Cat(int currentX, int currentY)
+    Cat(int X, int Y)
     {
-        super(currentX, currentY);
+        super(X, Y);
         try {
             Path catPath = Paths.get("Images/cat.png").toRealPath();;
             this.catImage = ImageIO.read(new File(catPath.toString()));
@@ -48,7 +48,7 @@ public class Cat extends Enemies {
     public void createCatLabel()
     {
         catLabel = new JLabel();
-        catLabel.setBounds(this.getCurrentX()*100,(this.getCurrentY()+1)*100,100,100);
+        catLabel.setBounds(this.currentX*100,(this.currentY+1)*100,100,100);
         catLabel.setBackground(Color.white);
         catLabel.setOpaque(true);
         Image catImg = getCatImage().getScaledInstance(catLabel.getWidth(), catLabel.getHeight(),
@@ -257,6 +257,19 @@ public class Cat extends Enemies {
 
     public BufferedImage getCatImage () {
         return catImage;
+    }
+
+    public void setCurrentX(int x)
+    {
+        this.currentX = x;
+        catLabel.setLocation(this.currentX*100,(this.currentY+1)*100);
+
+    }
+
+    public void setCurrentY(int y)
+    {
+        this.currentY = y;
+        catLabel.setLocation(this.currentX*100,(this.currentY+1)*100);
     }
 
 }

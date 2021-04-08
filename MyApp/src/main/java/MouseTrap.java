@@ -55,4 +55,12 @@ public class MouseTrap extends Enemies {
     public BufferedImage getMTImage () {
         return MTImage;
     }
+
+    public void setCurrentX(int currentX) {
+        this.currentX = currentX;
+    }
+
+    public void setCurrentY(int currentY) {
+        this.currentY = currentY;
+    }
 }
