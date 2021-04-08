@@ -13,11 +13,11 @@ public class Enemies{
     }
 
     public int getCurrentX() {
-        return this.currentX;
+        return currentX;
     }
 
     public int getCurrentY() {
-        return this.currentY; }
+        return currentY; }
 
     public void setCurrentX(int currentX) {
         this.currentX = currentX;
