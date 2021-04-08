@@ -28,6 +28,7 @@ public class Cat extends Enemies {
      * and catImage
      * @param currentX first parameter to Cat
      * @param currentY second parameter to Cat
+     * @param path the path to the image of the cat we want to add to the jLable
      */
     Cat(int currentX, int currentY,String path)
     {
