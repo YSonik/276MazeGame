@@ -29,9 +29,9 @@ public class Cat extends Enemies {
      * @param X first parameter to Cat
      * @param Y second parameter to Cat
      */
-    Cat(int X, int Y)
+    Cat(int currentX, int currentY)
     {
-        super(X, Y);
+        super(currentX, currentY);
         try {
             Path catPath = Paths.get("Images/cat.png").toRealPath();;
             this.catImage = ImageIO.read(new File(catPath.toString()));
@@ -80,10 +80,22 @@ public class Cat extends Enemies {
         return map[this.getCurrentY()+1][this.getCurrentX()].getisBarrier();
     }
 
+    public void setCurrentX(int x)
+    {
+        this.currentX = x;
+        catLabel.setLocation(this.currentX*100,(this.currentY+1)*100);
+
+    }
+
+    public void setCurrentY(int y)
+    {
+        this.currentY = y;
+        catLabel.setLocation(this.currentX*100,(this.currentY+1)*100);
+    }
 
 
 
-    /**
+   /**
      * The chase method moves the moving enemies closer to the player based on the player's X and Y
      * coordinates. The method uses the above functions to check
      * for barriers and adjust the the enemies' coordinates accordingly.
@@ -100,19 +112,21 @@ public class Cat extends Enemies {
         //if Mouse is on the right
         while (distanceX > 0) {
             if (!rightblocked(map)) {
+                this.setCurrentX(this.getCurrentX() + 1);
                 return 1;
             }
             //If Mouse is at bottom right
             else if(distanceY > 0){
                 if (!bottomblocked(map) ) {
+                    this.setCurrentY(this.getCurrentY() + 1);
                     return 3;
                 }
                 else if (!leftblocked(map)  ) {
-                    
+                    this.setCurrentX(this.getCurrentX() - 1);
                     return 2;
                 }
                 else if (!topblocked(map)) {
-                    
+                    this.setCurrentY(this.getCurrentY() - 1);
                     return 4;
                 }
                 else{
@@ -124,12 +138,15 @@ public class Cat extends Enemies {
             //Mouse is top right
             else if(distanceY < 0){
                 if (!topblocked(map) ) {
+                    this.setCurrentY(this.getCurrentY() - 1);
                     return 4;
                 }
                 else if (!leftblocked(map) ) {
+                    this.setCurrentX(this.getCurrentX() - 1);
                     return 2;
                 }
                 else  if (!bottomblocked(map) ) {
+                    this.setCurrentY(this.getCurrentY() + 1);
                     return 3;
                 }
                 else{
@@ -147,20 +164,20 @@ public class Cat extends Enemies {
         //If Mouse is on left
         while (distanceX < 0){
             if (!leftblocked(map)) {
-               
+                this.setCurrentX(this.getCurrentX() - 1);
                 return 2;
             }
             else if(distanceY > 0){
                 if (!bottomblocked(map)) {
-                    
+                    this.setCurrentY(this.getCurrentY() + 1);
                     return 3;
                 }
                 else if (!rightblocked(map)) {
-                   
+                    this.setCurrentX(this.getCurrentX() + 1);
                     return 1;
                 }
                 else if (!topblocked(map)) {
-                    
+                    this.setCurrentY(this.getCurrentY() - 1);
                     return 4;
                 }
                 else{
@@ -171,14 +188,14 @@ public class Cat extends Enemies {
 
             else if(distanceY < 0){
                 if (!topblocked(map)) {
-                   
+                    this.setCurrentY(this.getCurrentY() - 1);
                     return 4;
                 }else if (!bottomblocked(map)) {
-                    
+                    this.setCurrentY(this.getCurrentY() + 1);
                     return 3;
                 }
                 else if (!rightblocked(map)) {
-    
+                    this.setCurrentX(this.getCurrentX() + 1);
                     return 1;
                 }
                 else{
@@ -197,20 +214,20 @@ public class Cat extends Enemies {
         //Mouse is at bottom
         while (distanceY > 0 && distanceX == 0) {
             if (!bottomblocked(map)) {
-               
+                this.setCurrentY(this.getCurrentY() + 1);
                 return 3;
             }
 
             else if (!leftblocked(map)) {
-               
+                this.setCurrentX(this.getCurrentX() - 1);
                 return 2;
             }
             else if (!rightblocked(map)) {
-               
+                this.setCurrentX(this.getCurrentX() + 1);
                 return 1;
             }
             else if (!topblocked(map)) {
-              
+                this.setCurrentY(this.getCurrentY() - 1);
                 return 4;
             }
             else{
@@ -222,20 +239,20 @@ public class Cat extends Enemies {
             //Mouse is at top
         } while (distanceY < 0 && distanceX == 0 ){
             if (!topblocked(map)) {
-               
+                this.setCurrentY(this.getCurrentY() - 1);
                 return 4;
 
             }
             else if (!bottomblocked(map)) {
-               
+                this.setCurrentY(this.getCurrentY() + 1);
                 return 3;
             }
             else if (!rightblocked(map) ) {
-              
+                this.setCurrentX(this.getCurrentX() + 1);
                 return 1;
             }
             else if (!leftblocked(map) ) {
-              
+                this.setCurrentX(this.getCurrentX() - 1);
                 return 2;
             }
 
@@ -256,17 +273,6 @@ public class Cat extends Enemies {
         return catImage;
     }
 
-    public void setCurrentX(int x)
-    {
-        this.currentX = x;
-        catLabel.setLocation(this.currentX*100,(this.currentY+1)*100);
-
-    }
-
-    public void setCurrentY(int y)
-    {
-        this.currentY = y;
-        catLabel.setLocation(this.currentX*100,(this.currentY+1)*100);
-    }
+    
 
 }
