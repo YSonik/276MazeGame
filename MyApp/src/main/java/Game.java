@@ -282,7 +282,7 @@ public class Game extends JFrame implements KeyListener {
      * This is the boolean function, it will check cat's collision
      * */
     public boolean Catscollide(){
-        return ((cat1.catLabel.getX() == myMouse.mouseLabel.getX() && cat1.catLabel.getY() == myMouse.mouseLabel.getY()) ||
+        return ((cat1.catLabel.setLocation(cat1.getCurrentX()*100 == myMouse.mouseLabel.getX() && cat1.catLabel.getY() == myMouse.mouseLabel.getY()) ||
                 (cat2.catLabel.getX() == myMouse.mouseLabel.getX() && cat2.catLabel.getY() == myMouse.mouseLabel.getY()));
     }
 
