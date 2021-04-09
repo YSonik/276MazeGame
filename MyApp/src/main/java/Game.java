@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -5,6 +6,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.Timer;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Random;
 
 /**<h1>Game Class<h1/>
@@ -30,8 +36,13 @@ public class Game extends JFrame implements KeyListener {
     private Cat cat2;
     private MouseTrap trap1, trap2;
     public boolean testing;
-    public String catImage1 = "Images/cat1.png";
-    public String catImage2 = "Images/cat2.png";
+    private final String catImage1 = "Images/cat1.png";
+    private final String catImage2 = "Images/cat2.png";
+    private final String barrierPath = "Images/Barrier.png";
+    private BufferedImage barrierImage;
+    private final String doorPath = "Images/Door.png";
+    private BufferedImage doorImage;
+
 
     public Boolean getWinGame() {
         return winGame;
@@ -394,13 +405,22 @@ public class Game extends JFrame implements KeyListener {
         {
             for(int j = 0; j <10; j++)
             {
-                if(isaBarrier(i, j) == true ) {
+                if(isaBarrier(i, j)) {
                     tempLabel = new JLabel();
                     tempLabel.setBounds(x,y,100,100);
-                    tempLabel.setBackground(Color.red);
+                    tempLabel.setBackground(Color.blue);
                     tempLabel.setOpaque(true);
+                    try {
+                        Path barPath = Paths.get(barrierPath).toRealPath();;
+                        this.barrierImage = ImageIO.read(new File(barPath.toString()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Image barImg = barrierImage.getScaledInstance(tempLabel.getWidth(), tempLabel.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon icon = new ImageIcon(barImg);
+                    tempLabel.setIcon(icon);
                 }
-                else if(isaCheese(i, j) == true)
+                else if(isaCheese(i, j))
                 {
                     tempLabel = new JLabel();
                     tempLabel.setBounds(x,y,100,100);
@@ -408,26 +428,44 @@ public class Game extends JFrame implements KeyListener {
                     tempLabel.setOpaque(true);
 
                 }
-                else if(myMap.getLevelMap()[i][j].getisEmpty() == true)
+                else if(myMap.getLevelMap()[i][j].getisEmpty())
                 {
                     tempLabel = new JLabel();
                     tempLabel.setBounds(x,y,100,100);
                     tempLabel.setBackground(Color.white);
                     tempLabel.setOpaque(true);
                 }
-                else if(myMap.getLevelMap()[i][j].getisEntrance() == true)
+                else if(myMap.getLevelMap()[i][j].getisEntrance())
                 {
                     tempLabel = new JLabel("Entrance");
                     tempLabel.setBounds(x,y,100,100);
                     tempLabel.setBackground(Color.white);
                     tempLabel.setOpaque(true);
+                    try {
+                        Path drPath = Paths.get(doorPath).toRealPath();;
+                        this.doorImage = ImageIO.read(new File(doorPath.toString()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Image drImg = doorImage.getScaledInstance(tempLabel.getWidth(), tempLabel.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon icon = new ImageIcon(drImg);
+                    tempLabel.setIcon(icon);
                 }
-                else if (myMap.getLevelMap()[i][j].getisExit() == true)
+                else if (myMap.getLevelMap()[i][j].getisExit())
                 {
                     tempLabel = new JLabel("Exit");
                     tempLabel.setBounds(x,y,100,100);
                     tempLabel.setBackground(Color.white);
                     tempLabel.setOpaque(true);
+                    try {
+                        Path drPath = Paths.get(doorPath).toRealPath();;
+                        this.doorImage = ImageIO.read(new File(doorPath.toString()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Image drImg = doorImage.getScaledInstance(tempLabel.getWidth(), tempLabel.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon icon = new ImageIcon(drImg);
+                    tempLabel.setIcon(icon);
                 }
                 this.add(tempLabel);
                 x += 100;
