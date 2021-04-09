@@ -26,23 +26,26 @@ public class Cat extends Enemies {
     /**
      * Constructor for the program which contains X and Y coordinates of the moving enemies
      * and catImage
-     * @param X first parameter to Cat
-     * @param Y second parameter to Cat
+     * @param currentX first parameter to Cat
+     * @param currentY second parameter to Cat
+     * @param path the path to the image of the cat we want to add to the jLable
      */
-    Cat(int currentX, int currentY)
+    Cat(int currentX, int currentY,String path)
     {
         super(currentX, currentY);
-        try {
-            Path catPath = Paths.get("Images/cat.png").toRealPath();;
-            this.catImage = ImageIO.read(new File(catPath.toString()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SetCatImage(path);
         createCatLabel();
 
     }
 
-
+    private void SetCatImage(String path) {
+        try {
+            Path catPath = Paths.get(path).toRealPath();;
+            this.catImage = ImageIO.read(new File(catPath.toString()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     /**
