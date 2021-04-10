@@ -17,6 +17,7 @@ public class Enemies{
     }
 
     public int getCurrentY() {
-        return currentY; }
+        return currentY; 
+    }
 
 }
