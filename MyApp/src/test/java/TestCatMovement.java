@@ -497,9 +497,11 @@ public class TestCatMovement {
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),700);
 
         assertEquals(myGame.getCat1().getCurrentX(), 5);
-        assertEquals(myGame.getCat1().getCurrentY(), 6);
+        assertEquals(myGame.getCat1().getCurrentY(), 5);
         assertEquals(myGame.getCat2().getCurrentX(), 5);
         assertEquals(myGame.getCat2().getCurrentY(), 6);
+        assertFalse(myGame.getWinGame());
+
     }
 
     //When mouse is moving up and collide with Cat
@@ -527,9 +529,11 @@ public class TestCatMovement {
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),400);
 
         assertEquals(myGame.getCat1().getCurrentX(), 1);
-        assertEquals(myGame.getCat1().getCurrentY(), 3);
+        assertEquals(myGame.getCat1().getCurrentY(), 4);
         assertEquals(myGame.getCat2().getCurrentX(), 1);
         assertEquals(myGame.getCat2().getCurrentY(), 3);
+        assertFalse(myGame.getWinGame());
+
     }
 
     @Test
