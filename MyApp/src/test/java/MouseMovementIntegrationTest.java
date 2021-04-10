@@ -159,7 +159,7 @@ public class MouseMovementIntegrationTest {
     }
     @Test
     void MoveRightIsTrap() {
-        //Score Greater equal to penalty
+        //Score Greater than or equal to penalty
         myGame.getMyMouse().setCurrentX(5);
         myGame.getMyMouse().setCurrentY(3);
         myGame.validate();
@@ -175,6 +175,7 @@ public class MouseMovementIntegrationTest {
 
     @Test
     void MoveRightIsTrap2(){
+        //Score less than penalty
         myGame.testing = true;
         myGame.getMyMouse().setCurrentX(5);
         myGame.getMyMouse().setCurrentY(3);
@@ -239,7 +240,7 @@ public class MouseMovementIntegrationTest {
     }
     @Test
     void MoveUpIsTrap() {
-        //Score Greater equal to penalty
+        //Score Greater than or equal to penalty
         myGame.getMyMouse().setCurrentX(6);
         myGame.getMyMouse().setCurrentY(4);
         myGame.validate();
@@ -255,6 +256,7 @@ public class MouseMovementIntegrationTest {
 
     @Test
     void MoveUpIsTrap2(){
+        //Score is less than penalty
         myGame.testing = true;
         myGame.getMyMouse().setCurrentX(6);
         myGame.getMyMouse().setCurrentY(4);
@@ -424,6 +426,21 @@ public class MouseMovementIntegrationTest {
         myGame.moveMouse("down");
         assertEquals(myGame.getMyMouse().getCurrentX(),8);
         assertEquals(myGame.getMyMouse().getCurrentY(),4);
+        assertFalse(myGame.getInGame());
+        assertEquals(myGame.getCat2().getCurrentX(),myGame.getMyMouse().getCurrentX());
+        assertEquals(myGame.getCat2().getCurrentY(),myGame.getMyMouse().getCurrentY());
+    }
+
+    @Test
+    void CatCollisionUp(){
+        myGame.testing = true;
+        myGame.moveMouse("left");
+        myGame.moveMouse("left");
+        myGame.moveMouse("left");
+        myGame.moveMouse("up");
+        myGame.moveMouse("up");
+        assertEquals(myGame.getMyMouse().getCurrentX(),5);
+        assertEquals(myGame.getMyMouse().getCurrentY(),6);
         assertFalse(myGame.getInGame());
         assertEquals(myGame.getCat2().getCurrentX(),myGame.getMyMouse().getCurrentX());
         assertEquals(myGame.getCat2().getCurrentY(),myGame.getMyMouse().getCurrentY());
