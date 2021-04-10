@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -5,6 +6,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.Timer;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Random;
 
 /**<h1>Game Class<h1/>
@@ -30,6 +36,16 @@ public class Game extends JFrame implements KeyListener {
     private Cat cat2;
     private MouseTrap trap1, trap2;
     public boolean testing;
+    private final String catImage1 = "Images/cat1.png";
+    private final String catImage2 = "Images/cat2.png";
+    private final String barrierPath = "Images/Barrier.png";
+    private final String logoPath = "Images/Title2.png";
+    private BufferedImage barrierImage;
+    private final String doorPath = "Images/Door.png";
+    private BufferedImage doorImage;
+    private BufferedImage logoImage;
+    private JLabel logo;
+
 
     public Boolean getWinGame() {
         return winGame;
@@ -133,11 +149,11 @@ public class Game extends JFrame implements KeyListener {
         myMap = new LevelOne();
 
         // Create multiple cats
-        cat1 = new Cat(4, 1);
+        cat1 = new Cat(4, 1,catImage1);
         this.add(cat1.catLabel);
         this.validate();
 
-        cat2 = new Cat(8, 4);
+        cat2 = new Cat(8, 4,catImage2);
         this.add(cat2.catLabel);
         this.validate();
 
@@ -185,6 +201,7 @@ public class Game extends JFrame implements KeyListener {
         createFrame();
         createGameMap();
         createScoreText();
+        createLogoLabel();
 
         if (count == 0){scoreText.setText("Score: " + 0);}
 
@@ -204,6 +221,28 @@ public class Game extends JFrame implements KeyListener {
         Timer timer = new Timer(1000, taskPerformer);
         timer.start();
     }
+
+    public void createLogoLabel(){
+        setLogoImage(logoPath);
+        logo = new JLabel();
+        logo.setBounds(700,40,300,70);
+        Image catImg=getLogo().getScaledInstance(logo.getWidth(), logo.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(catImg);
+        logo.setIcon(icon);
+        this.add(logo);
+        this.validate();
+    }
+
+    private void setLogoImage(String path) {
+        try {
+            Path logoPath = Paths.get(path).toRealPath();;
+            logoImage = ImageIO.read(new File(logoPath.toString()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private BufferedImage getLogo(){return this.logoImage;}
 
     /**
      * This is void function draws the timer label
@@ -316,7 +355,7 @@ public class Game extends JFrame implements KeyListener {
                 //undo cat2's movement if colliding with cat1
                 if((cat1.catLabel.getX() == cat2.catLabel.getX()) && (cat1.catLabel.getY() == cat2.catLabel.getY())){
                    cat2.setCurrentX(cat2.getCurrentX()-1);
-                   cat2.catLabel.setLocation(cat2.catLabel.getX() - 100, cat2.catLabel.getY());
+                   cat2.catLabel.setLocation(cat2.getCurrentX()*100, (cat2.getCurrentY()+1)*100);
                 }
                 break;
             case 2:
@@ -324,7 +363,7 @@ public class Game extends JFrame implements KeyListener {
                 cat2.catLabel.setLocation(cat2.getCurrentX()*100 , (cat2.getCurrentY()+1)*100);
                 if((cat1.catLabel.getX() == cat2.catLabel.getX()) && (cat1.catLabel.getY() == cat2.catLabel.getY())){
                    cat2.setCurrentX(cat2.getCurrentX()+1);
-                   cat2.catLabel.setLocation(cat2.catLabel.getX() + 100, cat2.catLabel.getY());
+                   cat2.catLabel.setLocation(cat2.getCurrentX()*100, (cat2.getCurrentY()+1)*100);
                 }
                 break;
             case 3:
@@ -332,7 +371,7 @@ public class Game extends JFrame implements KeyListener {
                 cat2.catLabel.setLocation(cat2.getCurrentX()*100 , (cat2.getCurrentY()+1)*100);
                 if((cat1.catLabel.getX() == cat2.catLabel.getX()) && (cat1.catLabel.getY() == cat2.catLabel.getY())){
                     cat2.setCurrentY(cat2.getCurrentY()-1);
-                    cat2.catLabel.setLocation(cat2.catLabel.getX(), cat2.catLabel.getY() - 100);
+                    cat2.catLabel.setLocation(cat2.getCurrentX()*100, (cat2.getCurrentY()+1)*100 );
                 }
                 break;
             case 4:
@@ -340,7 +379,7 @@ public class Game extends JFrame implements KeyListener {
                 cat2.catLabel.setLocation(cat2.getCurrentX()*100 , (cat2.getCurrentY()+1)*100);
                 if((cat1.catLabel.getX() == cat2.catLabel.getX()) && (cat1.catLabel.getY() == cat2.catLabel.getY())){
                     cat2.setCurrentY(cat2.getCurrentY()+1);
-                    cat2.catLabel.setLocation(cat2.catLabel.getX(), cat2.catLabel.getY() + 100);
+                    cat2.catLabel.setLocation(cat2.getCurrentX()*100, (cat2.getCurrentY()+1)*100);
                 }
                 break;
             default:
@@ -392,13 +431,22 @@ public class Game extends JFrame implements KeyListener {
         {
             for(int j = 0; j <10; j++)
             {
-                if(isaBarrier(i, j) == true ) {
+                if(isaBarrier(i, j)) {
                     tempLabel = new JLabel();
                     tempLabel.setBounds(x,y,100,100);
-                    tempLabel.setBackground(Color.red);
+                    tempLabel.setBackground(Color.blue);
                     tempLabel.setOpaque(true);
+                    try {
+                        Path barPath = Paths.get(barrierPath).toRealPath();;
+                        this.barrierImage = ImageIO.read(new File(barPath.toString()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Image barImg = barrierImage.getScaledInstance(tempLabel.getWidth(), tempLabel.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon icon = new ImageIcon(barImg);
+                    tempLabel.setIcon(icon);
                 }
-                else if(isaCheese(i, j) == true)
+                else if(isaCheese(i, j))
                 {
                     tempLabel = new JLabel();
                     tempLabel.setBounds(x,y,100,100);
@@ -406,26 +454,44 @@ public class Game extends JFrame implements KeyListener {
                     tempLabel.setOpaque(true);
 
                 }
-                else if(myMap.getLevelMap()[i][j].getisEmpty() == true)
+                else if(myMap.getLevelMap()[i][j].getisEmpty())
                 {
                     tempLabel = new JLabel();
                     tempLabel.setBounds(x,y,100,100);
                     tempLabel.setBackground(Color.white);
                     tempLabel.setOpaque(true);
                 }
-                else if(myMap.getLevelMap()[i][j].getisEntrance() == true)
+                else if(myMap.getLevelMap()[i][j].getisEntrance())
                 {
                     tempLabel = new JLabel("Entrance");
                     tempLabel.setBounds(x,y,100,100);
                     tempLabel.setBackground(Color.white);
                     tempLabel.setOpaque(true);
+                    try {
+                        Path drPath = Paths.get(doorPath).toRealPath();;
+                        this.doorImage = ImageIO.read(new File(doorPath.toString()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Image drImg = doorImage.getScaledInstance(tempLabel.getWidth(), tempLabel.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon icon = new ImageIcon(drImg);
+                    tempLabel.setIcon(icon);
                 }
-                else if (myMap.getLevelMap()[i][j].getisExit() == true)
+                else if (myMap.getLevelMap()[i][j].getisExit())
                 {
                     tempLabel = new JLabel("Exit");
                     tempLabel.setBounds(x,y,100,100);
                     tempLabel.setBackground(Color.white);
                     tempLabel.setOpaque(true);
+                    try {
+                        Path drPath = Paths.get(doorPath).toRealPath();;
+                        this.doorImage = ImageIO.read(new File(doorPath.toString()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Image drImg = doorImage.getScaledInstance(tempLabel.getWidth(), tempLabel.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon icon = new ImageIcon(drImg);
+                    tempLabel.setIcon(icon);
                 }
                 this.add(tempLabel);
                 x += 100;
@@ -701,6 +767,7 @@ public class Game extends JFrame implements KeyListener {
 
         countSteps++;
 
+
         if(this.myMouse.getCheeseEaten() == 2 && this.myMouse.getCurrentY() == 1 && this.myMouse.getCurrentX() == 0) {
 
             inGame = false;
@@ -802,6 +869,13 @@ public class Game extends JFrame implements KeyListener {
      * It also calls the Catscollide function which checks whether either of the cats have collided with the mouse to end the game.
      */
     private void MoveCats() {
+        if (Catscollide()){
+            inGame = false;
+            if(!testing) {
+                gameOver();
+            }
+            return;
+        }
         int direction1 = cat1.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), myMap.getLevelMap());
         int direction2 = cat2.chase(myMouse.getCurrentX(), myMouse.getCurrentY(), myMap.getLevelMap());
         catMoveDraw(direction1, direction2);
