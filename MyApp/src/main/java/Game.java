@@ -39,9 +39,12 @@ public class Game extends JFrame implements KeyListener {
     private final String catImage1 = "Images/cat1.png";
     private final String catImage2 = "Images/cat2.png";
     private final String barrierPath = "Images/Barrier.png";
+    private final String logoPath = "Images/Title2.png";
     private BufferedImage barrierImage;
     private final String doorPath = "Images/Door.png";
     private BufferedImage doorImage;
+    private BufferedImage logoImage;
+    private JLabel logo;
 
 
     public Boolean getWinGame() {
@@ -198,6 +201,7 @@ public class Game extends JFrame implements KeyListener {
         createFrame();
         createGameMap();
         createScoreText();
+        createLogoLabel();
 
         if (count == 0){scoreText.setText("Score: " + 0);}
 
@@ -217,6 +221,28 @@ public class Game extends JFrame implements KeyListener {
         Timer timer = new Timer(1000, taskPerformer);
         timer.start();
     }
+
+    public void createLogoLabel(){
+        setLogoImage(logoPath);
+        logo = new JLabel();
+        logo.setBounds(700,40,300,70);
+        Image catImg=getLogo().getScaledInstance(logo.getWidth(), logo.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(catImg);
+        logo.setIcon(icon);
+        this.add(logo);
+        this.validate();
+    }
+
+    private void setLogoImage(String path) {
+        try {
+            Path logoPath = Paths.get(path).toRealPath();;
+            logoImage = ImageIO.read(new File(logoPath.toString()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private BufferedImage getLogo(){return this.logoImage;}
 
     /**
      * This is void function draws the timer label
