@@ -531,4 +531,65 @@ public class TestCatMovement {
         assertEquals(myGame.getCat2().getCurrentX(), 1);
         assertEquals(myGame.getCat2().getCurrentY(), 3);
     }
+
+    @Test
+    void CatOverCheese(){
+        myGame.getCat1().setCurrentX(2);
+        myGame.getCat1().setCurrentY(4);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),200);
+        assertEquals(myGame.getCat1().catLabel.getY(),500);
+
+        myGame.getMyMouse().setCurrentX(2);
+        myGame.getMyMouse().setCurrentY(8);
+        myGame.validate();
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),200);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),900);
+        myGame.moveMouse("right");
+
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),300);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),900);
+        assertTrue(myGame.getCheese2().cheeseLabel.isVisible());
+    }
+
+    @Test
+    void CatOverTrap2(){
+        myGame.getCat1().setCurrentX(5);
+        myGame.getCat1().setCurrentY(4);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),500);
+        assertEquals(myGame.getCat1().catLabel.getY(),500);
+
+        myGame.getMyMouse().setCurrentX(5);
+        myGame.getMyMouse().setCurrentY(8);
+        myGame.validate();
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),500);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),900);
+        myGame.moveMouse("left");
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),400);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),900);
+        assertTrue(myGame.getMyMap().getLevelMap()[4][4].getisMouseTrap());
+        assertTrue(myGame.getTrap2().trapLabel.isVisible());
+    }
+
+    @Test
+    void CatOverTrap1(){
+        myGame.getCat2().setCurrentX(5);
+        myGame.getCat2().setCurrentY(3);
+        myGame.validate();
+        assertEquals(myGame.getCat2().catLabel.getX(),500);
+        assertEquals(myGame.getCat2().catLabel.getY(),400);
+
+        myGame.getMyMouse().setCurrentX(5);
+        myGame.getMyMouse().setCurrentY(8);
+        myGame.validate();
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),500);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),900);
+        myGame.moveMouse("right");
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),600);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),900);
+        assertTrue(myGame.getMyMap().getLevelMap()[3][6].getisMouseTrap());
+        assertTrue(myGame.getTrap1().trapLabel.isVisible());
+    }
+
 }
