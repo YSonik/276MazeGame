@@ -10,7 +10,7 @@ public class MouseMovementIntegrationTest {
     @BeforeEach
     void setup()
     {
-        myGame = new Game();
+        myGame = new Game(true);
     }
 
     @Test
@@ -98,7 +98,6 @@ public class MouseMovementIntegrationTest {
 
     @Test
     void MoveLeftIsTrap2(){
-        myGame.testing = true;
         myGame.getMyMouse().setCurrentX(5);
         myGame.getMyMouse().setCurrentY(4);
         myGame.validate();
@@ -198,7 +197,6 @@ public class MouseMovementIntegrationTest {
     @Test
     void MoveRightIsTrap2(){
         //Score less than penalty
-        myGame.testing = true;
         myGame.getMyMouse().setCurrentX(5);
         myGame.getMyMouse().setCurrentY(3);
         myGame.validate();
@@ -290,7 +288,6 @@ public class MouseMovementIntegrationTest {
     @Test
     void MoveUpIsTrap2(){
         //Score is less than penalty
-        myGame.testing = true;
         myGame.getMyMouse().setCurrentX(6);
         myGame.getMyMouse().setCurrentY(4);
         myGame.validate();
@@ -381,7 +378,6 @@ public class MouseMovementIntegrationTest {
 
     @Test
     void MoveDownIsTrap2(){
-        myGame.testing = true;
         myGame.getMyMouse().setCurrentX(4);
         myGame.getMyMouse().setCurrentY(3);
         myGame.validate();
@@ -398,7 +394,6 @@ public class MouseMovementIntegrationTest {
 
     @Test //This is the case where the mouse reaches the exit without eating all regular cheese
     void MouseReachExit(){
-        myGame.testing = true;
         myGame.getMyMouse().setCurrentX(1);
         myGame.getMyMouse().setCurrentY(1);
         myGame.validate();
@@ -412,7 +407,6 @@ public class MouseMovementIntegrationTest {
 
     @Test //This is the case where the mouse reaches the exit after eating all regular cheese
     void MouseReachExit2(){
-        myGame.testing = true;
         //eat cheese 1
         myGame.getMyMouse().setCurrentX(8);
         myGame.getMyMouse().setCurrentY(6);
@@ -440,7 +434,6 @@ public class MouseMovementIntegrationTest {
 
     @Test
     void CatCollisionLeft(){
-        myGame.testing = true;
         myGame.getMyMouse().setCurrentX(5);
         myGame.getMyMouse().setCurrentY(1);
         myGame.validate();
@@ -456,7 +449,6 @@ public class MouseMovementIntegrationTest {
 
     @Test
     void CatCollisionRight(){
-        myGame.testing = true;
         myGame.getMyMouse().setCurrentX(7);
         myGame.getMyMouse().setCurrentY(4);
         myGame.validate();
@@ -472,7 +464,6 @@ public class MouseMovementIntegrationTest {
 
     @Test
     void CatCollisionDown(){
-        myGame.testing = true;
         myGame.getMyMouse().setCurrentX(8);
         myGame.getMyMouse().setCurrentY(3);
         myGame.validate();
@@ -488,7 +479,6 @@ public class MouseMovementIntegrationTest {
 
     @Test
     void CatCollisionUp(){
-        myGame.testing = true;
         myGame.moveMouse("left");
         myGame.moveMouse("left");
         myGame.moveMouse("left");
