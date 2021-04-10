@@ -329,6 +329,7 @@ public class TestCatMovement {
     //When Cat Eats Mouse from the left
     @Test
     void CollideMouseLeft() {
+        myGame.testing = true;
         myGame.getCat1().setCurrentX(2);
         myGame.getCat1().setCurrentY(8);
         myGame.validate();
@@ -362,6 +363,7 @@ public class TestCatMovement {
     //When Cat Eats Mouse from the left
     @Test
     void CollideMouseRight() {
+        myGame.testing = true;
         myGame.getCat1().setCurrentX(7);
         myGame.getCat1().setCurrentY(1);
         myGame.validate();
@@ -475,6 +477,7 @@ public class TestCatMovement {
     //When mouse is moving up and collide with Cat
     @Test
     void EatMouseUp(){
+        myGame.testing = true;
         myGame.getCat1().setCurrentX(5);
         myGame.getCat1().setCurrentY(5);
         myGame.validate();
@@ -507,6 +510,7 @@ public class TestCatMovement {
     //When mouse is moving up and collide with Cat
     @Test
     void EatMouseDown(){
+        myGame.testing = true;
         myGame.getCat1().setCurrentX(1);
         myGame.getCat1().setCurrentY(4);
         myGame.validate();
