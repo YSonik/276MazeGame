@@ -88,7 +88,7 @@ public class ObjectCreationTest {
 
     @Test
     void GameCreation() {
-        Game newGame = new Game();
+        Game newGame = new Game(true);
         assertEquals(newGame.getCat1().getCurrentX(),4);
         assertEquals(newGame.getCat1().getCurrentY(),1);
         assertEquals(newGame.getCat2().getCurrentX(),8);

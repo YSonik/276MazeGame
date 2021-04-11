@@ -39,9 +39,12 @@ public class Game extends JFrame implements KeyListener {
     private final String catImage1 = "Images/cat1.png";
     private final String catImage2 = "Images/cat2.png";
     private final String barrierPath = "Images/Barrier.png";
+    private final String logoPath = "Images/Title2.png";
     private BufferedImage barrierImage;
     private final String doorPath = "Images/Door.png";
     private BufferedImage doorImage;
+    private BufferedImage logoImage;
+    private JLabel logo;
 
 
     public Boolean getWinGame() {
@@ -138,9 +141,9 @@ public class Game extends JFrame implements KeyListener {
      * Additionally, this function initializes all private data members that belong to the class.
      * */
 
-    Game()
+    Game(boolean isTesting)
     {
-        testing = false;
+        testing = isTesting;
 
         //Create a TileMap Object
         myMap = new LevelOne();
@@ -198,6 +201,7 @@ public class Game extends JFrame implements KeyListener {
         createFrame();
         createGameMap();
         createScoreText();
+        createLogoLabel();
 
         if (count == 0){scoreText.setText("Score: " + 0);}
 
@@ -217,6 +221,28 @@ public class Game extends JFrame implements KeyListener {
         Timer timer = new Timer(1000, taskPerformer);
         timer.start();
     }
+
+    public void createLogoLabel(){
+        setLogoImage(logoPath);
+        logo = new JLabel();
+        logo.setBounds(700,30,300,70);
+        Image catImg=getLogo().getScaledInstance(logo.getWidth(), logo.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(catImg);
+        logo.setIcon(icon);
+        this.add(logo);
+        this.validate();
+    }
+
+    private void setLogoImage(String path) {
+        try {
+            Path logoPath = Paths.get(path).toRealPath();;
+            logoImage = ImageIO.read(new File(logoPath.toString()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private BufferedImage getLogo(){return this.logoImage;}
 
     /**
      * This is void function draws the timer label
@@ -260,7 +286,7 @@ public class Game extends JFrame implements KeyListener {
                 System.exit(ABORT);
             } else {
                 this.setVisible(false);
-                new Game();
+                new Game(false);
             }
     }
 
@@ -286,7 +312,7 @@ public class Game extends JFrame implements KeyListener {
                 System.exit(ABORT);
             } else {
                 this.setVisible(false);
-                new Game();
+                new Game(false);
             }
 
 	}
@@ -410,15 +436,18 @@ public class Game extends JFrame implements KeyListener {
                     tempLabel.setBounds(x,y,100,100);
                     tempLabel.setBackground(Color.blue);
                     tempLabel.setOpaque(true);
-                    try {
-                        Path barPath = Paths.get(barrierPath).toRealPath();;
-                        this.barrierImage = ImageIO.read(new File(barPath.toString()));
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    if(!testing) {
+                        try {
+                            Path barPath = Paths.get(barrierPath).toRealPath();
+                            ;
+                            this.barrierImage = ImageIO.read(new File(barPath.toString()));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Image barImg = barrierImage.getScaledInstance(tempLabel.getWidth(), tempLabel.getHeight(), Image.SCALE_SMOOTH);
+                        ImageIcon icon = new ImageIcon(barImg);
+                        tempLabel.setIcon(icon);
                     }
-                    Image barImg = barrierImage.getScaledInstance(tempLabel.getWidth(), tempLabel.getHeight(), Image.SCALE_SMOOTH);
-                    ImageIcon icon = new ImageIcon(barImg);
-                    tempLabel.setIcon(icon);
                 }
                 else if(isaCheese(i, j))
                 {

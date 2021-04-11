@@ -33,7 +33,7 @@ public class Main extends JFrame{
                     // dispose the old frame
                     f.dispose();
                     // initial the new frame
-                    Game myGame = new Game();
+                    Game myGame = new Game(false);
                 }
             });
     }
