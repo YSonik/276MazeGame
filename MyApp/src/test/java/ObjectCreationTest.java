@@ -2,6 +2,36 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ObjectCreationTest {
+
+    @Test
+    void TileCreation() {
+        Tile newTile = new Tile(false, false, false, false, false, false, false, false);
+        assertEquals(newTile.getisBarrier(), false);
+        assertEquals(newTile.getIsCharacter(), false);
+        assertEquals(newTile.getisEmpty(), false);
+        assertEquals(newTile.getisEntrance(), false);
+        assertEquals(newTile.getisExit(), false);
+        assertEquals(newTile.getisMouseTrap(), false);
+        assertEquals(newTile.getisCheese(), false);
+        assertEquals(newTile.getIsOrganicCheese(), false);
+        newTile.setBarrier(true);
+        newTile.setCharacter(true);
+        newTile.setEmpty(true);
+        newTile.setEntrance(true);
+        newTile.setExit(true);
+        newTile.setCheese(true);
+        newTile.setIsOrganicCheese(true);
+        newTile.setMouseTrap(true);
+        assertEquals(newTile.getisBarrier(), true);
+        assertEquals(newTile.getIsCharacter(), true);
+        assertEquals(newTile.getisEmpty(), true);
+        assertEquals(newTile.getisEntrance(), true);
+        assertEquals(newTile.getisExit(), true);
+        assertEquals(newTile.getisMouseTrap(), true);
+        assertEquals(newTile.getisCheese(), true);
+        assertEquals(newTile.getIsOrganicCheese(), true);
+    }
+
     @Test
     void MouseCreation() {
         Mouse newMouse = new Mouse(3,4);
