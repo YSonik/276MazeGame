@@ -23,6 +23,7 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().getCurrentY(), 8);
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
     }
 
     @Test
@@ -35,6 +36,8 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().getCurrentY(), 7);
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -51,6 +54,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getCheese1().cheeseLabel.isVisible());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -76,7 +81,7 @@ public class MouseMovementIntegrationTest {
         //Add integration tests here by checking the position of the jLabel
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
-
+        myGame.dispose();
     }
     @Test
     void MoveLeftIsTrap() {
@@ -94,6 +99,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getTrap2().trapLabel.isVisible());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -110,6 +117,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getInGame());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
 
@@ -124,6 +133,8 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().getCurrentY(), 8);
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -136,6 +147,8 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().getCurrentY(), 7);
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -152,6 +165,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getCheese2().cheeseLabel.isVisible());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
     @Test
     void MoveRightIsOrgCheese() {
@@ -175,6 +190,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getOrgCheese2().organicLabel.isVisible());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
     @Test
     void MoveRightIsTrap() {
@@ -192,6 +209,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getTrap1().trapLabel.isVisible());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -209,6 +228,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getInGame());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -221,6 +242,8 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().getCurrentY(), 7);
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -233,6 +256,8 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().getCurrentY(), 8);
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -249,6 +274,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getCheese2().cheeseLabel.isVisible());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
     @Test
     void MoveUpIsOrgCheese() {
@@ -266,6 +293,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getOrgCheese1().organicLabel.isVisible());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
     @Test
     void MoveUpIsTrap() {
@@ -283,6 +312,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getTrap1().trapLabel.isVisible());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -300,6 +331,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getInGame());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -312,6 +345,8 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().getCurrentY(), 8);
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -324,6 +359,8 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().getCurrentY(), 4);
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -340,6 +377,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getCheese2().cheeseLabel.isVisible());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
     @Test
     void MoveDownIsOrgCheese() {
@@ -357,6 +396,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getOrgCheese1().organicLabel.isVisible());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
     @Test
     void MoveDownIsTrap() {
@@ -374,6 +415,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getTrap2().trapLabel.isVisible());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -390,6 +433,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getInGame());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test //This is the case where the mouse reaches the exit without eating all regular cheese
@@ -403,6 +448,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getWinGame());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test //This is the case where the mouse reaches the exit after eating all regular cheese
@@ -430,6 +477,8 @@ public class MouseMovementIntegrationTest {
         assertFalse(myGame.getInGame());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -445,6 +494,8 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getCat1().getCurrentY(),myGame.getMyMouse().getCurrentY());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -460,6 +511,8 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getCat2().getCurrentY(),myGame.getMyMouse().getCurrentY());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -475,6 +528,8 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getCat2().getCurrentY(),myGame.getMyMouse().getCurrentY());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
+
     }
 
     @Test
@@ -491,6 +546,7 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getCat2().getCurrentY(),myGame.getMyMouse().getCurrentY());
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
+        myGame.dispose();
     }
 
 }
