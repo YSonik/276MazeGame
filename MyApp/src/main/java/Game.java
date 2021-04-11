@@ -141,9 +141,9 @@ public class Game extends JFrame implements KeyListener {
      * Additionally, this function initializes all private data members that belong to the class.
      * */
 
-    Game()
+    Game(boolean isTesting)
     {
-        testing = false;
+        testing = isTesting;
 
         //Create a TileMap Object
         myMap = new LevelOne();
@@ -225,7 +225,7 @@ public class Game extends JFrame implements KeyListener {
     public void createLogoLabel(){
         setLogoImage(logoPath);
         logo = new JLabel();
-        logo.setBounds(700,40,300,70);
+        logo.setBounds(700,30,300,70);
         Image catImg=getLogo().getScaledInstance(logo.getWidth(), logo.getHeight(),
                 Image.SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(catImg);
@@ -286,7 +286,7 @@ public class Game extends JFrame implements KeyListener {
                 System.exit(ABORT);
             } else {
                 this.setVisible(false);
-                new Game();
+                new Game(false);
             }
     }
 
@@ -312,7 +312,7 @@ public class Game extends JFrame implements KeyListener {
                 System.exit(ABORT);
             } else {
                 this.setVisible(false);
-                new Game();
+                new Game(false);
             }
 
 	}
@@ -436,15 +436,18 @@ public class Game extends JFrame implements KeyListener {
                     tempLabel.setBounds(x,y,100,100);
                     tempLabel.setBackground(Color.blue);
                     tempLabel.setOpaque(true);
-                    try {
-                        Path barPath = Paths.get(barrierPath).toRealPath();;
-                        this.barrierImage = ImageIO.read(new File(barPath.toString()));
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    if(!testing) {
+                        try {
+                            Path barPath = Paths.get(barrierPath).toRealPath();
+                            ;
+                            this.barrierImage = ImageIO.read(new File(barPath.toString()));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Image barImg = barrierImage.getScaledInstance(tempLabel.getWidth(), tempLabel.getHeight(), Image.SCALE_SMOOTH);
+                        ImageIcon icon = new ImageIcon(barImg);
+                        tempLabel.setIcon(icon);
                     }
-                    Image barImg = barrierImage.getScaledInstance(tempLabel.getWidth(), tempLabel.getHeight(), Image.SCALE_SMOOTH);
-                    ImageIcon icon = new ImageIcon(barImg);
-                    tempLabel.setIcon(icon);
                 }
                 else if(isaCheese(i, j))
                 {
