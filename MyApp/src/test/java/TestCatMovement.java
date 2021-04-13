@@ -602,4 +602,218 @@ public class TestCatMovement {
         assertTrue(myGame.getMyMap().getLevelMap()[3][6].getisMouseTrap());
         assertTrue(myGame.getTrap1().trapLabel.isVisible());
     }
+    
+    @Test
+    void MouseonTopRight(){
+        myGame.getCat1().setCurrentX(3);
+        myGame.getCat1().setCurrentY(5);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),300);
+        assertEquals(myGame.getCat1().catLabel.getY(),600);
+        
+        myGame.getMyMouse().setCurrentX(8);
+        myGame.getMyMouse().setCurrentY(1);
+        myGame.validate();  
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),800);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),200);
+        myGame.moveMouse("left"); 
+
+
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),700);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),200);
+
+        assertEquals(myGame.getCat1().catLabel.getX(),300);
+        assertEquals(myGame.getCat1().catLabel.getY(),500);
+
+    }
+
+
+    @Test
+    void ChaseMouseTopRight(){
+        myGame.getMyMouse().setCurrentX(4);
+        myGame.getMyMouse().setCurrentY(1);
+        myGame.validate(); 
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),400);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),200);
+        
+        myGame.getCat1().setCurrentX(3);
+        myGame.getCat1().setCurrentY(5);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),300);
+        assertEquals(myGame.getCat1().catLabel.getY(),600);
+
+        myGame.moveMouse("left"); 
+        
+        assertEquals(myGame.getCat1().catLabel.getX(),300);
+        assertEquals(myGame.getCat1().catLabel.getY(),500);
+
+
+    }
+
+    @Test
+    void MouseTLwithTBLBlocked(){
+        myGame.getMyMouse().setCurrentX(4);
+        myGame.getMyMouse().setCurrentY(1);
+        myGame.validate(); 
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),400);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),200);
+        
+        myGame.getCat1().setCurrentX(7);
+        myGame.getCat1().setCurrentY(6);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),700);
+        assertEquals(myGame.getCat1().catLabel.getY(),700);
+
+        myGame.moveMouse("left"); 
+        
+        assertEquals(myGame.getCat1().catLabel.getX(),800);
+        assertEquals(myGame.getCat1().catLabel.getY(),700);
+
+    }
+
+    @Test
+    void MouseonTopwithTopBlockedOnly(){
+        myGame.getMyMouse().setCurrentX(6);
+        myGame.getMyMouse().setCurrentY(1);
+        myGame.validate(); 
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),600);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),200);
+        
+        myGame.getCat1().setCurrentX(6);
+        myGame.getCat1().setCurrentY(3);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),600);
+        assertEquals(myGame.getCat1().catLabel.getY(),400);
+
+        myGame.moveMouse("up"); 
+        
+        assertEquals(myGame.getCat1().catLabel.getX(),600);
+        assertEquals(myGame.getCat1().catLabel.getY(),500);
+
+    }
+
+    @Test
+    void MouseTRwithTopRightBlockedOnly(){
+        myGame.getMyMouse().setCurrentX(8);
+        myGame.getMyMouse().setCurrentY(1);
+        myGame.validate(); 
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),800);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),200);
+        
+        myGame.getCat1().setCurrentX(6);
+        myGame.getCat1().setCurrentY(3);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),600);
+        assertEquals(myGame.getCat1().catLabel.getY(),400);
+
+        myGame.moveMouse("up"); 
+        
+        assertEquals(myGame.getCat1().catLabel.getX(),500);
+        assertEquals(myGame.getCat1().catLabel.getY(),400);
+
+    }
+
+    @Test
+    void MouseonTopwithTopBottomBlockedOnly(){
+        myGame.getMyMouse().setCurrentX(7);
+        myGame.getMyMouse().setCurrentY(1);
+        myGame.validate(); 
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),700);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),200);
+        
+        myGame.getCat1().setCurrentX(7);
+        myGame.getCat1().setCurrentY(4);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),700);
+        assertEquals(myGame.getCat1().catLabel.getY(),500);
+
+        myGame.moveMouse("up"); 
+        
+        assertEquals(myGame.getCat1().catLabel.getX(),800);
+        assertEquals(myGame.getCat1().catLabel.getY(),500);
+
+    }
+    
+    @Test
+    void MouseonBLwithLBBlockedOnly(){
+        myGame.getMyMouse().setCurrentX(5);
+        myGame.getMyMouse().setCurrentY(8);
+        myGame.validate(); 
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),500);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),900);
+        
+        myGame.getCat1().setCurrentX(7);
+        myGame.getCat1().setCurrentY(6);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),700);
+        assertEquals(myGame.getCat1().catLabel.getY(),700);
+
+        myGame.moveMouse("left"); 
+        
+        assertEquals(myGame.getCat1().catLabel.getX(),800);
+        assertEquals(myGame.getCat1().catLabel.getY(),700);
+
+    }
+    @Test
+    void MouseonTLwithLeftBlockedOnly(){
+        myGame.getMyMouse().setCurrentX(6);
+        myGame.getMyMouse().setCurrentY(1);
+        myGame.validate(); 
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),600);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),200);
+        
+        myGame.getCat1().setCurrentX(8);
+        myGame.getCat1().setCurrentY(3);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),800);
+        assertEquals(myGame.getCat1().catLabel.getY(),400);
+
+        myGame.moveMouse("left"); 
+        
+        assertEquals(myGame.getCat1().catLabel.getX(),800);
+        assertEquals(myGame.getCat1().catLabel.getY(),300);
+
+    }
+    @Test
+    void MouseonTLwithLeftTopBlockedOnly(){
+        myGame.getMyMouse().setCurrentX(2);
+        myGame.getMyMouse().setCurrentY(1);
+        myGame.validate(); 
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),200);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),200);
+        
+        myGame.getCat1().setCurrentX(3);
+        myGame.getCat1().setCurrentY(3);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),300);
+        assertEquals(myGame.getCat1().catLabel.getY(),400);
+
+        myGame.moveMouse("down"); 
+        
+        assertEquals(myGame.getCat1().catLabel.getX(),300);
+        assertEquals(myGame.getCat1().catLabel.getY(),500);
+
+    }
+
+    @Test
+    void MouseBottomwithLeftBottomBlockedOnly(){
+        myGame.getMyMouse().setCurrentX(7);
+        myGame.getMyMouse().setCurrentY(8);
+        myGame.validate(); 
+        assertEquals(myGame.getMyMouse().mouseLabel.getX(),700);
+        assertEquals(myGame.getMyMouse().mouseLabel.getY(),900);
+        
+        myGame.getCat1().setCurrentX(7);
+        myGame.getCat1().setCurrentY(6);
+        myGame.validate();
+        assertEquals(myGame.getCat1().catLabel.getX(),700);
+        assertEquals(myGame.getCat1().catLabel.getY(),700);
+
+        myGame.moveMouse("down"); 
+        
+        assertEquals(myGame.getCat1().catLabel.getX(),800);
+        assertEquals(myGame.getCat1().catLabel.getY(),700);
+
+    }
 }
+
