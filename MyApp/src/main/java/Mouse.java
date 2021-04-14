@@ -43,7 +43,7 @@ public class Mouse {
     {
         mouseLabel = new JLabel();
         mouseLabel.setBounds(currentX*100,(currentY + 1)*100,100,100);
-        mouseLabel.setBackground(Color.blue);
+        mouseLabel.setBackground(Color.white);
         mouseLabel.setOpaque(true);
         Image mouseImg = this.getMouseImage().getScaledInstance(mouseLabel.getWidth(), mouseLabel.getHeight(),
                 Image.SCALE_SMOOTH);
