@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestCatMovement {
+public class CatMovementTest {
 
     private Game myGame;
 

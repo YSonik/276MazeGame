@@ -2,7 +2,7 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class TestGenMap {
+public class GenMapTest {
     
     private LevelOne map;
     Tile[][] layout;
