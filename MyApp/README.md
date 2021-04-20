@@ -10,3 +10,6 @@
 1. mvn install
 
 2. Check the target/apidocs
+
+# Making a JAR file is straight forward enough and can be accomplished by executing the following command:
+1. mvn package
