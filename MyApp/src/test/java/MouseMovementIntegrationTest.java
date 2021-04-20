@@ -55,7 +55,6 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
         myGame.dispose();
-
     }
 
     @Test
@@ -83,6 +82,7 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
         myGame.dispose();
     }
+
     @Test
     void MoveLeftIsTrap() {
         //Score Greater equal to penalty
@@ -100,7 +100,6 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
         myGame.dispose();
-
     }
 
     @Test
@@ -118,9 +117,7 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
         myGame.dispose();
-
     }
-
 
 
     @Test
@@ -134,7 +131,6 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
         myGame.dispose();
-
     }
 
     @Test
@@ -148,7 +144,6 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
         myGame.dispose();
-
     }
 
     @Test
@@ -166,8 +161,8 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
         myGame.dispose();
-
     }
+
     @Test
     void MoveRightIsOrgCheese() {
         myGame.getMyMouse().setCurrentX(8);
@@ -191,8 +186,8 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
         myGame.dispose();
-
     }
+
     @Test
     void MoveRightIsTrap() {
         //Score Greater than or equal to penalty
@@ -210,7 +205,6 @@ public class MouseMovementIntegrationTest {
         assertEquals(myGame.getMyMouse().mouseLabel.getX(),myGame.getMyMouse().getCurrentX()*100);
         assertEquals(myGame.getMyMouse().mouseLabel.getY(),(myGame.getMyMouse().getCurrentY()+1)*100);
         myGame.dispose();
-
     }
 
     @Test
